@@ -1,0 +1,125 @@
+<project name="Piazza" default="build">
+	<property name="app" value="piazza"/>
+	<property name="version" value="SNAPSHOT"/>
+	<property name="distdir" value="build/${app}-${version}"/>
+	<property name="teamcity.home" location="${basedir}/TeamCity"/>
+	<property name="teamcity.appdir" location="${teamcity.home}/webapps/ROOT/WEB-INF"/>
+	
+	<path id="build.classpath">
+		<fileset dir="lib" includes="*.jar"/>
+		<fileset dir="${teamcity.home}/common/lib" includes="*.jar"/>
+		<pathelement location="${teamcity.appdir}/classes"/>
+		<fileset dir="${teamcity.appdir}/lib" includes="*.jar" excludes="${app}*.jar"/>
+	</path>
+	
+	<target name="test">
+		<pathconvert property="tmp" refid="build.classpath"/>
+		<echo message="${tmp}"/>
+	</target>
+	
+	<target name="build"
+		description="Builds everything from scratch"
+		depends="clean, zip"/>
+	
+	<target name="clean" 
+			description="Removes all build artefacts">
+		<delete dir="build"/>
+	</target>
+	
+	<target name="zip" depends="run.tests">
+		<zip destfile="build/${app}-${version}.zip" compress="true">
+			<fileset dir="build">
+				<include name="${app}-${version}/*.jar"/>
+				<exclude name="**/*-tests*.jar"/>
+			</fileset>
+		</zip>
+	</target>
+	
+	<target name="compile" depends="dir.build">
+		<mkdir dir="build/classes" />
+		<javac classpathref="build.classpath" 
+			   destdir="build/classes"
+			   debug="yes"
+			   failonerror="yes"
+			   source="1.5" 
+			   target="1.5">
+
+			<src path="src"/>
+			<src path="tests"/>
+		</javac>
+	</target>
+
+	<target name="dir.build">
+		<mkdir dir="build"/>
+	</target>
+
+	<target name="dir.dist" depends="dir.build">
+		<mkdir dir="${distdir}"/>
+	</target>
+
+	<target name="jars" 
+		    depends="jar.app, jar.tests"/>
+	
+	<target name="jar.app" depends="compile, dir.dist">
+		<jar destfile="${distdir}/${app}.jar" compress="false">
+			<fileset dir="build/classes">
+				<exclude name="nat/piazza/tests/**"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="META-INF/**/*"/>
+				<include name="buildServerResources/**/*"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="jar.tests" depends="compile, dir.dist">
+		<jar destfile="${distdir}/${app}-tests.jar" compress="false">
+			<fileset dir="build/classes">
+				<include name="nat/piazza/tests/**"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="run.tests" depends="jars">
+		<property name="outdir" value="build/reports/tests"/>
+		<mkdir dir="${outdir}"/>
+		<junit fork="yes" forkmode="once" printsummary="no" showoutput="yes">
+			<classpath>
+				<path refid="build.classpath"/>
+				<fileset dir="${distdir}" includes="*.jar"/>
+				<fileset dir="tests" excludes="*.java"/>
+			</classpath>
+			
+			<formatter type="brief" usefile="no"/>
+			
+			<batchtest haltonfailure="yes">
+				<fileset dir="tests">
+					<include name="**/*Tests.java"/>
+					<exclude name="**/Abstract*"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="deploy" depends="clean, run.tests"
+		    description="Deploys to a local TeamCity server">
+		<teamcity action="stop"/>
+		<copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
+		<teamcity action="start"/>
+	</target>
+	
+	<target name="undeploy">
+		<teamcity action="stop"/>
+		<delete dir="${teamcity.appdir}/lib" includes="${app}.jar"/>
+		<teamcity action="start"/>
+	</target>
+	
+	<macrodef name="teamcity">
+		<attribute name="action"/>
+		<sequential>
+			<exec executable="${teamcity.home}/bin/runAll.sh">
+				<arg value="@{action}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+</project>

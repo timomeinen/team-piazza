@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/messages.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/server-openapi.jar" sourcepath="TeamCity/openApi-source.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/annotations.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/server-model.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/common.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="TeamCity/common/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="TeamCity/common/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/openapi.jar"/>
+	<classpathentry kind="lib" path="TeamCity/webapps/ROOT/WEB-INF/lib/server.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>
