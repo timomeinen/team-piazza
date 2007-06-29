@@ -1,0 +1,38 @@
+Installation
+------------
+
+Assuming that Team City is installed in the directory $TEAMCITY_HOME:
+
+  1. Copy the piazza.jar file into the directory $TEAMCITY_HOME/webapps/ROOT/WEB-INF/lib.
+  2. Restart the Team City server. 
+
+The build monitor can be displayed by browsing to the URL:
+
+    http://<teamcity-server>:<port>/piazza/<project>/<build-type>.html 
+
+E.g. if the server is running on localhost, port 8111 and the project "world-domination" has a build type named "quick-build" and "system-build", the build monitors for those builds will be at:
+
+    http://localhost:8111/piazza/world-domination/quick-build.html
+    http://localhost:8111/piazza/world-domination/system-build.html 
+
+The portraits of team members can then be configured without restarting the server.
+
+
+Configuring Team Portraits
+--------------------------
+
+Piazza displays the portraits of the programmers responsible for a build. It determines who is responsible by looking for nicknames the commit comments. This means that programmers must identify who worked on a commit in the commit message when they check their changes into source control. This feature encourages programmers to write good commit messages and, if pair programming. identify both members of the pair responsible for every change.
+
+A Piazza-compatible commit message looks something like:
+
+    Alice and bob made added Javascript animation effects to the web front-end
+
+If suitably configured, Piazza will then show the portraits of Alice and Bob while Team City builds and tests their changes.
+
+To configure the portraits displayed for each team member create a text file named portraits.cfg in the Team City configuration directory for the project. On Unix that is usually $HOME/.BuildServer/config/<project>/portraits.cfg when logged in to the account that runs the Team City server.
+
+Each line of the file contains a comma separated list of the nicknames of a team member, followed by an equals symbol ("="), followed by the URL of the portrait for that team member. Here's an example:
+
+    alice = http://teamserver/alice.png
+    robert, bob = http://teamserver/bob.png
+
