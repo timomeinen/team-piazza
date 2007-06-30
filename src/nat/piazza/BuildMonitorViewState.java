@@ -31,7 +31,7 @@ import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
 
 
-public class BuildViewState {
+public class BuildMonitorViewState {
 	private static final String BUILDING = "Building";
 	private static final String SUCCESS = "Success";
 	private static final String UNKNOWN = "Unknown";
@@ -45,7 +45,7 @@ public class BuildViewState {
 	private Build lastFinishedBuild;
 	private Build latestBuild;
 
-	public BuildViewState(SBuildServer server, SBuildType buildType, UserPictures userPictures) {
+	public BuildMonitorViewState(SBuildServer server, SBuildType buildType, UserPictures userPictures) {
 		this.buildType = buildType;
 		
 		lastFinishedBuild = buildType.getLastFinished();
