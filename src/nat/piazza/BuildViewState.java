@@ -155,16 +155,10 @@ public class BuildViewState {
 		}
 	}
 	
-	/**
-	 * Commmit messages for the changes since the last successful build
-	 */
 	public List<String> getCommitMessages() {
 		return commitMessages;
 	}
 
-	/**
-	 * URLs of pictures of the people who committed the changes being displayed
-	 */
 	public Set<String> getPicturesOfCommitters() {
 		return picturesOfCommitters;
 	}
