@@ -62,7 +62,7 @@ public class BuildViewState {
 		
 		ArrayList<String> commitMessages = new ArrayList<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-			commitMessages.add(vcsModification.getDescription());
+			commitMessages.add(vcsModification.getDescription().trim());
 		}
 		return commitMessages;
 	}
