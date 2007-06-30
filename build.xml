@@ -1,6 +1,9 @@
 <project name="Piazza" default="build">
 	<property name="app" value="piazza"/>
-	<property name="version" value="SNAPSHOT"/>
+	<tstamp>
+		<format property="version" timezone="UTC" pattern="yyyyMMdd"/>
+	</tstamp>
+	
 	<property name="distdir" value="build/${app}-${version}"/>
 	<property name="teamcity.home" location="${basedir}/TeamCity"/>
 	<property name="teamcity.appdir" location="${teamcity.home}/webapps/ROOT/WEB-INF"/>

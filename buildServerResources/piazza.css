@@ -73,31 +73,35 @@ body.Building .Content {
 	height: 32px;
 }
 
-.Progress div {
-	position: absolute;
-	left: 0px;
-}
-
 .Progress #bar {
+	position: absolute;
+	left: 4px;
+	right: 4px;
+	top: 4px;
+	bottom: 4px;
 	z-index: 1;
-	top: 0px;
-	bottom: 0px;
 }
 
-.Progress #overlay {
+.Progress #activity {
+	position: absolute;
 	font-size: 16px;
 	z-index: 2;
 	text-align: left;
 	vertical-align: middle;
-	width: 100%;
-	top: 6px;
-	margin-left: 12px;
+	left: 12px;
+	width: auto;
+	top: 7px;
 }
 
-.Progress #bar.Success {
+.Progress #completed {
+	position: static;
+	height: 100%;
+}
+
+.Progress #completed.Success {
 	background-color: #44FF44;
 }
 
-.Progress #bar.Failure {
+.Progress #completed.Failure {
 	background-color: #FF0000;
 }
