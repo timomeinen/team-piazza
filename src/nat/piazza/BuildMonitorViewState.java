@@ -20,6 +20,7 @@ package nat.piazza;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,19 +53,35 @@ public class BuildMonitorViewState {
 		latestBuild = buildType.getLastStartedBuild();
 		
 		commitMessages = commitMessagesForBuild(latestBuild);
+		
 		picturesOfCommitters = userPictures.picturesForComments(commitMessages);
+		picturesOfCommitters.addAll(
+			userPictures.picturesForCommitterUserIds(committersForBuild(latestBuild)));
 	}
 	
-	@SuppressWarnings("unchecked")
+	private Set<String> committersForBuild(Build latestBuild) {
+		List<VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
+		
+		HashSet<String> committers = new HashSet<String>();
+		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
+			committers.add(vcsModification.getUserName().trim());
+		}
+		return committers;
+	}
+	
 	private ArrayList<String> commitMessagesForBuild(Build latestBuild) {
-		List<VcsModification> changesSinceLastSuccessfulBuild = 
-			latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
+		List<VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 		
 		ArrayList<String> commitMessages = new ArrayList<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
 			commitMessages.add(vcsModification.getDescription().trim());
 		}
 		return commitMessages;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<VcsModification> changesInBuild(Build latestBuild) {
+		return latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
 	}
 	
 	public String getId() {

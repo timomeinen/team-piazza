@@ -23,9 +23,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,9 +72,15 @@ public class UserPictures {
 		}
 	}
 	
-	public Set<String> picturesForComments(List<String> commitComments) {
-		Set<String> words = wordsOf(commitComments);
-		
+	public Set<String> picturesForComments(Collection<String> commitComments) {
+		return picturesForWords(wordsOf(commitComments));
+	}
+	
+	public Set<String> picturesForCommitterUserIds(Collection<String> userIds) {
+		return picturesForWords(userIds);
+	}
+	
+	private Set<String> picturesForWords(Collection<String> words) {
 		Set<String> picturesOfCommitters = new HashSet<String>();
 		for (String userName : picturesByNickname.keySet()) {
 			if (words.contains(userName)) {
@@ -85,7 +91,7 @@ public class UserPictures {
 		return picturesOfCommitters;
 	}
 	
-	private Set<String> wordsOf(List<String> commitComments) {
+	private Set<String> wordsOf(Collection<String> commitComments) {
 		Set<String> words = new HashSet<String>();
 		for (String message : commitComments) {
 			for (String word : Text.WORD_BOUNDARIES.split(message)) {
