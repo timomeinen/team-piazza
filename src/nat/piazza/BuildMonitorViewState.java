@@ -28,6 +28,7 @@ import jetbrains.buildServer.Build;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SRunningBuild;
+import jetbrains.buildServer.serverSide.ShortStatistics;
 import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
 
@@ -45,6 +46,8 @@ public class BuildMonitorViewState {
 	
 	private Build lastFinishedBuild;
 	private Build latestBuild;
+	
+	private TestStatisticsViewState tests;
 
 	public BuildMonitorViewState(SBuildServer server, SBuildType buildType, UserPictures userPictures) {
 		this.buildType = buildType;
@@ -57,6 +60,8 @@ public class BuildMonitorViewState {
 		picturesOfCommitters = userPictures.picturesForComments(commitMessages);
 		picturesOfCommitters.addAll(
 			userPictures.picturesForCommitterUserIds(committersForBuild(latestBuild)));
+		
+		tests = testStatistics();
 	}
 	
 	private Set<String> committersForBuild(Build latestBuild) {
@@ -77,6 +82,17 @@ public class BuildMonitorViewState {
 			commitMessages.add(vcsModification.getDescription().trim());
 		}
 		return commitMessages;
+	}
+	
+	private TestStatisticsViewState testStatistics() {
+		if (isBuilding()) {
+			ShortStatistics stats = ((SRunningBuild)latestBuild).getShortStatistics();
+			return new TestStatisticsViewState(
+				stats.getPassedTestCount(), stats.getFailedTestCount(), stats.getIgnoredTestCount());
+		}
+		else {
+			return new TestStatisticsViewState(0,0,0);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -128,6 +144,11 @@ public class BuildMonitorViewState {
 		else {
 			return 100;
 		}
+	}
+	
+	
+	public TestStatisticsViewState getTests() {
+		return tests;
 	}
 	
 	public long getDurationSeconds() {

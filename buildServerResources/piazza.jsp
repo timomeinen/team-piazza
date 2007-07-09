@@ -47,7 +47,16 @@
 			<div id="bar">
 				<div id="completed" class="${build.runningBuildStatus}" style="width: ${build.completedPercent}%"></div>
 			</div>
-			<div id="activity">${build.activity}</div>
+			<div id="activity">
+				${build.activity}
+				
+				<c:if test="${build.tests.anyHaveRun}">
+				(${build.tests.completed} tests &ndash; 
+				passed: ${build.tests.passed}, 
+				failed: ${build.tests.failed},
+				ignored: ${build.tests.ignored})
+				</c:if>	
+			</div>
 		</div>
 	</c:if>
 	
