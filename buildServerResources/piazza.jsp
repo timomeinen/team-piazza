@@ -51,8 +51,7 @@
 				${build.activity}
 				
 				<c:if test="${build.tests.anyHaveRun}">
-				(${build.tests.completed} tests &ndash; 
-				passed: ${build.tests.passed}, 
+				(Tests passed: ${build.tests.passed}, 
 				failed: ${build.tests.failed},
 				ignored: ${build.tests.ignored})
 				</c:if>	
