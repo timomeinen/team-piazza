@@ -105,3 +105,11 @@ body.Building .Content {
 .Progress #completed.Failure {
 	background-color: #FF0000;
 }
+
+.Version {
+	position: fixed;
+	bottom: 4px;
+	right: 4px;
+	font-size: 12px;
+	color: #444444;
+}

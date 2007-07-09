@@ -63,7 +63,7 @@
 	<target name="jars" 
 		    depends="jar.app, jar.tests"/>
 	
-	<target name="jar.app" depends="compile, dir.dist">
+	<target name="jar.app" depends="compile, build.identifier, dir.dist">
 		<jar destfile="${distdir}/${app}.jar" compress="false">
 			<fileset dir="build/classes">
 				<exclude name="nat/piazza/tests/**"/>
@@ -73,6 +73,10 @@
 				<include name="buildServerResources/**/*"/>
 			</fileset>
 		</jar>
+	</target>
+	
+	<target name="build.identifier">
+		<echo file="build/classes/version.properties" message="piazza.version=${version}"/>
 	</target>
 	
 	<target name="jar.tests" depends="compile, dir.dist">

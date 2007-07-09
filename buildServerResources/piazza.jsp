@@ -92,5 +92,8 @@
 	</c:choose>
 </div>
 
+<div class="Version">
+Team Piazza version ${build.piazzaVersion}
+</div>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class BuildMonitorController  extends BaseController {
 			throw new IllegalArgumentException("no build type named " + buildTypeName + " in project " + projectName);			
 		}
 		
-		BuildMonitorViewState buildViewState = new BuildMonitorViewState(myServer, buildType, loadUserPictures(project));
+		BuildMonitorViewState buildViewState = new BuildMonitorViewState(piazza.getVersion(), myServer, buildType, loadUserPictures(project));
 		
 		String viewJspPath = piazza.resourcePath("piazza.jsp");
 		ModelAndView view = new ModelAndView(viewJspPath);

@@ -39,6 +39,7 @@ public class BuildMonitorViewState {
 	private static final String UNKNOWN = "Unknown";
 	private static final String FAILURE = "Failure";
 
+	private final String version;
 	private final SBuildType buildType;
 	
 	private final List<String> commitMessages;
@@ -49,7 +50,8 @@ public class BuildMonitorViewState {
 	
 	private TestStatisticsViewState tests;
 
-	public BuildMonitorViewState(SBuildServer server, SBuildType buildType, UserPictures userPictures) {
+	public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserPictures userPictures) {
+		this.version = version;
 		this.buildType = buildType;
 		
 		lastFinishedBuild = buildType.getLastFinished();
@@ -199,5 +201,9 @@ public class BuildMonitorViewState {
 
 	public Set<String> getPicturesOfCommitters() {
 		return picturesOfCommitters;
+	}
+	
+	public String getPiazzaVersion() {
+		return version;
 	}
 }

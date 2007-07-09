@@ -18,6 +18,10 @@
  */
 package nat.piazza;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.Privileges;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
@@ -28,6 +32,7 @@ public class Piazza {
 	public static final String PLUGIN_NAME = Piazza.class.getSimpleName().toLowerCase();
 	
 	private final WebResourcesManager webResourcesManager;
+	private final String version;
 	
 	
 	public Piazza(SBuildServer server, 
@@ -35,6 +40,7 @@ public class Piazza {
 				  WebResourcesManager webResourcesManager) 
 	{
 		this.webResourcesManager = webResourcesManager;
+		this.version = loadVersionFromResource();
 		
 		webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
 		webControllerManager.registerController(
@@ -45,5 +51,28 @@ public class Piazza {
 	
 	public String resourcePath(String resourceName) {
 		return webResourcesManager.resourcePath(PLUGIN_NAME, resourceName);
+	}
+	
+	public String getVersion() {
+		return version;
+	}
+	
+	private String loadVersionFromResource() {
+		Properties properties = new Properties();
+		
+		InputStream input = getClass().getResourceAsStream("/version.properties");
+		try {
+			try {
+				properties.load(input);
+			}
+			finally {
+				input.close();
+			}
+		}
+		catch (IOException e) {
+			throw new RuntimeException("version information incorrectly configured");
+		}
+		
+		return properties.getProperty("piazza.version");
 	}
 }
