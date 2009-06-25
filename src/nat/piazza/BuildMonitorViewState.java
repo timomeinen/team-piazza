@@ -18,12 +18,6 @@
  */
 package nat.piazza;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import jetbrains.buildServer.Build;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
@@ -31,6 +25,12 @@ import jetbrains.buildServer.serverSide.SRunningBuild;
 import jetbrains.buildServer.serverSide.ShortStatistics;
 import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class BuildMonitorViewState {
@@ -53,9 +53,9 @@ public class BuildMonitorViewState {
 	public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserPictures userPictures) {
 		this.version = version;
 		this.buildType = buildType;
-		
-		lastFinishedBuild = buildType.getLastFinished();
-		latestBuild = buildType.getLastStartedBuild();
+        
+		lastFinishedBuild = buildType.getLastChangesFinished();
+		latestBuild = buildType.getLastChangesStartedBuild();
 		
 		commitMessages = commitMessagesForBuild(latestBuild);
 		
@@ -67,17 +67,20 @@ public class BuildMonitorViewState {
 	}
 	
 	private Set<String> committersForBuild(Build latestBuild) {
-		List<VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
+		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 		
 		HashSet<String> committers = new HashSet<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-			committers.add(vcsModification.getUserName().trim());
+            String userName = vcsModification.getUserName();
+            if (userName != null) {
+			    committers.add(userName.trim());
+            }
 		}
 		return committers;
 	}
 	
 	private ArrayList<String> commitMessagesForBuild(Build latestBuild) {
-		List<VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
+		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 		
 		ArrayList<String> commitMessages = new ArrayList<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
@@ -98,7 +101,7 @@ public class BuildMonitorViewState {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private List<VcsModification> changesInBuild(Build latestBuild) {
+	private List<? extends VcsModification> changesInBuild(Build latestBuild) {
 		return latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
 	}
 	

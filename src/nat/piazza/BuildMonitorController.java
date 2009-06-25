@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import jetbrains.buildServer.controllers.BaseController;
-import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
@@ -68,7 +67,9 @@ public class BuildMonitorController  extends BaseController {
 			userPictures.loadFrom(configFile);
 		}
 		catch (IOException e) {
-			Loggers.SERVER.debug(Piazza.PLUGIN_NAME + " plug-in could not load user portraits", e);
+            //TODO: how to log?
+			System.err.println(Piazza.PLUGIN_NAME + " plug-in could not load user portraits");
+            e.printStackTrace();
 		}
 	}
 }

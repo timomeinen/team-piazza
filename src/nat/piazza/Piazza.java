@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import jetbrains.buildServer.serverSide.SBuildServer;
-import jetbrains.buildServer.web.openapi.Privileges;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import jetbrains.buildServer.web.openapi.WebResourcesManager;
 
@@ -45,8 +44,7 @@ public class Piazza {
 		webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
 		webControllerManager.registerController(
 			"/" + PLUGIN_NAME + "/*/*", 
-			new BuildMonitorController(server, this), 
-			Privileges.NONE);
+			new BuildMonitorController(server, this));
 	}
 	
 	public String resourcePath(String resourceName) {

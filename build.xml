@@ -10,8 +10,7 @@
 	
 	<path id="build.classpath">
 		<fileset dir="lib" includes="*.jar"/>
-		<fileset dir="${teamcity.home}/common/lib" includes="*.jar"/>
-		<pathelement location="${teamcity.appdir}/classes"/>
+        <fileset dir="${teamcity.home}/lib" includes="*.jar" excludes="${app}*.jar"/>
 		<fileset dir="${teamcity.appdir}/lib" includes="*.jar" excludes="${app}*.jar"/>
 	</path>
 	
