@@ -23,27 +23,32 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.MainConfigProcessor;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import jetbrains.buildServer.web.openapi.WebResourcesManager;
+import org.jdom.Element;
 
 
-public class Piazza {
+public class Piazza implements MainConfigProcessor {
 	public static final String PLUGIN_NAME = Piazza.class.getSimpleName().toLowerCase();
 	
 	private final WebResourcesManager webResourcesManager;
 	private final String version;
-	
-	
-	public Piazza(SBuildServer server, 
+    
+	private UserGroup userGroup = new UserGroup();
+
+    public Piazza(SBuildServer server,
 				  WebControllerManager webControllerManager,
 				  WebResourcesManager webResourcesManager) 
 	{
 		this.webResourcesManager = webResourcesManager;
 		this.version = loadVersionFromResource();
-		
-		webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
-		webControllerManager.registerController(
-			"/" + PLUGIN_NAME + "/*/*", 
+
+        server.registerExtension(MainConfigProcessor.class, "piazza", this);
+
+        webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
+        webControllerManager.registerController(
+			"/" + PLUGIN_NAME + "/*/*",
 			new BuildMonitorController(server, this));
 	}
 	
@@ -51,7 +56,7 @@ public class Piazza {
 		return webResourcesManager.resourcePath(PLUGIN_NAME, resourceName);
 	}
 	
-	public String getVersion() {
+	public String version() {
 		return version;
 	}
 	
@@ -73,4 +78,26 @@ public class Piazza {
 		
 		return properties.getProperty("piazza.version");
 	}
+
+    public void readFrom(Element serverConfigRoot) {
+        System.out.println("PIAZZA: read from! elementName = " + serverConfigRoot.getQualifiedName());
+        Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
+        if (piazzaConfigRoot == null) {
+            this.userGroup = UserGroup.loadFrom(piazzaConfigRoot);
+        }
+        else {
+            this.userGroup = new UserGroup();
+        }
+    }
+    
+    public void writeTo(Element serverConfigRoot) {
+        System.out.println("PIAZZA: write to! elementName = " + serverConfigRoot.getQualifiedName());
+        Element piazzaConfigRoot = new Element("piazza");
+        userGroup.writeTo(piazzaConfigRoot);
+        serverConfigRoot.addContent(piazzaConfigRoot);
+    }
+    
+    public UserGroup userGroup() {
+        return userGroup;
+    }
 }

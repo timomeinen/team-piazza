@@ -274,81 +274,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://team-piazza.googlecode.com/svn/branches">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://team-piazza.googlecode.com/svn/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://team-piazza.googlecode.com/svn/wiki">
-                    <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1192045067026" />
-                          <option name="revision" value="41" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/ConfiguringTeamPortraits.wiki" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1190906384881" />
-                          <option name="revision" value="40" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/SnsChanges.wiki" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1190905455631" />
-                          <option name="revision" value="36" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/sns-changes" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183228669338" />
-                          <option name="revision" value="26" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/Screenshots.wiki" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183228557421" />
-                          <option name="revision" value="25" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-fixed.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183227840482" />
-                          <option name="revision" value="23" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-broken-being-fixed.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183227840482" />
-                          <option name="revision" value="23" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-broken.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183227840482" />
-                          <option name="revision" value="23" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-building.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183207358884" />
-                          <option name="revision" value="17" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-building-no-changes.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183207014608" />
-                          <option name="revision" value="16" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/screenshot-success.png" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1183156278840" />
-                          <option name="revision" value="11" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/wiki/Installation.wiki" />
-                        </SvnBranchItem>
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://team-piazza.googlecode.com/svn/branches" />
@@ -371,13 +296,21 @@
   <component name="libraryTable">
     <library name="TeamCity">
       <CLASSES>
-        <root url="file://C:/TeamCity/webapps/ROOT/WEB-INF/lib" />
-        <root url="file://C:/TeamCity/lib" />
+        <root url="jar://C:/TeamCity/devPackage/server-api.jar!/" />
+        <root url="jar://C:/TeamCity/devPackage/agent-api.jar!/" />
+        <root url="jar://C:/TeamCity/devPackage/common-api.jar!/" />
+        <root url="jar://C:/TeamCity/devPackage/runtime-util.jar!/" />
+        <root url="jar://C:/TeamCity/webapps/ROOT/WEB-INF/lib/spring-webmvc.jar!/" />
+        <root url="jar://C:/TeamCity/webapps/ROOT/WEB-INF/lib/spring.jar!/" />
+        <root url="jar://C:/TeamCity/webapps/ROOT/WEB-INF/lib/jdom.jar!/" />
+        <root url="jar://C:/TeamCity/lib/servlet-api.jar!/" />
       </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-      <jarDirectory url="file://C:/TeamCity/lib" recursive="false" />
-      <jarDirectory url="file://C:/TeamCity/webapps/ROOT/WEB-INF/lib" recursive="false" />
+      <JAVADOC>
+        <root url="jar://C:/TeamCity/devPackage/javadoc/openApi-help.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://C:/TeamCity/devPackage/src/openApi-source.jar!/" />
+      </SOURCES>
     </library>
   </component>
 </project>

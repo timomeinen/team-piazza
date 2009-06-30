@@ -1,8 +1,5 @@
 package nat.piazza;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +10,7 @@ import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 
-public class BuildMonitorController  extends BaseController {
+public class BuildMonitorController extends BaseController {
 	private final Piazza piazza;
 	
 	public BuildMonitorController(SBuildServer server, Piazza piazza) {
@@ -40,7 +37,7 @@ public class BuildMonitorController  extends BaseController {
 			throw new IllegalArgumentException("no build type named " + buildTypeName + " in project " + projectName);			
 		}
 		
-		BuildMonitorViewState buildViewState = new BuildMonitorViewState(piazza.getVersion(), myServer, buildType, loadUserPictures(project));
+		BuildMonitorViewState buildViewState = new BuildMonitorViewState(piazza.version(), myServer, buildType, piazza.userGroup());
 		
 		String viewJspPath = piazza.resourcePath("piazza.jsp");
 		ModelAndView view = new ModelAndView(viewJspPath);
@@ -49,27 +46,5 @@ public class BuildMonitorController  extends BaseController {
 		view.addObject("project", project);
 		view.addObject("resourceRoot", piazza.resourcePath(""));
 		return view;
-	}
-	
-	private UserPictures loadUserPictures(SProject project) {
-		UserPictures userPictures = new UserPictures();
-		File configFile = new File(project.getConfigDirectory(), "portraits.cfg");
-		
-		if (configFile.exists()) {
-			loadUserPicturesFromFile(userPictures, configFile);
-		}
-		
-		return userPictures;
-	}
-
-	private void loadUserPicturesFromFile(UserPictures userPictures, File configFile) {
-		try {
-			userPictures.loadFrom(configFile);
-		}
-		catch (IOException e) {
-            //TODO: how to log?
-			System.err.println(Piazza.PLUGIN_NAME + " plug-in could not load user portraits");
-            e.printStackTrace();
-		}
 	}
 }

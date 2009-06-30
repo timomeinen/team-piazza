@@ -50,7 +50,7 @@ public class BuildMonitorViewState {
 	
 	private TestStatisticsViewState tests;
 
-	public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserPictures userPictures) {
+	public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
 		this.version = version;
 		this.buildType = buildType;
         
