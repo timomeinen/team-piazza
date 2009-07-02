@@ -20,13 +20,13 @@ package nat.piazza;
 
 import org.jdom.Element;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
 
 
 public class UserGroup {
@@ -40,7 +40,7 @@ public class UserGroup {
 
     public void add(User user) {
         users.add(user);
-        for (String nickname : user.nicknames) {
+        for (String nickname : user.nicknames()) {
             usersByNickname.put(nickname.toLowerCase(), user);
         }
     }
@@ -52,31 +52,12 @@ public class UserGroup {
         return involvedUsers;
     }
 
-    public Set<String> picturesForComments(Collection<String> commitComments) {
-        return picturesForWords(wordsOf(commitComments));
-    }
-
-    public Set<String> picturesForCommitterUserIds(Collection<String> userIds) {
-        return picturesForWords(userIds);
-    }
-
     private void collectUsersForWords(Set<User> involvedUsers, Collection<String> words) {
         for (String nickname : usersByNickname.keySet()) {
             if (words.contains(nickname)) {
                 involvedUsers.add(usersByNickname.get(nickname));
             }
         }
-    }
-
-    private Set<String> picturesForWords(Collection<String> words) {
-        Set<String> picturesOfCommitters = new HashSet<String>();
-        for (String userName : usersByNickname.keySet()) {
-            if (words.contains(userName)) {
-                picturesOfCommitters.add(usersByNickname.get(userName).portraitURL);
-            }
-        }
-
-        return picturesOfCommitters;
     }
 
     private Set<String> wordsOf(Collection<String> commitComments) {
@@ -112,9 +93,9 @@ public class UserGroup {
         for (User user : users) {
             Element userConfigElement = new Element(USER);
             
-            userConfigElement.setAttribute(HREF, user.portraitURL);
-            userConfigElement.addContent(elementWithText(NAME, user.name));
-            for (String nickname : user.nicknames) {
+            userConfigElement.setAttribute(HREF, user.getPortraitURL());
+            userConfigElement.addContent(elementWithText(NAME, user.getName()));
+            for (String nickname : user.nicknames()) {
                 userConfigElement.addContent(elementWithText(NICKNAME, nickname));
             }
 

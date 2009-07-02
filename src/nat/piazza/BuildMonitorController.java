@@ -1,14 +1,13 @@
 package nat.piazza;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class BuildMonitorController extends BaseController {
 	private final Piazza piazza;
@@ -37,7 +36,11 @@ public class BuildMonitorController extends BaseController {
 			throw new IllegalArgumentException("no build type named " + buildTypeName + " in project " + projectName);			
 		}
 		
-		BuildMonitorViewState buildViewState = new BuildMonitorViewState(piazza.version(), myServer, buildType, piazza.userGroup());
+		BuildMonitorViewState buildViewState = new BuildMonitorViewState(
+            piazza.version(),
+            myServer,
+            buildType,
+            piazza.userGroup());
 		
 		String viewJspPath = piazza.resourcePath("piazza.jsp");
 		ModelAndView view = new ModelAndView(viewJspPath);

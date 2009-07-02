@@ -18,15 +18,15 @@
  */
 package nat.piazza;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.MainConfigProcessor;
+import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import jetbrains.buildServer.web.openapi.WebResourcesManager;
 import org.jdom.Element;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 
 public class Piazza implements MainConfigProcessor {
@@ -80,9 +80,8 @@ public class Piazza implements MainConfigProcessor {
 	}
 
     public void readFrom(Element serverConfigRoot) {
-        System.out.println("PIAZZA: read from! elementName = " + serverConfigRoot.getQualifiedName());
         Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
-        if (piazzaConfigRoot == null) {
+        if (piazzaConfigRoot != null) {
             this.userGroup = UserGroup.loadFrom(piazzaConfigRoot);
         }
         else {
@@ -91,7 +90,6 @@ public class Piazza implements MainConfigProcessor {
     }
     
     public void writeTo(Element serverConfigRoot) {
-        System.out.println("PIAZZA: write to! elementName = " + serverConfigRoot.getQualifiedName());
         Element piazzaConfigRoot = new Element("piazza");
         userGroup.writeTo(piazzaConfigRoot);
         serverConfigRoot.addContent(piazzaConfigRoot);

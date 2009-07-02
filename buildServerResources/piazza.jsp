@@ -59,10 +59,10 @@
 		</div>
 	</c:if>
 	
-	<c:if test="${! empty build.picturesOfCommitters}">
+	<c:if test="${! empty build.committers}">
 		<div class="Portraits">
-			<c:forEach var="url" items="${build.picturesOfCommitters}">
-				<img src="${url}"/>
+			<c:forEach var="committer" items="${build.committers}">
+				<img src="${committer.portraitURL}" title="${committer.name}"/>
 			</c:forEach>
 		</div>
 	</c:if>

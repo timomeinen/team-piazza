@@ -43,27 +43,24 @@ public class BuildMonitorViewState {
 	private final SBuildType buildType;
 	
 	private final List<String> commitMessages;
-	private final Set<String> picturesOfCommitters;
-	
 	private Build lastFinishedBuild;
-	private Build latestBuild;
-	
-	private TestStatisticsViewState tests;
+    private final Build latestBuild;
+    private final TestStatisticsViewState tests;
+    private final Set<User> committers;
 
-	public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
+    public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
 		this.version = version;
 		this.buildType = buildType;
-        
-		lastFinishedBuild = buildType.getLastChangesFinished();
-		latestBuild = buildType.getLastChangesStartedBuild();
-		
-		commitMessages = commitMessagesForBuild(latestBuild);
-		
-		picturesOfCommitters = userPictures.picturesForComments(commitMessages);
-		picturesOfCommitters.addAll(
-			userPictures.picturesForCommitterUserIds(committersForBuild(latestBuild)));
-		
-		tests = testStatistics();
+        this.lastFinishedBuild = buildType.getLastChangesFinished();
+		this.latestBuild = buildType.getLastChangesStartedBuild();
+		this.commitMessages = commitMessagesForBuild(latestBuild);
+
+        committers = userPictures.usersInvolvedInCommit(
+            committersForBuild(latestBuild),
+            commitMessagesForBuild(latestBuild)
+        );
+
+        this.tests = testStatistics();
 	}
 	
 	private Set<String> committersForBuild(Build latestBuild) {
@@ -86,6 +83,7 @@ public class BuildMonitorViewState {
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
 			commitMessages.add(vcsModification.getDescription().trim());
 		}
+        
 		return commitMessages;
 	}
 	
@@ -202,8 +200,8 @@ public class BuildMonitorViewState {
 		return commitMessages;
 	}
 
-	public Set<String> getPicturesOfCommitters() {
-		return picturesOfCommitters;
+	public Set<User> getCommitters() {
+		return committers;
 	}
 	
 	public String getPiazzaVersion() {

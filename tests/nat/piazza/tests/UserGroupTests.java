@@ -111,12 +111,11 @@ public class UserGroupTests extends TestCase {
         Document doc = fromXML(CONFIG__XML);
         
         userGroup = UserGroup.loadFrom(doc.getRootElement());
-        
-		assertEquals(set("alice.png", "http://www.bob.com/bob.png"), 
-	         userGroup.picturesForComments(asList("alice & bob did stuff")));
-		
-		assertEquals(set("alice.png", "http://www.bob.com/bob.png"), 
-	         userGroup.picturesForComments(asList("alice & robert did stuff")));
+
+        assertContainsUserWithName("Alice Band",
+            userGroup.usersInvolvedInCommit(notRelevant, asList("alice & bob did stuff")));
+        assertContainsUserWithName("Bob Frapples",
+            userGroup.usersInvolvedInCommit(notRelevant, asList("alice & bob did stuff")));
 	}
 
     public void testCanBeSavedToXmlElement() throws JDOMException, IOException {
@@ -126,9 +125,9 @@ public class UserGroupTests extends TestCase {
 
         Document savedDoc = new Document(new Element("piazza"));
         userGroupToSave.writeTo(savedDoc.getRootElement());
-        
+
         Document expectedDoc = fromXML(CONFIG__XML);
-        
+
         assertEquals(asXML(expectedDoc), asXML(savedDoc));
     }
 
@@ -141,6 +140,14 @@ public class UserGroupTests extends TestCase {
 
     private Document fromXML(String xml) throws JDOMException, IOException {
         return new SAXBuilder().build(new StringReader(xml));
+    }
+
+    private void assertContainsUserWithName(String name, Set<User> users) {
+        for (User user : users) {
+            if (user.getName().equals(name)) return;
+        }
+
+        fail("no user named \"" + name + "\" in " + users);
     }
 
     private <T> Set<T> set(T ... elements) {
