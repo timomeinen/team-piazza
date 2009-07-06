@@ -95,11 +95,11 @@ public class UserGroupTests extends TestCase {
 
     private static final String CONFIG__XML =
         "<piazza>" +
-        "  <user href='alice.png'>" +
+        "  <user portrait='alice.png'>" +
         "    <name>Alice Band</name>" +
         "    <nickname>alice</nickname>" +
         "  </user>" +
-        "  <user href='http://www.bob.com/bob.png'>" +
+        "  <user portrait='http://www.bob.com/bob.png'>" +
         "    <name>Bob Frapples</name>" +
         "    <nickname>robert</nickname>" +
         "    <nickname>bob</nickname>" +

@@ -31,7 +31,7 @@ import java.util.Set;
 
 public class UserGroup {
     private static final String USER = "user";
-    private static final String HREF = "href";
+    private static final String PORTRAIT = "portrait";
     private static final String NAME = "name";
     private static final String NICKNAME = "nickname";
     
@@ -74,7 +74,7 @@ public class UserGroup {
         UserGroup userGroup = new UserGroup();
 
         for (Element userElement : (List<Element>)element.getChildren(USER)) {
-            String portraitUrl = userElement.getAttribute(HREF).getValue();
+            String portraitUrl = userElement.getAttribute(PORTRAIT).getValue();
             String name = userElement.getChild(NAME).getTextTrim();
 
             Set<String> nicknames = new HashSet<String>();
@@ -93,7 +93,7 @@ public class UserGroup {
         for (User user : users) {
             Element userConfigElement = new Element(USER);
             
-            userConfigElement.setAttribute(HREF, user.getPortraitURL());
+            userConfigElement.setAttribute(PORTRAIT, user.getPortraitURL());
             userConfigElement.addContent(elementWithText(NAME, user.getName()));
             for (String nickname : user.nicknames()) {
                 userConfigElement.addContent(elementWithText(NICKNAME, nickname));
