@@ -72,16 +72,14 @@
 			<div class="Changes">
 				<ul>
 				<c:forEach var="message" items="${build.commitMessages}">
-					<li>
 					<c:choose>
 						<c:when test="${empty message}">
-							<em class="NoCommitMessage">No commit message</em>
+							<li></li><em class="NoCommitMessage">No commit message</em></li>
 						</c:when>
 						<c:otherwise>
-							${message}
+							<li>${message}</li>
 						</c:otherwise>
 					</c:choose>
-					</li>
 				</c:forEach>
 				</ul>
 			</div>
