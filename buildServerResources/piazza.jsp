@@ -62,7 +62,7 @@
 	<c:if test="${! empty build.committers}">
 		<div class="Portraits">
 			<c:forEach var="committer" items="${build.committers}">
-				<img src="${committer.portraitURL}" title="${committer.name}"/>
+				<img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}"/>
 			</c:forEach>
 		</div>
 	</c:if>
@@ -77,7 +77,7 @@
 							<li></li><em class="NoCommitMessage">No commit message</em></li>
 						</c:when>
 						<c:otherwise>
-							<li>${message}</li>
+							<li>${fn:escapeXml(message)}</li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
