@@ -67,7 +67,7 @@ public class UserGroupTests extends TestCase {
                      userGroup.usersInvolvedInCommit(userIds, notRelevant));
     }
 
-    public void testUsesBothUserIdsAndCommitCommentsAndSoSupportsPairPRogramming() throws Exception {
+    public void testUsesBothUserIdsAndCommitCommentsToSupportPairPRogramming() throws Exception {
         assertEquals(set(alice, bob),
                      userGroup.usersInvolvedInCommit(set("alice"), set("alice and bob checked something in")));
     }
@@ -100,6 +100,13 @@ public class UserGroupTests extends TestCase {
                      userGroup.usersInvolvedInCommit(notRelevant, commitComments));
     }
 
+    public void testNicknamesBeginAndEndAtWordBoundaries() {
+        List<String> commitComments = asList("alice updated info for 125cc riders");
+
+        assertEquals(set(alice),
+                     userGroup.usersInvolvedInCommit(notRelevant, commitComments));
+    }
+    
     private static final String CONFIG__XML =
         "<piazza>" +
         "  <user portrait='alice.png'>" +
