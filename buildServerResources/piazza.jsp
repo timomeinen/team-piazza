@@ -34,8 +34,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Piazza - ${build.buildTypeName}</title>
     <meta http-equiv="refresh" content="${build.building ? 1 : 10}">
-    <link rel="stylesheet" type="text/css" href="/css/progress.css"/>
-    <link rel="stylesheet" type="text/css" href="${resourceRoot}piazza.css"/>
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/progress.css"/>
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
 <body class="${build.combinedStatusClasses}">
 <h1>${build.buildTypeName} #${build.buildNumber}</h1>
