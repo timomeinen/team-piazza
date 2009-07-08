@@ -33,4 +33,17 @@ public class User {
     public Iterable<String> nicknames() {
         return nicknames;
     }
+
+    public boolean hasNickname(String nickname) {
+        return nicknames.contains(nickname);
+    }
+
+    public boolean hasNicknameWithin(String commitComment) {
+        for (String nickname : nicknames) {
+            if (commitComment.toLowerCase().contains(nickname.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

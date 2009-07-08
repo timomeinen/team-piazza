@@ -40,7 +40,7 @@ import java.util.Set;
 public class UserGroupTests extends TestCase {
     User alice = new User("Alice", set("alice"), "alice.png");
     User bob = new User("Bob", set("bob"), "bob.png");
-    User carol = new User("Carol", set("carol"), "carol.png");
+    User carol = new User("Carol", set("carol", "cc rider"), "carol.png");
     User dave = new User("David", set("david", "dave"), "dave.png");
 
     UserGroup userGroup = new UserGroup();
@@ -92,6 +92,13 @@ public class UserGroupTests extends TestCase {
 		assertEquals(set(alice, bob),
 			         userGroup.usersInvolvedInCommit(notRelevant, commitComments));
 	}
+
+    public void testNicknamesCanContainSpaces() {
+        List<String> commitComments = asList("alice and cc rider: did stuff");
+
+        assertEquals(set(alice, carol),
+                     userGroup.usersInvolvedInCommit(notRelevant, commitComments));
+    }
 
     private static final String CONFIG__XML =
         "<piazza>" +

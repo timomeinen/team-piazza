@@ -20,13 +20,7 @@ package nat.piazza;
 
 import org.jdom.Element;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class UserGroup {
@@ -36,39 +30,40 @@ public class UserGroup {
     private static final String NICKNAME = "nickname";
     
     private List<User> users = new ArrayList<User>();
-    private Map<String, User> usersByNickname = new HashMap<String, User>();
 
     public void add(User user) {
         users.add(user);
-        for (String nickname : user.nicknames()) {
-            usersByNickname.put(nickname.toLowerCase(), user);
-        }
     }
-
+    
     public Set<User> usersInvolvedInCommit(Collection<String> userIds, Collection<String> commitComments) {
         Set<User> involvedUsers = new HashSet<User>();
-        collectUsersForWords(involvedUsers, userIds);
-        collectUsersForWords(involvedUsers, wordsOf(commitComments));
+        collectUsersByCommitterId(involvedUsers, userIds);
+        collectUsersByCommitComment(involvedUsers, commitComments);
         return involvedUsers;
     }
+    
+    private void collectUsersByCommitComment(Set<User> involvedUsers, Collection<String> commitComments) {
+        for (User user : users) {
+            for (String commitComment : commitComments) {
+                if (user.hasNicknameWithin(commitComment)) {
+                    involvedUsers.add(user);
+                }
+            }
 
-    private void collectUsersForWords(Set<User> involvedUsers, Collection<String> words) {
-        for (String nickname : usersByNickname.keySet()) {
-            if (words.contains(nickname)) {
-                involvedUsers.add(usersByNickname.get(nickname));
+        }
+    }
+
+    private void collectUsersByCommitterId(Set<User> involvedUsers, Collection<String> userIds) {
+        for (User user : users) {
+            for (String userId : userIds) {
+                if (user.hasNickname(userId)) {
+                    involvedUsers.add(user);
+                }
             }
         }
     }
 
-    private Set<String> wordsOf(Collection<String> commitComments) {
-        Set<String> words = new HashSet<String>();
-        for (String message : commitComments) {
-            for (String word : Text.WORD_BOUNDARIES.split(message)) {
-                words.add(word.toLowerCase());
-            }
-        }
-        return words;
-    }
+
     
     public static UserGroup loadFrom(Element element) {
         UserGroup userGroup = new UserGroup();
