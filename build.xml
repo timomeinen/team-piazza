@@ -107,12 +107,13 @@
 		</junit>
 	</target>
 
-    <target name="deploy" depends="clean, run.tests">
+    <target name="deploy" depends="clean, run.tests"
+            description="Deploys to a local TeamCity server">
         <copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
     </target>
     
-	<target name="test.deploy" depends="clean, run.tests"
-		    description="Deploys to a local TeamCity server">
+	<target name="deploy.restart" depends="clean, run.tests"
+		    description="Deploys to a local TeamCity server and restarts it">
 		<teamcity action="stop"/>
 		<copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
 		<teamcity action="start"/>

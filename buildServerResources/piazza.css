@@ -2,14 +2,18 @@
 body {
 	font-family: tahoma, arial, sans-serif;
 	padding: 16px;
+    background-position: top right;
+    background-repeat: no-repeat;
 }
 
 body.Success {
 	background-color: #44FF44;
+    background-image: url("green-tick.png");
 }
 
 body.Failure {
 	background-color: #FF0000;
+    background-image: url("red-cross.png");
 }
 
 h1 {

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="96"
+   height="96"
+   id="svg2703"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   version="1.0"
+   sodipodi:docname="green-tick.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/nat/Programming/team-piazza/buildServerResources/green-tick.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs2705">
+    <filter
+       inkscape:collect="always"
+       id="filter5901">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.65875103"
+         id="feGaussianBlur5903" />
+    </filter>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective2711" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.25"
+     inkscape:cx="48"
+     inkscape:cy="48"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="641"
+     inkscape:window-height="719"
+     inkscape:window-x="68"
+     inkscape:window-y="28"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata2708">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-219.58082,-1140.5668)">
+    <g
+       id="g2453"
+       transform="translate(1.8665499,9.5095646)">
+      <path
+         style="opacity:0.2;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter5901);enable-background:accumulate"
+         d="M 249.84375,397.84375 C 241.14425,405.062 233.48423,414.03285 228.5,424.4375 C 226.67687,422.50085 224.70458,417.73978 221.71875,418.125 C 220.05826,419.93287 218.5401,422.40402 220.96875,424.40625 C 224.82355,426.62303 224.53503,433.18669 229.40625,433.59375 C 234.4331,433.43691 233.75218,426.24514 236.33139,423.15737 C 240.39265,414.60737 245.28454,405.51986 250.0625,397.84375 C 250.01759,397.78603 249.89691,397.80569 249.84375,397.84375 z M 232.34375,432.4375 C 232.30082,432.49516 232.44739,432.47001 232.34375,432.4375 z"
+         id="path5895"
+         transform="matrix(2.466731,0.461588,-0.5018319,2.2689147,-105.33851,127.70901)" />
+      <path
+         class="passing"
+         id="path5860"
+         d="M 306.20265,1140.6021 C 281.12098,1152.9641 257.72391,1169.7824 240.20777,1191.089 C 236.68247,1185.8534 234.20662,1174.1405 226.64807,1173.6363 C 221.64484,1176.9718 216.65984,1181.8778 221.64589,1187.5418 C 230.04219,1194.3508 226.03664,1209.11 237.84835,1212.2821 C 250.32694,1214.2465 252.25636,1197.6147 260.16812,1191.7994 C 274.47681,1174.2748 291.10419,1155.914 306.74225,1140.703 C 306.66044,1140.5513 306.35289,1140.5402 306.20265,1140.6021 z M 245.67461,1211.0145 C 245.53978,1211.1256 245.91395,1211.1361 245.67461,1211.0145 z"
+         style="fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+  </g>
+</svg>
