@@ -106,7 +106,15 @@ public class UserGroupTests extends TestCase {
         assertEquals(set(alice),
                      userGroup.usersInvolvedInCommit(notRelevant, commitComments));
     }
-    
+
+    public void testMultiwordNicknamesCanBeAtEndOfCommitMessage() {
+        List<String> commitComments = asList("alice & cc rider");
+
+        assertEquals(set(alice, carol),
+                     userGroup.usersInvolvedInCommit(notRelevant, commitComments));
+    }
+
+
     private static final String CONFIG__XML =
         "<piazza>" +
         "  <user portrait='alice.png'>" +
