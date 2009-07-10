@@ -2,5 +2,5 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-autowire="constructor">
-  <bean id="piazza" class="nat.piazza.Piazza"/>
+  <bean id="piazza" class="com.natpryce.piazza.Piazza"/>
 </beans>

@@ -22,7 +22,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <jsp:useBean id="build"
-			 type="nat.piazza.BuildMonitorViewState"
+			 type="com.natpryce.piazza.BuildMonitorViewState"
 			 scope="request"/>
 
 <jsp:useBean id="resourceRoot"
@@ -62,7 +62,7 @@
 	<c:if test="${! empty build.committers}">
 		<div class="Portraits">
 			<c:forEach var="committer" items="${build.committers}">
-				<img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}"/>
+				<img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
 			</c:forEach>
 		</div>
 	</c:if>

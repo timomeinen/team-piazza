@@ -16,11 +16,11 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza.tests;
+package com.natpryce.piazza.tests;
 
+import com.natpryce.piazza.User;
+import com.natpryce.piazza.UserGroup;
 import junit.framework.TestCase;
-import nat.piazza.User;
-import nat.piazza.UserGroup;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -106,7 +106,7 @@ public class UserGroupTests extends TestCase {
         assertEquals(set(alice),
                      userGroup.usersInvolvedInCommit(notRelevant, commitComments));
     }
-
+    
     public void testMultiwordNicknamesCanBeAtEndOfCommitMessage() {
         List<String> commitComments = asList("alice & cc rider");
 

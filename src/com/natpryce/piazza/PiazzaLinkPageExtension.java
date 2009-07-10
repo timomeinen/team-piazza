@@ -16,7 +16,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza;
+package com.natpryce.piazza;
 
 import jetbrains.buildServer.web.openapi.PageExtension;
 
@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PiazzaPermalinkPageExtension implements PageExtension {
+public class PiazzaLinkPageExtension implements PageExtension {
     private final Piazza piazza;
 
-    public PiazzaPermalinkPageExtension(Piazza piazza) {
+    public PiazzaLinkPageExtension(Piazza piazza) {
         this.piazza = piazza;
     }
 
@@ -54,6 +54,6 @@ public class PiazzaPermalinkPageExtension implements PageExtension {
     }
     
     public void fillModel(Map<String, Object> model, HttpServletRequest request) {
-        // nothing to do
+        model.put("piazzaHref", request.getContextPath() + Piazza.PATH);
     }
 }

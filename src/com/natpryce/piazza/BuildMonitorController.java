@@ -16,44 +16,42 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza;
+package com.natpryce.piazza;
 
 import jetbrains.buildServer.controllers.BaseController;
+import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
-import jetbrains.buildServer.serverSide.SProject;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class BuildMonitorController extends BaseController {
-	private final Piazza piazza;
+    private final ProjectManager projectManager;
+    private final Piazza piazza;
 	
-	public BuildMonitorController(SBuildServer server, Piazza piazza) {
+	public BuildMonitorController(SBuildServer server, ProjectManager projectManager, Piazza piazza) {
 		super(server);
-		this.piazza = piazza;
+        this.projectManager = projectManager;
+        this.piazza = piazza;
 	}
 	
 	protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String[] path = request.getServletPath().split("/");
-		if (path.length < 3) {
-			throw new IllegalArgumentException("project and build missing from path");
-		}
-		
-		String projectName = path[path.length-2];
-		String buildTypeName = Text.withoutExtension(path[path.length-1]);
-				
-		SProject project = myServer.getProjectManager().findProjectByName(projectName);
-		if (project == null) {
-			throw new IllegalArgumentException("no project named " + projectName);
-		}
-		
-		SBuildType buildType = project.findBuildTypeByName(buildTypeName);
+        String buildTypeId = request.getParameter("buildTypeId");
+        if (buildTypeId == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                               "no build type id specified");
+            return null;
+        }
+
+		SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
 		if (buildType == null) {
-			throw new IllegalArgumentException("no build type named " + buildTypeName + " in project " + projectName);			
+            response.sendError(HttpServletResponse.SC_NOT_FOUND,
+			                   "no build type with id " + buildTypeId);
+            return null;
 		}
-		
+
 		BuildMonitorViewState buildViewState = new BuildMonitorViewState(
             piazza.version(),
             myServer,
@@ -64,7 +62,6 @@ public class BuildMonitorController extends BaseController {
 		ModelAndView view = new ModelAndView(viewJspPath);
 		view.addObject("build", buildViewState);
 		view.addObject("buildType", buildType);
-		view.addObject("project", project);
 		view.addObject("resourceRoot", piazza.resourcePath(""));
 		return view;
 	}

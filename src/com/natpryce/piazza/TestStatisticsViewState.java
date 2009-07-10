@@ -16,34 +16,34 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza;
+package com.natpryce.piazza;
 
-import java.util.regex.Pattern;
-
-public class Text {
-	public static final Pattern WORD_BOUNDARIES = Pattern.compile("\\W+");
-
-	public static String toTitleCase(String input) {
-		String[] words = WORD_BOUNDARIES.split(input);
-		
-		StringBuilder result = new StringBuilder();
-		
-		for (String word : words) {
-			if (result.length() > 0) result.append(" ");
-			result.append(Character.toTitleCase(word.charAt(0)));
-			result.append(word.substring(1));
-		}
-		
-		return result.toString();
+public class TestStatisticsViewState {
+	private final int passed, failed, ignored;
+	
+	public TestStatisticsViewState(int passedTestCount, int failedTestCount, int ignoredTestCount) {
+		passed = passedTestCount;
+		failed = failedTestCount;
+		ignored = ignoredTestCount;
 	}
 	
-	public static String withoutExtension(String string) {
-		int end = string.lastIndexOf('.');
-		if (end == -1) {
-			return string;
-		}
-		else {
-			return string.substring(0, end);
-		}
+	public boolean getAnyHaveRun() {
+		return getCompleted() > 0;
+	}
+	
+	public int getCompleted() {
+		return passed + failed + ignored;
+	}
+	
+	public int getFailed() {
+		return failed;
+	}
+
+	public int getIgnored() {
+		return ignored;
+	}
+	
+	public int getPassed() {
+		return passed;
 	}
 }

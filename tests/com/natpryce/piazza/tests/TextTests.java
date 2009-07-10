@@ -16,10 +16,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza.tests;
+package com.natpryce.piazza.tests;
 
+import com.natpryce.piazza.Text;
 import junit.framework.TestCase;
-import nat.piazza.Text;
 
 public class TextTests extends TestCase {
 	public void testTimeCasesWordsInString() {

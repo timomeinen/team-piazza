@@ -1,4 +1,3 @@
-<%@ page import="nat.piazza.Piazza" %>
 <%--
   Copyright (C) 2007-2009 Nat Pryce.
 
@@ -21,6 +20,11 @@
 <jsp:useBean id="buildType"
 			 type="jetbrains.buildServer.BuildTypeDescriptor"
 			 scope="request"/>
+
+<jsp:useBean id="piazzaHref"
+			 type="java.lang.String"
+			 scope="request"/>
+
 <div>
-    <a href="<%= request.getContextPath() %>/<%= Piazza.PLUGIN_NAME %>/${buildType.projectName}/${buildType.name}.html" title="Team Piazza Build Monitor">Piazza Build Monitor</a>
+    <a href="${piazzaHref}?buildTypeId=${buildType.buildTypeId}" title="Team Piazza Build Monitor">Piazza Build Monitor</a>
 </div>

@@ -16,9 +16,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nat.piazza;
+package com.natpryce.piazza;
 
 import jetbrains.buildServer.serverSide.MainConfigProcessor;
+import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.PlaceId;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
@@ -32,13 +33,15 @@ import java.util.Properties;
 
 public class Piazza implements MainConfigProcessor {
 	public static final String PLUGIN_NAME = Piazza.class.getSimpleName().toLowerCase();
-	
+    public static final String PATH = "/" + PLUGIN_NAME + ".html";
+
 	private final WebResourcesManager webResourcesManager;
 	private final String version;
     
 	private UserGroup userGroup = new UserGroup();
 
     public Piazza(SBuildServer server,
+                  ProjectManager projectManager,
 				  WebControllerManager webControllerManager,
 				  WebResourcesManager webResourcesManager) 
 	{
@@ -49,9 +52,9 @@ public class Piazza implements MainConfigProcessor {
 
         webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
         webControllerManager.registerController(
-			"/" + PLUGIN_NAME + "/*/*",
-			new BuildMonitorController(server, this));
-        webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaPermalinkPageExtension(this));
+                PATH, new BuildMonitorController(server, projectManager, this));
+        
+        webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));
 	}
 	
 	public String resourcePath(String resourceName) {
