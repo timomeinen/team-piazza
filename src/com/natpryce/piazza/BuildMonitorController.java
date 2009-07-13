@@ -22,47 +22,67 @@ import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
+import jetbrains.buildServer.serverSide.SProject;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 public class BuildMonitorController extends BaseController {
+    private static final String BUILD_TYPE_ID = "buildTypeId";
+    private static final String PROJECT_ID = "projectId";
+
     private final ProjectManager projectManager;
     private final Piazza piazza;
-	
-	public BuildMonitorController(SBuildServer server, ProjectManager projectManager, Piazza piazza) {
-		super(server);
+
+    public BuildMonitorController(SBuildServer server, ProjectManager projectManager, Piazza piazza) {
+        super(server);
         this.projectManager = projectManager;
         this.piazza = piazza;
-	}
-	
-	protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String buildTypeId = request.getParameter("buildTypeId");
-        if (buildTypeId == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                               "no build type id specified");
+    }
+
+    protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (requestHasParameter(request, BUILD_TYPE_ID)) {
+            return showBuildType(request.getParameter(BUILD_TYPE_ID), response);
+        } else if (requestHasParameter(request, PROJECT_ID)) {
+            return showProject(request.getParameter(PROJECT_ID), response);
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "no build type id specified");
+            return null;
+        }
+    }
+
+    private ModelAndView showProject(String projectId, HttpServletResponse response) throws IOException {
+        SProject project = projectManager.findProjectById(projectId);
+        if (project == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
             return null;
         }
 
-		SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
-		if (buildType == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND,
-			                   "no build type with id " + buildTypeId);
-            return null;
-		}
+        throw new UnsupportedOperationException("nat couldn't be bothered");
+    }
 
-		BuildMonitorViewState buildViewState = new BuildMonitorViewState(
-            piazza.version(),
-            myServer,
-            buildType,
-            piazza.userGroup());
-		
-		String viewJspPath = piazza.resourcePath("piazza.jsp");
-		ModelAndView view = new ModelAndView(viewJspPath);
-		view.addObject("build", buildViewState);
-		view.addObject("buildType", buildType);
-		view.addObject("resourceRoot", piazza.resourcePath(""));
-		return view;
-	}
+    private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
+        SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
+        if (buildType == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND,
+                "no build type with id " + buildTypeId);
+            return null;
+        }
+
+        return new ModelAndView(piazza.resourcePath("piazza.jsp"))
+            .addObject("build", new BuildTypeMonitorViewState(
+                piazza.version(),
+                myServer,
+                buildType,
+                piazza.userGroup()))
+            .addObject("buildType", buildType)
+            .addObject("resourceRoot", piazza.resourcePath(""));
+    }
+
+    private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
+        return request.getParameterMap().containsKey(parameterName);
+    }
 }

@@ -22,7 +22,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <jsp:useBean id="build"
-			 type="com.natpryce.piazza.BuildMonitorViewState"
+			 type="com.natpryce.piazza.BuildTypeMonitorViewState"
 			 scope="request"/>
 
 <jsp:useBean id="resourceRoot"

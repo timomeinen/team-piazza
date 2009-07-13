@@ -26,16 +26,15 @@ import jetbrains.buildServer.serverSide.ShortStatistics;
 import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
-public class BuildMonitorViewState {
-	private static final String BUILDING = "Building";
-	private static final String SUCCESS = "Success";
-	private static final String UNKNOWN = "Unknown";
-	private static final String FAILURE = "Failure";
-
-	private final String version;
+public class BuildTypeMonitorViewState {
+    private final String version;
 	private final SBuildType buildType;
 	
 	private final List<String> commitMessages;
@@ -44,7 +43,7 @@ public class BuildMonitorViewState {
     private final TestStatisticsViewState tests;
     private final Set<User> committers;
 
-    public BuildMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
+    public BuildTypeMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
 		this.version = version;
 		this.buildType = buildType;
         this.lastFinishedBuild = buildType.getLastChangesFinished();
@@ -58,8 +57,8 @@ public class BuildMonitorViewState {
 
         this.tests = testStatistics();
 	}
-	
-	private Set<String> committersForBuild(Build latestBuild) {
+
+    private Set<String> committersForBuild(Build latestBuild) {
 		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 		
 		HashSet<String> committers = new HashSet<String>();
@@ -114,7 +113,7 @@ public class BuildMonitorViewState {
 	public String getCombinedStatusClasses() {
 		String status = getStatus();
 		if (isBuilding()) {
-			status = status + " " + BUILDING;
+			status = status + " " + BuildStatusNames.BUILDING;
 		}
 		return status;
 	}
@@ -164,31 +163,31 @@ public class BuildMonitorViewState {
 	
 	public String getStatus() {
 		if (latestBuild == null) {
-			return UNKNOWN;
+			return BuildStatusNames.UNKNOWN;
 		}
 		else if (latestBuild.getBuildStatus().isFailed()) {
-			return FAILURE;
+			return BuildStatusNames.FAILURE;
 		}
 		if (lastFinishedBuild == null) {
-			return UNKNOWN;
+			return BuildStatusNames.UNKNOWN;
 		} 
 		else if (lastFinishedBuild.getBuildStatus().isFailed()) {
-			return FAILURE;
+			return BuildStatusNames.FAILURE;
 		}
 		else {
-			return SUCCESS;
+			return BuildStatusNames.SUCCESS;
 		}
 	}
 	
 	public String getRunningBuildStatus() {
 		if (latestBuild == null) {
-			return UNKNOWN;
+			return BuildStatusNames.UNKNOWN;
 		}
 		else if (latestBuild.getBuildStatus().isFailed()) {
-			return FAILURE;
+			return BuildStatusNames.FAILURE;
 		}
 		else {
-			return SUCCESS;
+			return BuildStatusNames.SUCCESS;
 		}
 	}
 	
