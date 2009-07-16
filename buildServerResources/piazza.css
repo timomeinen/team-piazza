@@ -32,7 +32,7 @@ h2 {
 
 h3 {
     margin: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
     font-weight:normal;
     font-size: 20px;
 }
@@ -64,10 +64,6 @@ body.Building .BuildType {
 	border: 1px solid #444444;
 }
 
-.Builds {
-    width: 100%;
-}
-
 .NoChanges {
 	margin-left: 8px;
 	margin-right: 8px;
@@ -91,15 +87,19 @@ body.Building .BuildType {
     white-space: pre-line;
 }
 
+.BuildType .ProgressBar {
+    margin-top: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 16px;    
+}
+
 .ProgressBar {
     position: relative;
-	margin-top: 8px;
-	margin-left: 8px;
-	margin-right: 8px;
-	margin-bottom: 16px;
 	border: 1px solid #444444;
 	background-color: white;
     height: 40px;
+    overflow-x: hidden;
 }
 
 .ProgressBar .Activity {
