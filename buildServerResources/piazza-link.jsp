@@ -17,14 +17,10 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 
-<jsp:useBean id="buildType"
-			 type="jetbrains.buildServer.BuildTypeDescriptor"
-			 scope="request"/>
-
 <jsp:useBean id="piazzaHref"
 			 type="java.lang.String"
 			 scope="request"/>
 
 <div>
-    <a href="${piazzaHref}?buildTypeId=${buildType.buildTypeId}" title="Team Piazza Build Monitor">Piazza Build Monitor</a>
+    <a href="${piazzaHref}" title="Team Piazza Build Monitor">Team Piazza Build Monitor</a>
 </div>
