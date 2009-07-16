@@ -29,16 +29,20 @@
 			 type="java.lang.String"
 			 scope="request"/>
 
+<jsp:useBean id="version"
+			 type="java.lang.String"
+			 scope="request"/>
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Piazza - ${build.buildTypeName}</title>
+	<title>Piazza - ${build.fullName}</title>
     <meta http-equiv="refresh" content="${build.building ? 1 : 10}">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/progress.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
 <body class="${build.combinedStatusClasses}">
-<h1>${build.buildTypeName} #${build.buildNumber}</h1>
+<h1>${build.fullName} #${build.buildNumber}</h1>
 <h2>${build.status}. Duration: <bs:printTime time="${build.durationSeconds}"/>.</h2>
 
 <div class="Content">
@@ -91,7 +95,7 @@
 </div>
 
 <div class="Version">
-Team Piazza version ${build.piazzaVersion}
+Team Piazza version ${version}
 </div>
 </body>
 </html>

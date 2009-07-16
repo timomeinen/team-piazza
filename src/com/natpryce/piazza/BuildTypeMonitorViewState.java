@@ -19,22 +19,16 @@
 package com.natpryce.piazza;
 
 import jetbrains.buildServer.Build;
-import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SRunningBuild;
 import jetbrains.buildServer.serverSide.ShortStatistics;
 import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class BuildTypeMonitorViewState {
-    private final String version;
 	private final SBuildType buildType;
 	
 	private final List<String> commitMessages;
@@ -43,8 +37,7 @@ public class BuildTypeMonitorViewState {
     private final TestStatisticsViewState tests;
     private final Set<User> committers;
 
-    public BuildTypeMonitorViewState(String version, SBuildServer server, SBuildType buildType, UserGroup userPictures) {
-		this.version = version;
+    public BuildTypeMonitorViewState(SBuildType buildType, UserGroup userPictures) {
 		this.buildType = buildType;
         this.lastFinishedBuild = buildType.getLastChangesFinished();
 		this.latestBuild = buildType.getLastChangesStartedBuild();
@@ -97,25 +90,21 @@ public class BuildTypeMonitorViewState {
 	private List<? extends VcsModification> changesInBuild(Build latestBuild) {
 		return latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
 	}
-	
-	public String getId() {
-		return buildType.getBuildTypeId();
-	}
-	
-	public String getBuildTypeName() {
+
+	public String getFullName() {
 		return Text.toTitleCase(buildType.getFullName());
 	}
-	
+
+    public String getName() {
+        return Text.toTitleCase(buildType.getName());
+    }
+
 	public String getBuildNumber() {
 		return latestBuild.getBuildNumber();
 	}
 	
 	public String getCombinedStatusClasses() {
-		String status = getStatus();
-		if (isBuilding()) {
-			status = status + " " + BuildStatusNames.BUILDING;
-		}
-		return status;
+        return getStatus().toStringReflectingCurrentlyBuilding(isBuilding());
 	}
 	
 	public boolean isBuilding() {
@@ -131,7 +120,7 @@ public class BuildTypeMonitorViewState {
 			return ((SRunningBuild)latestBuild).getShortStatistics().getCurrentStage();
 		}
 		else {
-			return getStatus();
+			return getStatus().toString();
 		}
 	}
 	
@@ -161,33 +150,33 @@ public class BuildTypeMonitorViewState {
 		return new Date();
 	}
 	
-	public String getStatus() {
+	public BuildStatus getStatus() {
 		if (latestBuild == null) {
-			return BuildStatusNames.UNKNOWN;
+			return BuildStatus.UNKNOWN;
 		}
 		else if (latestBuild.getBuildStatus().isFailed()) {
-			return BuildStatusNames.FAILURE;
+			return BuildStatus.FAILURE;
 		}
 		if (lastFinishedBuild == null) {
-			return BuildStatusNames.UNKNOWN;
+			return BuildStatus.UNKNOWN;
 		} 
 		else if (lastFinishedBuild.getBuildStatus().isFailed()) {
-			return BuildStatusNames.FAILURE;
+			return BuildStatus.FAILURE;
 		}
 		else {
-			return BuildStatusNames.SUCCESS;
+			return BuildStatus.SUCCESS;
 		}
 	}
 	
-	public String getRunningBuildStatus() {
+	public BuildStatus getRunningBuildStatus() {
 		if (latestBuild == null) {
-			return BuildStatusNames.UNKNOWN;
+			return BuildStatus.UNKNOWN;
 		}
 		else if (latestBuild.getBuildStatus().isFailed()) {
-			return BuildStatusNames.FAILURE;
+			return BuildStatus.FAILURE;
 		}
 		else {
-			return BuildStatusNames.SUCCESS;
+			return BuildStatus.SUCCESS;
 		}
 	}
 	
@@ -197,9 +186,5 @@ public class BuildTypeMonitorViewState {
 
 	public Set<User> getCommitters() {
 		return committers;
-	}
-	
-	public String getPiazzaVersion() {
-		return version;
 	}
 }

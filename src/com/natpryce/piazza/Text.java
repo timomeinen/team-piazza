@@ -36,7 +36,7 @@ public class Text {
 		
 		return result.toString();
 	}
-	
+    
 	public static String withoutExtension(String string) {
 		int end = string.lastIndexOf('.');
 		if (end == -1) {

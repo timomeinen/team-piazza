@@ -5,7 +5,7 @@
 	</tstamp>
 	
 	<property name="distdir" value="build/${app}-${version}"/>
-	<property name="teamcity.home" location="${basedir}/TeamCity"/>
+	<property name="teamcity.home" location="${basedir}/../TeamCity"/>
 	<property name="teamcity.appdir" location="${teamcity.home}/webapps/ROOT/WEB-INF"/>
 	
 	<path id="build.classpath">
@@ -111,12 +111,12 @@
             description="Deploys to a local TeamCity server">
         <copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
     </target>
-    
-	<target name="deploy.restart" depends="clean, run.tests"
+
+    <!-- assumes that team city is being run in a perpetual loop -->
+	<target name="deploy-and-restart" depends="clean, run.tests"
 		    description="Deploys to a local TeamCity server and restarts it">
+        <copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
 		<teamcity action="stop"/>
-		<copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
-		<teamcity action="start"/>
 	</target>
 	
 	<target name="undeploy">

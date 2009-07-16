@@ -60,8 +60,11 @@ public class BuildMonitorController extends BaseController {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
             return null;
         }
-
-        throw new UnsupportedOperationException("nat couldn't be bothered");
+        
+        return modelWithView("piazza-project-monitor.jsp")
+                .addObject("builds", new ProjectMonitorViewState(project, piazza.userGroup()))
+                .addObject("project", project)
+                ;
     }
 
     private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
@@ -72,14 +75,16 @@ public class BuildMonitorController extends BaseController {
             return null;
         }
 
-        return new ModelAndView(piazza.resourcePath("piazza-build-type-monitor.jsp"))
-            .addObject("build", new BuildTypeMonitorViewState(
-                piazza.version(),
-                myServer,
-                buildType,
-                piazza.userGroup()))
-            .addObject("buildType", buildType)
-            .addObject("resourceRoot", piazza.resourcePath(""));
+        return modelWithView("piazza-build-type-monitor.jsp")
+                .addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup()))
+                .addObject("buildType", buildType)
+                ;
+    }
+
+    private ModelAndView modelWithView(String viewJSP) {
+        return new ModelAndView(piazza.resourcePath(viewJSP))
+                .addObject("version", piazza.version())
+                .addObject("resourceRoot", piazza.resourcePath(""));
     }
 
     private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
