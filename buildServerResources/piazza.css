@@ -32,7 +32,6 @@ h2 {
 
 h3 {
     margin: 0px;
-    margin-bottom: 8px;
     font-weight:normal;
     font-size: 20px;
 }
@@ -94,6 +93,10 @@ body.Building .BuildType {
     margin-bottom: 16px;    
 }
 
+.Builds .ProgressBar {
+    margin-top: 8px;
+}
+
 .ProgressBar {
     position: relative;
 	border: 1px solid #444444;
@@ -123,6 +126,14 @@ body.Building .BuildType {
 
 .ProgressBar .Failure {
 	background-color: #FF0000;
+}
+
+.Builds .Build.Failure {
+    background-color: #FF0000;
+}
+
+.Builds .Build.Success {
+    background-color: #44FF44;
 }
 
 .Version {
