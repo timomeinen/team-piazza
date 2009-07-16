@@ -18,6 +18,8 @@
  */
 package com.natpryce.piazza;
 
+import static com.natpryce.piazza.BuildMonitorController.BUILD_TYPE_ID;
+import static com.natpryce.piazza.BuildMonitorController.PROJECT_ID;
 import jetbrains.buildServer.BuildProject;
 import jetbrains.buildServer.BuildType;
 import jetbrains.buildServer.web.openapi.PageExtension;
@@ -74,12 +76,12 @@ public class PiazzaLinkPageExtension implements PageExtension {
 
     private String projectQuery(Map<String, Object> model) {
         BuildProject project = (BuildProject) model.get("project");
-        return "projectId=" + project.getProjectId();
+        return PROJECT_ID + "=" + project.getProjectId();
     }
 
     private String buildTypeQuery(Map<String, Object> model) {
         BuildType buildType = (BuildType) model.get("buildType");
-        return "buildTypeId=" + buildType.getBuildTypeId();
+        return BUILD_TYPE_ID +"=" + buildType.getBuildTypeId();
     }
 
 

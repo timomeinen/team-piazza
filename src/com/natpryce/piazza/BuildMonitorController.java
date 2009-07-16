@@ -31,8 +31,8 @@ import java.io.IOException;
 
 
 public class BuildMonitorController extends BaseController {
-    private static final String BUILD_TYPE_ID = "buildTypeId";
-    private static final String PROJECT_ID = "projectId";
+    public static final String BUILD_TYPE_ID = "buildTypeId";
+    public static final String PROJECT_ID = "projectId";
 
     private final ProjectManager projectManager;
     private final Piazza piazza;
