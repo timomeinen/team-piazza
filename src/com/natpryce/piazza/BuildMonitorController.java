@@ -72,7 +72,7 @@ public class BuildMonitorController extends BaseController {
             return null;
         }
 
-        return new ModelAndView(piazza.resourcePath("piazza.jsp"))
+        return new ModelAndView(piazza.resourcePath("piazza-build-type-monitor.jsp"))
             .addObject("build", new BuildTypeMonitorViewState(
                 piazza.version(),
                 myServer,
