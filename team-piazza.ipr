@@ -345,6 +345,7 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/../TeamCity/devPackage/src/openApi-source.jar!/" />
+        <root url="file://$PROJECT_DIR$/../TeamCity/webapps/ROOT" />
       </SOURCES>
     </library>
   </component>

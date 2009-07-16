@@ -104,7 +104,7 @@ public class BuildTypeMonitorViewState {
 	}
 	
 	public String getCombinedStatusClasses() {
-        return getStatus().toStringReflectingCurrentlyBuilding(isBuilding());
+        return status().toStringReflectingCurrentlyBuilding(isBuilding());
 	}
 	
 	public boolean isBuilding() {
@@ -120,7 +120,7 @@ public class BuildTypeMonitorViewState {
 			return ((SRunningBuild)latestBuild).getShortStatistics().getCurrentStage();
 		}
 		else {
-			return getStatus().toString();
+			return status().toString();
 		}
 	}
 	
@@ -149,8 +149,12 @@ public class BuildTypeMonitorViewState {
 	private Date now() {
 		return new Date();
 	}
-	
-	public BuildStatus getStatus() {
+
+    public String getStatus() {
+        return status().toString();
+    }
+
+	public BuildStatus status() {
 		if (latestBuild == null) {
 			return BuildStatus.UNKNOWN;
 		}
@@ -167,8 +171,12 @@ public class BuildTypeMonitorViewState {
 			return BuildStatus.SUCCESS;
 		}
 	}
-	
-	public BuildStatus getRunningBuildStatus() {
+
+    public String getRunningBuildStatus() {
+        return runningBuildStatus().toString();
+    }
+
+	public BuildStatus runningBuildStatus() {
 		if (latestBuild == null) {
 			return BuildStatus.UNKNOWN;
 		}

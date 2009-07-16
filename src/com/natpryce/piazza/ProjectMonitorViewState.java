@@ -27,14 +27,22 @@ public class ProjectMonitorViewState {
         }
     }
 
-    public String getCombinedStatusClasses() {
-        return getStatus().toStringReflectingCurrentlyBuilding(isBuilding());
+    public String getProjectName() {
+        return project.getName();
     }
-    
-    public BuildStatus getStatus() {
+
+    public String getCombinedStatusClasses() {
+        return status().toStringReflectingCurrentlyBuilding(isBuilding());
+    }
+
+    public String getStatus() {
+        return status().toString();
+    }
+
+    public BuildStatus status() {
         BuildStatus status = SUCCESS;
         for (BuildTypeMonitorViewState build : builds) {
-            status = status.mostSevere(build.getStatus());
+            status = status.mostSevere(build.status());
         }
         return status;
     }

@@ -62,11 +62,10 @@ public class BuildMonitorController extends BaseController {
         }
         
         return modelWithView("piazza-project-monitor.jsp")
-                .addObject("builds", new ProjectMonitorViewState(project, piazza.userGroup()))
-                .addObject("project", project)
+                .addObject("project", new ProjectMonitorViewState(project, piazza.userGroup()))
                 ;
     }
-
+    
     private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
         SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
         if (buildType == null) {
@@ -77,7 +76,6 @@ public class BuildMonitorController extends BaseController {
 
         return modelWithView("piazza-build-type-monitor.jsp")
                 .addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup()))
-                .addObject("buildType", buildType)
                 ;
     }
 

@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="builds"
+<jsp:useBean id="project"
              type="com.natpryce.piazza.ProjectMonitorViewState"
              scope="request"/>
 
@@ -36,22 +36,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Piazza - ${build.buildTypeName}</title>
-    <meta http-equiv="refresh" content="${build.building ? 1 : 10}">
+    <title>Piazza - ${project.projectName}</title>
+    <meta http-equiv="refresh" content="${project.building ? 1 : 10}">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/progress.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
-<body class="${builds.combinedStatusClasses}">
-<h1>${project.name}</h1>
+<body class="${project.combinedStatusClasses}">
+<h1>${project.projectName}</h1>
 
-<h2>${builds.status}.</h2>
+<h2>${project.status}.</h2>
 
 
-<div class="Content">
+<div class="Project">
 
-    <c:if test="${! empty builds.committers}">
+    <c:if test="${! empty project.committers}">
         <div class="Portraits">
-            <c:forEach var="committer" items="${builds.committers}">
+            <c:forEach var="committer" items="${project.committers}">
                 <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
             </c:forEach>
         </div>
@@ -59,16 +59,31 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
     <div class="Builds">
-        <c:forEach var="build" items="${builds.builds}">
+        <c:forEach var="build" items="${project.builds}">
             <div class="Build ${build.combinedStatusClasses}">
-                ${build.name}
+                <h3>${build.name} #${build.buildNumber}</h3>
+
+                <c:if test="${build.building}">
+                    <c:if test="${build.building}">
+                        <div class="ProgressBar">
+                            <div class="Activity ${build.runningBuildStatus}" style="width: ${build.completedPercent}%">
+                                ${build.activity}
+                                <c:if test="${build.tests.anyHaveRun}">
+                                    (Tests passed: ${build.tests.passed},
+                                    failed: ${build.tests.failed},
+                                    ignored: ${build.tests.ignored})
+                                </c:if>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:if>
             </div>
         </c:forEach>
     </div>
-</div>
 
-<div class="Version">
-    Team Piazza version ${version}
+    <div class="Version">
+        Team Piazza version ${version}
+    </div>
 </div>
 </body>
 </html>
