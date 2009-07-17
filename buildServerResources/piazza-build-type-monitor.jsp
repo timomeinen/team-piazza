@@ -38,7 +38,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Piazza - ${build.fullName}</title>
     <meta http-equiv="refresh" content="${build.building ? 1 : 10}">
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/progress.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
 <body class="${build.combinedStatusClasses}">
