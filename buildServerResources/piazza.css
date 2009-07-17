@@ -36,27 +36,26 @@ h3 {
     font-size: 20px;
 }
 
-.BuildType, .Project .Portraits {
-	background-color: #FFFFFF;
+.Content {
 	border: 1px solid #444444;
+    background-color: #FFFFFF;
 	padding: 8px;
 }
 
-.Project .Builds {
-    position: relative;
-}
-
-.Project .Build {
-	background-color: #FFFFFF;
-	border: 1px solid #444444;
-	padding: 8px;
-    margin-top: 16px;
-}
-
-body.Building .BuildType {
+body.Building .Content {
 	background-color: #FFFF00;
 }
 
+.Builds {
+    margin-bottom: 8px;
+}
+
+.Build {
+	background-color: #FFFFFF;
+	border: 1px solid #444444;
+	padding: 8px;
+    margin: 8px;
+}
 
 .Portraits img {
 	margin: 8px;
@@ -90,11 +89,13 @@ body.Building .BuildType {
     margin-top: 8px;
     margin-left: 8px;
     margin-right: 8px;
-    margin-bottom: 16px;    
+    margin-bottom: 16px;
 }
 
-.Builds .ProgressBar {
+.Project .Build .ProgressBar {
     margin-top: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .ProgressBar {

@@ -47,7 +47,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <h2>${project.status}.</h2>
 
 
-<div class="Project">
+<div class="Content">
 
     <c:if test="${! empty project.committers}">
         <div class="Portraits">
