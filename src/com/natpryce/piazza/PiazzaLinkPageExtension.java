@@ -20,8 +20,6 @@ package com.natpryce.piazza;
 
 import static com.natpryce.piazza.BuildMonitorController.BUILD_TYPE_ID;
 import static com.natpryce.piazza.BuildMonitorController.PROJECT_ID;
-import jetbrains.buildServer.BuildProject;
-import jetbrains.buildServer.BuildType;
 import jetbrains.buildServer.web.openapi.PageExtension;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,32 +57,22 @@ public class PiazzaLinkPageExtension implements PageExtension {
     }
 
     public void fillModel(Map<String, Object> model, HttpServletRequest request) {
-        model.put("piazzaHref", request.getContextPath() + Piazza.PATH + "?" + queryParameter(model, request));
+        String queryParameter = queryParameter(request);
+        model.put("piazzaHref", request.getContextPath() + Piazza.PATH + "?" + queryParameter + "=" + request.getParameter(queryParameter));
     }
 
-    private String queryParameter(Map<String, Object> model, HttpServletRequest request) {
+    private String queryParameter(HttpServletRequest request) {
         if (isBuildTypeView(request)) {
-            return buildTypeQuery(model);
+            return BUILD_TYPE_ID;
         }
         else if (isProjectView(request)) {
-            return projectQuery(model);
+            return PROJECT_ID;
         }
         else {
             throw new IllegalStateException("cannot create link for page at " + request.getRequestURI());
         }
     }
-
-    private String projectQuery(Map<String, Object> model) {
-        BuildProject project = (BuildProject) model.get("project");
-        return PROJECT_ID + "=" + project.getProjectId();
-    }
-
-    private String buildTypeQuery(Map<String, Object> model) {
-        BuildType buildType = (BuildType) model.get("buildType");
-        return BUILD_TYPE_ID +"=" + buildType.getBuildTypeId();
-    }
-
-
+    
     private boolean isProjectView(HttpServletRequest request) {
         return request.getRequestURI().endsWith("/project.html");
     }
