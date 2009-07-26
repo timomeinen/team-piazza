@@ -19,9 +19,11 @@ public class ProjectMonitorViewState {
 
         builds = new ArrayList<BuildTypeMonitorViewState>();
         for (SBuildType buildType : project.getBuildTypes()) {
-            builds.add(new BuildTypeMonitorViewState(buildType, userGroup));
+            if (buildType.isAllowExternalStatus()) {
+                builds.add(new BuildTypeMonitorViewState(buildType, userGroup));
+            }
         }
-
+        
         for (BuildTypeMonitorViewState build : builds) {
             committers.addAll(build.getCommitters());
         }
@@ -40,11 +42,16 @@ public class ProjectMonitorViewState {
     }
 
     public BuildStatus status() {
-        BuildStatus status = SUCCESS;
-        for (BuildTypeMonitorViewState build : builds) {
-            status = status.mostSevere(build.status());
+        if (builds.isEmpty()) {
+            return BuildStatus.UNKNOWN;
         }
-        return status;
+        else {
+            BuildStatus status = SUCCESS;
+            for (BuildTypeMonitorViewState build : builds) {
+                status = status.mostSevere(build.status());
+            }
+            return status;
+        }
     }
 
     public boolean isBuilding() {

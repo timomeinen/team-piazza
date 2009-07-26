@@ -58,6 +58,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
     <div class="Builds">
+        <c:if test="${empty project.builds}">
+            <p class="Tip">
+            No monitored builds. Enable the status widget for builds that you want to appear in the Project monitor.
+            </p>
+        </c:if>
+        
         <c:forEach var="build" items="${project.builds}">
             <div class="Build ${build.combinedStatusClasses}">
                 <h3>${build.name} #${build.buildNumber}</h3>
