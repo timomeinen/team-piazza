@@ -20,11 +20,16 @@ package com.natpryce.piazza;
 
 import org.jdom.Element;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class UserGroup {
     private static final String USER = "user";
+    private static final String PORTRAIT_TEMPLATE = "portrait-template";
     private static final String PORTRAIT = "portrait";
     private static final String NAME = "name";
     private static final String NICKNAME = "nickname";
@@ -63,13 +68,16 @@ public class UserGroup {
         }
     }
 
-
-    
     public static UserGroup loadFrom(Element element) {
         UserGroup userGroup = new UserGroup();
 
+        String portraitUrlTemplate = element.getAttributeValue(PORTRAIT_TEMPLATE);
+        if (portraitUrlTemplate == null) {
+            portraitUrlTemplate = "%s";
+        }
+        
         for (Element userElement : (List<Element>)element.getChildren(USER)) {
-            String portraitUrl = userElement.getAttribute(PORTRAIT).getValue();
+            String portraitUrl = String.format(portraitUrlTemplate, userElement.getAttributeValue(PORTRAIT));
             String name = userElement.getChild(NAME).getTextTrim();
 
             Set<String> nicknames = new HashSet<String>();
