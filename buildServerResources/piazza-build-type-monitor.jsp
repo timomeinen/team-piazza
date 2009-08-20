@@ -62,7 +62,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <c:if test="${! empty build.committers}">
         <div class="Portraits">
             <c:forEach var="committer" items="${build.committers}">
+                <div class="Portrait">
                 <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
+                <p class="Name">${committer.name}</p>
+                </div>
             </c:forEach>
         </div>
     </c:if>

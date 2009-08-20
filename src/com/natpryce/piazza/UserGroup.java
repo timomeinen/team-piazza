@@ -54,7 +54,6 @@ public class UserGroup {
                     involvedUsers.add(user);
                 }
             }
-
         }
     }
 
