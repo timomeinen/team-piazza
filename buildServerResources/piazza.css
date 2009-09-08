@@ -57,9 +57,29 @@ body.Building .Content {
     margin: 8px;
 }
 
-.Portraits img {
+.Portrait {
+    display: inline-block;
 	margin: 8px;
+}
+
+.Portrait img {
+    display: block;
 	border: 1px solid #444444;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Portrait .Name {
+    display: block;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
 }
 
 .NoChanges {
