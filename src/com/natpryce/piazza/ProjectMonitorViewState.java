@@ -12,7 +12,7 @@ import java.util.Set;
 public class ProjectMonitorViewState {
     private final SProject project;
     private final Set<User> committers = new HashSet<User>();
-    private List<BuildTypeMonitorViewState> builds;
+    private final List<BuildTypeMonitorViewState> builds;
 
     public ProjectMonitorViewState(SProject project, UserGroup userGroup) {
         this.project = project;
