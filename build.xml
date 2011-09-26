@@ -12,7 +12,6 @@
     <package.teamcity.plugin name="${plugin.name}-${plugin.version}"
       server.output="${team-piazza.output.dir}"
       server.lib.dir="lib"
-      server.lib.includes="*.jar"
       plugin.descriptor.file="${basedir}/teamcity-plugin.xml"
       plugin.version="${plugin.version}" />
   </target>
