@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
+  <info>
+    <name>piazza</name>
+    <display-name>Piazza build monitor</display-name>
+    <version>@version@</version>
+    <description>Piazza is a build monitor plugin for the Team City continuous integration server. Piazza provides a high-visibility display of the current state of the build to alert the team as soon as the build breaks.</description>
+
+    <vendor>
+      <name>Team Piazza</name>
+      <url>http://code.google.com/p/team-piazza/</url>
+    </vendor>
+  </info>
+</teamcity-plugin>

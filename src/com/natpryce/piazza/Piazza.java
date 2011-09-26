@@ -18,89 +18,57 @@
  */
 package com.natpryce.piazza;
 
+import org.jdom.Element;
+
 import jetbrains.buildServer.serverSide.MainConfigProcessor;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.PlaceId;
+import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
-import jetbrains.buildServer.web.openapi.WebResourcesManager;
-import org.jdom.Element;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 
 public class Piazza implements MainConfigProcessor {
+
 	public static final String PLUGIN_NAME = Piazza.class.getSimpleName().toLowerCase();
-    public static final String PATH = "/" + PLUGIN_NAME + ".html";
+	public static final String PATH = "/" + PLUGIN_NAME + ".html";
 
-	private final WebResourcesManager webResourcesManager;
-	private final String version;
-    
 	private UserGroup userGroup = new UserGroup();
+	private PluginDescriptor pluginDescriptor;
 
-    public Piazza(SBuildServer server,
-                  ProjectManager projectManager,
-				  WebControllerManager webControllerManager,
-				  WebResourcesManager webResourcesManager) 
-	{
-		this.webResourcesManager = webResourcesManager;
-		this.version = loadVersionFromResource();
+	public Piazza (SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager, PluginDescriptor pluginDescriptor) {
+		this.pluginDescriptor = pluginDescriptor;
 
-        server.registerExtension(MainConfigProcessor.class, PLUGIN_NAME, this);
+		server.registerExtension(MainConfigProcessor.class, PLUGIN_NAME, this);
 
-        webResourcesManager.addPluginResources(PLUGIN_NAME, PLUGIN_NAME + ".jar");
-        webControllerManager.registerController(
-                PATH, new BuildMonitorController(server, projectManager, this));
-        
-        webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));
+		webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, this));
+
+		webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));
 	}
-	
-	public String resourcePath(String resourceName) {
-		return webResourcesManager.resourcePath(PLUGIN_NAME, resourceName);
+
+	public String resourcePath (String resourceName) {
+		return this.pluginDescriptor.getPluginResourcesPath(resourceName);
 	}
-	
-	public String version() {
-		return version;
+
+	public String version () {
+		return this.pluginDescriptor.getPluginVersion();
 	}
-	
-	private String loadVersionFromResource() {
-		Properties properties = new Properties();
-		
-		InputStream input = getClass().getResourceAsStream("/version.properties");
-		try {
-			try {
-				properties.load(input);
-			}
-			finally {
-				input.close();
-			}
+
+	public void readFrom (Element serverConfigRoot) {
+		Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
+		if (piazzaConfigRoot != null) {
+			this.userGroup = UserGroup.loadFrom(piazzaConfigRoot);
+		} else {
+			this.userGroup = new UserGroup();
 		}
-		catch (IOException e) {
-			throw new RuntimeException("version information incorrectly configured");
-		}
-		
-		return properties.getProperty("piazza.version");
 	}
 
-    public void readFrom(Element serverConfigRoot) {
-        Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
-        if (piazzaConfigRoot != null) {
-            this.userGroup = UserGroup.loadFrom(piazzaConfigRoot);
-        }
-        else {
-            this.userGroup = new UserGroup();
-        }
-    }
-    
-    public void writeTo(Element serverConfigRoot) {
-        Element piazzaConfigRoot = new Element("piazza");
-        userGroup.writeTo(piazzaConfigRoot);
-        serverConfigRoot.addContent(piazzaConfigRoot);
-    }
-    
-    public UserGroup userGroup() {
-        return userGroup;
-    }
+	public void writeTo (Element serverConfigRoot) {
+		Element piazzaConfigRoot = new Element("piazza");
+		userGroup.writeTo(piazzaConfigRoot);
+		serverConfigRoot.addContent(piazzaConfigRoot);
+	}
+
+	public UserGroup userGroup () {
+		return userGroup;
+	}
 }
