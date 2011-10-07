@@ -1,136 +1,39 @@
-<project name="Piazza" default="build">
-	<property name="app" value="piazza"/>
-	<tstamp>
-		<format property="version" timezone="UTC" pattern="yyyyMMdd"/>
-	</tstamp>
-	
-	<property name="distdir" value="build/${app}-${version}"/>
-	<property name="teamcity.home" location="${basedir}/../TeamCity"/>
-	<property name="teamcity.appdir" location="${teamcity.home}/webapps/ROOT/WEB-INF"/>
-	
-	<path id="build.classpath">
-		<fileset dir="lib" includes="*.jar"/>
-        <fileset dir="${teamcity.home}/lib" includes="*.jar" excludes="${app}*.jar"/>
-		<fileset dir="${teamcity.appdir}/lib" includes="*.jar" excludes="${app}*.jar"/>
-	</path>
-	
-	<target name="test">
-		<pathconvert property="tmp" refid="build.classpath"/>
-		<echo message="${tmp}"/>
-	</target>
-	
-	<target name="build"
-		description="Builds everything from scratch"
-		depends="clean, zip"/>
-	
-	<target name="clean" 
-			description="Removes all build artefacts">
-		<delete dir="build"/>
-	</target>
-	
-	<target name="zip" depends="run.tests">
-		<zip destfile="build/${app}-${version}.zip" compress="true">
-			<fileset dir="build">
-				<include name="${app}-${version}/*.jar"/>
-				<exclude name="**/*-tests*.jar"/>
-			</fileset>
-		</zip>
-	</target>
-	
-	<target name="compile" depends="dir.build">
-		<mkdir dir="build/classes" />
-		<javac classpathref="build.classpath" 
-			   destdir="build/classes"
-			   debug="yes"
-			   failonerror="yes"
-			   source="1.5" 
-			   target="1.5">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Piazza TeamCity Plugin" default="dist">
 
-			<src path="src"/>
-			<src path="tests"/>
-		</javac>
-	</target>
+  <property file="build.properties" />
+  <property name="plugin.name" value="piazza" />
+  <property name="javac2.home" value="${basedir}/lib-compile" />
 
-	<target name="dir.build">
-		<mkdir dir="build"/>
-	</target>
+  <import file="teamcity-common.xml" />
+  <import file="team-piazza-build.xml" />
 
-	<target name="dir.dist" depends="dir.build">
-		<mkdir dir="${distdir}"/>
-	</target>
+  <target name="package" depends="define.version">
+    <package.teamcity.plugin name="${plugin.name}-${plugin.version}"
+      server.output="${team-piazza.output.dir}"
+      server.lib.dir="lib"
+      plugin.descriptor.file="${basedir}/teamcity-plugin.xml"
+      plugin.version="${plugin.version}" />
+  </target>
 
-	<target name="jars" 
-		    depends="jar.app, jar.tests"/>
-	
-	<target name="jar.app" depends="compile, build.identifier, dir.dist">
-		<jar destfile="${distdir}/${app}.jar" compress="false">
-			<fileset dir="build/classes">
-				<exclude name="nat/piazza/tests/**"/>
-			</fileset>
-			<fileset dir=".">
-				<include name="META-INF/**/*"/>
-				<include name="buildServerResources/**/*"/>
-			</fileset>
-		</jar>
-	</target>
-	
-	<target name="build.identifier">
-		<echo file="build/classes/version.properties" message="piazza.version=${version}"/>
-	</target>
-	
-	<target name="jar.tests" depends="compile, dir.dist">
-		<jar destfile="${distdir}/${app}-tests.jar" compress="false">
-			<fileset dir="build/classes">
-				<include name="nat/piazza/tests/**"/>
-			</fileset>
-		</jar>
-	</target>
-	
-	<target name="run.tests" depends="jars">
-		<property name="outdir" value="build/reports/tests"/>
-		<mkdir dir="${outdir}"/>
-		<junit fork="yes" forkmode="once" printsummary="no" showoutput="yes">
-			<classpath>
-				<path refid="build.classpath"/>
-				<fileset dir="${distdir}" includes="*.jar"/>
-				<fileset dir="tests" excludes="*.java"/>
-			</classpath>
-			
-			<formatter type="brief" usefile="no"/>
-			
-			<batchtest haltonfailure="yes">
-				<fileset dir="tests">
-					<include name="**/*Tests.java"/>
-					<exclude name="**/Abstract*"/>
-				</fileset>
-			</batchtest>
-		</junit>
-	</target>
+  <target name="define.version" depends="define.version.if.under.teamcity">
+    <tstamp>
+      <format property="current.time" pattern="yyyyMMddHHmm" />
+    </tstamp>
+    <property name="plugin.version" value="${current.time}" />
+  </target>
 
-    <target name="deploy" depends="clean, run.tests"
-            description="Deploys to a local TeamCity server">
-        <copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
-    </target>
+  <target name="define.version.if.under.teamcity" if="build.number">
+    <property name="plugin.version" value="${build.number}" />
+  </target>
 
-    <!-- assumes that team city is being run in a perpetual loop -->
-	<target name="deploy-and-restart" depends="clean, run.tests"
-		    description="Deploys to a local TeamCity server and restarts it">
-        <copy file="${distdir}/${app}.jar" todir="${teamcity.appdir}/lib"/>
-		<teamcity action="stop"/>
-	</target>
-	
-	<target name="undeploy">
-		<teamcity action="stop"/>
-		<delete dir="${teamcity.appdir}/lib" includes="${app}.jar"/>
-		<teamcity action="start"/>
-	</target>
-	
-	<macrodef name="teamcity">
-		<attribute name="action"/>
-		<sequential>
-			<exec executable="${teamcity.home}/bin/runAll.sh">
-				<arg value="@{action}"/>
-			</exec>
-		</sequential>
-	</macrodef>
+  <target name="dist" depends="all" description="Same as 'all'" />
+  <target name="all" depends="check.teamcitydistribution,team-piazza.all,package" description="Invoke this to build your plugin" />
+
+  <target name="clean" depends="team-piazza.clean" />
+
+  <target name="deploy" depends="dist">
+    <deploy.teamcity.plugin name="${plugin.name}-${plugin.version}" />
+  </target>
+
 </project>
