@@ -9,7 +9,7 @@
       <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
       <properties>
-        <property name="teamcity.home" value="../TeamCity" />
+        <property name="teamcity.distribution" value="../TeamCity" />
       </properties>
     </buildFile>
   </component>
