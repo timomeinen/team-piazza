@@ -18,16 +18,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="library" name="TeamCity" level="project" />
+    <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/junit-3.8.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mockito-all-1.8.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="TeamCity" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/junit-4.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

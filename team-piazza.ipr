@@ -44,7 +44,7 @@
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
-  <component name="CopyrightManager" default="">
+  <component name="CopyrightManager" default="GPL 3">
     <copyright>
       <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce.&#10;&#10;   This file is part of Team Piazza.&#10;&#10;   Team Piazza is free software; you can redistribute it and/or modify&#10;   it under the terms of the GNU General Public License as published by&#10;   the Free Software Foundation; either version 3 of the License, or&#10;   (at your option) any later version.&#10;&#10;   Team Piazza is distributed in the hope that it will be useful,&#10;   but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;   GNU General Public License for more details.&#10;&#10;   You should have received a copy of the GNU General Public License&#10;   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
       <option name="keyword" value="Copyright" />
@@ -64,6 +64,9 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="org.mockito.Mock" />
+    </list>
   </component>
   <component name="IdProvider" IDEtalkID="9382ED03558CF9C621E84F5098E8CFD8" />
   <component name="InspectionProjectProfileManager">
@@ -288,6 +291,146 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Run All Tests" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Team-piazza" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="JavaRebel">
+        <option name="bootstrapPath" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="useBootstrapDefaults" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JavaRebel Debug">
+        <option name="bootstrapPath" />
+        <option name="debugPort" value="55908" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="transport" value="0" />
+        <option name="useBootstrapDefaults" value="true" />
+        <option name="DEBUG_PORT" value="55908" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TeamCity 6.5.4" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 6.5.3">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8111/" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment />
+      <server-settings>
+        <option name="DEPLOY_TOMCAT_APPS" value="false" />
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_team-piazza" />
+      </server-settings>
+      <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="53642" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JavaRebel">
+        <option name="bootstrapPath" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="useBootstrapDefaults" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JavaRebel Debug">
+        <option name="bootstrapPath" />
+        <option name="debugPort" value="53643" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="transport" value="0" />
+        <option name="useBootstrapDefaults" value="true" />
+        <option name="DEBUG_PORT" value="53643" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" run" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" stop" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JavaRebel">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" run" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" stop" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JavaRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" run" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" stop" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" run" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" stop" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="deploy" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="myConfigurationMap">

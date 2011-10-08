@@ -1,10 +1,14 @@
 package com.natpryce.piazza.tests;
 
+import org.junit.Test;
+
 import static com.natpryce.piazza.BuildStatus.*;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 
-public class BuildStatusTests extends TestCase {
+public class BuildStatusTests {
+
+    @Test
     public void testCanReduceTwoStatusesToMostSevere() {
         assertEquals(SUCCESS, SUCCESS.mostSevere(SUCCESS));
         assertEquals(UNKNOWN, SUCCESS.mostSevere(UNKNOWN));
@@ -19,6 +23,7 @@ public class BuildStatusTests extends TestCase {
         assertEquals(FAILURE, FAILURE.mostSevere(FAILURE));
     }
 
+    @Test
     public void testHasPrettyToString() {
         assertEquals("Success", SUCCESS.toString());
         assertEquals("Unknown", UNKNOWN.toString());

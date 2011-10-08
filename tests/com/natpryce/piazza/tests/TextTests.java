@@ -19,20 +19,25 @@
 package com.natpryce.piazza.tests;
 
 import com.natpryce.piazza.Text;
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TextTests extends TestCase {
-	public void testTimeCasesWordsInString() {
-		assertEquals("JMock", Text.toTitleCase("jMock"));
-		assertEquals("JMock2", Text.toTitleCase("jMock2"));
-		assertEquals("More Cheese", Text.toTitleCase("more cheese"));
-		assertEquals("Quick Build", Text.toTitleCase("quick-build"));
-	}
-	
-	public void testRemovesExtensionFromString() {
-		assertEquals("build", Text.withoutExtension("build.html"));
-		assertEquals("quick-build", Text.withoutExtension("quick-build.xml"));
-		assertEquals("fast.slow.fast", Text.withoutExtension("fast.slow.fast.txt"));
-		assertEquals("cheese", Text.withoutExtension("cheese"));
-	}
+import static org.junit.Assert.assertEquals;
+
+public class TextTests {
+
+    @Test
+    public void testTimeCasesWordsInString() {
+        assertEquals("JMock", Text.toTitleCase("jMock"));
+        assertEquals("JMock2", Text.toTitleCase("jMock2"));
+        assertEquals("More Cheese", Text.toTitleCase("more cheese"));
+        assertEquals("Quick Build", Text.toTitleCase("quick-build"));
+    }
+
+    @Test
+    public void testRemovesExtensionFromString() {
+        assertEquals("build", Text.withoutExtension("build.html"));
+        assertEquals("quick-build", Text.withoutExtension("quick-build.xml"));
+        assertEquals("fast.slow.fast", Text.withoutExtension("fast.slow.fast.txt"));
+        assertEquals("cheese", Text.withoutExtension("cheese"));
+    }
 }
