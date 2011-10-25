@@ -82,13 +82,16 @@
   </component>
   <component name="CopyrightManager" default="GPL 3">
     <copyright>
-      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce.&#10;&#10;   This file is part of Team Piazza.&#10;&#10;   Team Piazza is free software; you can redistribute it and/or modify&#10;   it under the terms of the GNU General Public License as published by&#10;   the Free Software Foundation; either version 3 of the License, or&#10;   (at your option) any later version.&#10;&#10;   Team Piazza is distributed in the hope that it will be useful,&#10;   but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;   GNU General Public License for more details.&#10;&#10;   You should have received a copy of the GNU General Public License&#10;   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
+      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce, Timo Meinen.&#10;&#10;This file is part of Team Piazza.&#10;&#10;Team Piazza is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 3 of the License, or&#10;(at your option) any later version.&#10;&#10;Team Piazza is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
       <option name="keyword" value="Copyright" />
       <option name="allowReplaceKeyword" value="" />
       <option name="myName" value="GPL 3" />
       <option name="myLocal" value="true" />
     </copyright>
     <module2copyright />
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="addBlankAfter" value="false" />
+    </LanguageOptions>
   </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
@@ -369,9 +372,9 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TeamCity 6.5.4" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
+    <configuration default="false" name="TeamCity 6.5.4" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 6.5.4">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8111/" />
-      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m -Dteamcity.development.mode=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
       <server-settings>
@@ -380,6 +383,12 @@
       </server-settings>
       <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Clover Optimizing Runner">
+        <option name="discardSnapshots" value="false" />
+        <option name="compilesBeforeStaleSnapshot" value="10" />
+        <option name="minimize" value="true" />
+        <option name="reorder" value="FAILFAST" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="53642" />
         <option name="TRANSPORT" value="0" />
@@ -403,6 +412,21 @@
         <option name="LOCAL" value="true" />
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Clover Optimizing Runner">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" run" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value=" stop" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>

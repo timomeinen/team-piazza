@@ -1,49 +1,66 @@
-
+/*
+ * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ *
+ * This file is part of Team Piazza.
+ *
+ * Team Piazza is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Team Piazza is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 body {
-	font-family: tahoma, arial, sans-serif;
-	padding: 16px;
+    font-family: tahoma, arial, sans-serif;
+    padding: 16px;
     background-position: top right;
     background-repeat: no-repeat;
 }
 
 body.Success {
-	background-color: #44FF44;
+    background-color: #42aa6a;
     background-image: url("green-tick.png");
 }
 
 body.Failure {
-	background-color: #FF0000;
+    background-color: #ff3b30;
     background-image: url("red-cross.png");
 }
 
 h1 {
-	margin: 0;
-	margin-bottom: 16px;
-	font-weight: bold;
+    margin: 0;
+    margin-bottom: 16px;
+    font-weight: bold;
     font-size: 32px;
 }
 
 h2 {
-	margin: 0;
-	margin-bottom: 32px;
-	font-weight: normal;
+    margin: 0;
+    margin-bottom: 32px;
+    font-weight: normal;
     font-size: 24px;
 }
 
 h3 {
     margin: 0;
-    font-weight:normal;
+    font-weight: normal;
     font-size: 20px;
 }
 
 .Content {
-	border: 1px solid #444444;
+    border: 1px solid #444444;
     background-color: #FFFFFF;
-	padding: 8px;
+    padding: 8px;
 }
 
 body.Building .Content {
-	background-color: #FFFF00;
+    background-color: #FFFF00;
 }
 
 .Builds {
@@ -51,20 +68,29 @@ body.Building .Content {
 }
 
 .Build {
-	background-color: #FFFFFF;
-	border: 1px solid #444444;
-	padding: 8px;
+    padding: 8px;
     margin: 8px;
+    border: solid 3px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.Build.Success {
+    border-color: #42AA52;
+}
+
+.Build.Failure {
+    border-color: #ff0000;
 }
 
 .Portrait {
     display: inline-block;
-	margin: 8px;
+    margin: 8px;
 }
 
 .Portrait img {
     display: block;
-	border: 1px solid #444444;
+    border: 1px solid #444444;
     margin-left: auto;
     margin-right: auto;
 }
@@ -84,15 +110,15 @@ body.Building .Content {
 }
 
 .Changes ul {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
     margin: 16px 8px 0;
 }
 
 .Changes li {
-	border-top: solid 1px #444444;
-	padding-top: 8px;
-	padding-bottom: 8px;
+    border-top: solid 1px #444444;
+    padding-top: 8px;
+    padding-bottom: 8px;
     white-space: pre-line;
 }
 
@@ -111,47 +137,47 @@ body.Building .Content {
 
 .ProgressBar {
     position: relative;
-	border: 1px solid #444444;
-	background-color: white;
+    border: 1px solid #444444;
+    background-color: white;
     height: 40px;
     overflow-x: hidden;
 }
 
 .ProgressBar .Activity {
-	position: absolute;
+    position: absolute;
     border: 4px solid white;
     left: 0;
     top: 0;
     bottom: 0;
     padding: 4px;
 
-	font-size: 16px;
-	text-align: left;
-	vertical-align: middle;
+    font-size: 16px;
+    text-align: left;
+    vertical-align: middle;
     overflow-x: visible;
     white-space: nowrap;
 }
 
 .ProgressBar .Success {
-	background-color: #44FF44;
+    background-color: #42aa6a;
 }
 
 .ProgressBar .Failure {
-	background-color: #FF0000;
+    background-color: #E23B30;
 }
 
 .Builds .Build.Failure {
-    background-color: #FF0000;
+    background-color: #E23B30;
 }
 
 .Builds .Build.Success {
-    background-color: #44FF44;
+    background-color: #A5DDAD;
 }
 
 .Version {
-	position: fixed;
-	bottom: 4px;
-	right: 4px;
-	font-size: 12px;
-	color: #444444;
+    position: fixed;
+    bottom: 4px;
+    right: 4px;
+    font-size: 12px;
+    color: #444444;
 }
