@@ -161,6 +161,11 @@
           <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
         </inspection_tool>
         <inspection_tool class="ObjectEqualsNull" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+          <option name="processCode" value="true" />
+          <option name="processLiterals" value="true" />
+          <option name="processComments" value="true" />
+        </inspection_tool>
         <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
       </profile>
@@ -168,12 +173,13 @@
     <option name="PROJECT_PROFILE" value="Project Default" />
     <option name="USE_PROJECT_PROFILE" value="true" />
     <version value="1.0" />
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="WEAK WARNING" />
-      <item index="1" class="java.lang.String" itemvalue="WARNING" />
-      <item index="2" class="java.lang.String" itemvalue="SERVER PROBLEM" />
-      <item index="3" class="java.lang.String" itemvalue="INFO" />
-      <item index="4" class="java.lang.String" itemvalue="ERROR" />
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="TYPO" />
+      <item index="1" class="java.lang.String" itemvalue="WEAK WARNING" />
+      <item index="2" class="java.lang.String" itemvalue="WARNING" />
+      <item index="3" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="4" class="java.lang.String" itemvalue="INFO" />
+      <item index="5" class="java.lang.String" itemvalue="ERROR" />
     </list>
   </component>
   <component name="JavadocGenerationManager">
@@ -192,6 +198,28 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
+    <option name="myNullables">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+        </list>
+      </value>
+    </option>
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -314,8 +342,36 @@
       </item>
     </group>
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+        <codeStyleSettings language="JAVA">
+          <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
+          <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+          <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
+          <option name="CALL_PARAMETERS_WRAP" value="1" />
+          <option name="METHOD_PARAMETERS_WRAP" value="1" />
+          <option name="EXTENDS_LIST_WRAP" value="1" />
+          <option name="THROWS_LIST_WRAP" value="1" />
+          <option name="EXTENDS_KEYWORD_WRAP" value="1" />
+          <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
+          <indentOptions>
+            <option name="USE_TAB_CHARACTER" value="true" />
+          </indentOptions>
+        </codeStyleSettings>
+      </value>
+    </option>
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+  </component>
   <component name="ProjectDetails">
     <option name="projectName" value="team-piazza" />
+  </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="tmeinen" />
   </component>
   <component name="ProjectKey">
     <option name="state" value="https://team-piazza.googlecode.com/svn/trunk/team-piazza.ipr" />
@@ -489,6 +545,7 @@
       </ConfigurationWrapper>
       <method>
         <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="deploy" />
+        <option name="Make" enabled="false" />
       </method>
     </configuration>
   </component>
@@ -502,13 +559,7 @@
                 <map>
                   <entry key="https://team-piazza.googlecode.com/svn/branches">
                     <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1317029488832" />
-                          <option name="revision" value="86" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/branches/new-teamcity-format" />
-                        </SvnBranchItem>
-                      </list>
+                      <list />
                     </value>
                   </entry>
                   <entry key="https://team-piazza.googlecode.com/svn/tags">

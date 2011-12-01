@@ -40,46 +40,54 @@ public class BuildTypeMonitorViewState {
 	private final Build latestBuild;
 	private final TestStatisticsViewState tests;
 	private final Set<PiazzaUser> committers;
+	private boolean showOnFailureOnly;
 
-	public BuildTypeMonitorViewState (SBuildType buildType, UserGroup userPictures) {
+	public BuildTypeMonitorViewState(SBuildType buildType, UserGroup userPictures, boolean showOnFailureOnly) {
+		this.showOnFailureOnly = showOnFailureOnly;
 		this.buildType = buildType;
 		this.lastFinishedBuild = buildType.getLastChangesFinished();
 		this.latestBuild = buildType.getLastChangesStartedBuild();
-		this.commitMessages = commitMessagesForBuild(latestBuild);
+		this.commitMessages = commitMessagesForBuild();
 
-		committers = userPictures.usersInvolvedInCommit(
-				committersForBuild(latestBuild),
-				commitMessagesForBuild(latestBuild)
+		this.committers = userPictures.usersInvolvedInCommit(
+				committersForBuild(),
+				commitMessagesForBuild()
 		);
-
 		this.tests = testStatistics();
 	}
 
-	private Set<String> committersForBuild (Build latestBuild) {
+	private Set<String> committersForBuild() {
 		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
 		HashSet<String> committers = new HashSet<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
 			String userName = vcsModification.getUserName();
 			if (userName != null) {
-				committers.add(userName.trim());
+				if (!userFiltered())
+					committers.add(userName.trim());
 			}
 		}
 		return committers;
 	}
 
-	private ArrayList<String> commitMessagesForBuild (Build latestBuild) {
+	private ArrayList<String> commitMessagesForBuild() {
 		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
 		ArrayList<String> commitMessages = new ArrayList<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-			commitMessages.add(vcsModification.getDescription().trim());
+            String description = vcsModification.getDescription();
+            if (description != null && !userFiltered()) {
+                commitMessages.add(description.trim());
+            }
 		}
-
 		return commitMessages;
 	}
 
-	private TestStatisticsViewState testStatistics () {
+	private boolean userFiltered() {
+		return showOnFailureOnly && (status() != BuildStatus.FAILURE);
+	}
+
+	private TestStatisticsViewState testStatistics() {
 		if (isBuilding()) {
 			ShortStatistics stats = ((SRunningBuild) latestBuild).getShortStatistics();
 			return new TestStatisticsViewState(
@@ -90,35 +98,35 @@ public class BuildTypeMonitorViewState {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<? extends VcsModification> changesInBuild (Build latestBuild) {
+	private List<? extends VcsModification> changesInBuild(Build latestBuild) {
 		return latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
 	}
 
-	public String getFullName () {
+	public String getFullName() {
 		return Text.toTitleCase(buildType.getFullName());
 	}
 
-	public String getName () {
+	public String getName() {
 		return Text.toTitleCase(buildType.getName());
 	}
 
-	public String getBuildNumber () {
+	public String getBuildNumber() {
 		return latestBuild.getBuildNumber();
 	}
 
-	public String getCombinedStatusClasses () {
+	public String getCombinedStatusClasses() {
 		return status().toStringReflectingCurrentlyBuilding(isBuilding());
 	}
 
-	public boolean isBuilding () {
+	public boolean isBuilding() {
 		return !latestBuild.isFinished();
 	}
 
-	public Build getLatestBuild () {
+	public Build getLatestBuild() {
 		return latestBuild;
 	}
 
-	public String getActivity () {
+	public String getActivity() {
 		if (isBuilding()) {
 			return ((SRunningBuild) latestBuild).getShortStatistics().getCurrentStage();
 		} else {
@@ -126,7 +134,7 @@ public class BuildTypeMonitorViewState {
 		}
 	}
 
-	public int getCompletedPercent () {
+	public int getCompletedPercent() {
 		if (isBuilding()) {
 			return ((SRunningBuild) latestBuild).getCompletedPercent();
 		} else {
@@ -134,11 +142,11 @@ public class BuildTypeMonitorViewState {
 		}
 	}
 
-	public TestStatisticsViewState getTests () {
+	public TestStatisticsViewState getTests() {
 		return tests;
 	}
 
-	public long getDurationSeconds () {
+	public long getDurationSeconds() {
 		Date start = latestBuild.getStartDate();
 		Date finished = latestBuild.getFinishDate();
 		Date end = (finished != null) ? finished : now();
@@ -146,15 +154,15 @@ public class BuildTypeMonitorViewState {
 		return (end.getTime() - start.getTime()) / 1000L;
 	}
 
-	private Date now () {
+	private Date now() {
 		return new Date();
 	}
 
-	public String getStatus () {
+	public String getStatus() {
 		return status().toString();
 	}
 
-	public BuildStatus status () {
+	public BuildStatus status() {
 		if (latestBuild == null) {
 			return BuildStatus.UNKNOWN;
 		} else if (latestBuild.getBuildStatus().isFailed()) {
@@ -169,11 +177,11 @@ public class BuildTypeMonitorViewState {
 		}
 	}
 
-	public String getRunningBuildStatus () {
+	public String getRunningBuildStatus() {
 		return runningBuildStatus().toString();
 	}
 
-	public BuildStatus runningBuildStatus () {
+	public BuildStatus runningBuildStatus() {
 		if (latestBuild == null) {
 			return BuildStatus.UNKNOWN;
 		} else if (latestBuild.getBuildStatus().isFailed()) {
@@ -183,11 +191,11 @@ public class BuildTypeMonitorViewState {
 		}
 	}
 
-	public List<String> getCommitMessages () {
+	public List<String> getCommitMessages() {
 		return commitMessages;
 	}
 
-	public Set<PiazzaUser> getCommitters () {
+	public Set<PiazzaUser> getCommitters() {
 		return committers;
 	}
 }

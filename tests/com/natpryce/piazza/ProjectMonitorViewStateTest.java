@@ -1,8 +1,5 @@
 package com.natpryce.piazza;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
-
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 import org.junit.Before;
@@ -11,6 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
+
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Timo Meinen
@@ -39,7 +39,8 @@ public class ProjectMonitorViewStateTest {
         // Issue #31
         when(sBuildTypeMock.isAllowExternalStatus()).thenReturn(true);
         when(projectMock.getBuildTypes()).thenReturn(Collections.singletonList(sBuildTypeMock));
-        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock);
+        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock,
+				true);
 
         assertNotNull(projectMonitorViewState);
     }
