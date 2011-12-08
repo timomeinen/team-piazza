@@ -94,8 +94,8 @@ public class PiazzaConfigurationTest {
 		MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
 
 		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
-		when(spyPiazzaConfiguration.createConfigAsXml()).thenReturn(element);
-		when(spyPiazzaConfiguration.createConfigFileWriter()).thenReturn(mockWriter);
+		doReturn(element).when(spyPiazzaConfiguration).createConfigAsXml();
+		doReturn(mockWriter).when(spyPiazzaConfiguration).createConfigFileWriter();
 
 		// when trying to output
 		spyPiazzaConfiguration.save();
