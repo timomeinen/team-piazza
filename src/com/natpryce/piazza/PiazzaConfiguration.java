@@ -42,14 +42,6 @@ public class PiazzaConfiguration {
 
 	private String teamcityConfigDir;
 
-	public boolean isShowOnFailureOnly() {
-		return showOnFailureOnly;
-	}
-
-	public void setShowOnFailureOnly(boolean showOnFailureOnly) {
-		this.showOnFailureOnly = showOnFailureOnly;
-	}
-
 /*
 	public void readFrom(Element serverConfigRoot) {
 		Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
@@ -60,9 +52,12 @@ public class PiazzaConfiguration {
 	}
 */
 
-	public void save() throws IOException {
-		Writer configFileWriter = new FileWriter(createConfigFile());
-		writeElementTo(createConfigAsXml(), configFileWriter);
+	public synchronized void save() {
+		try {
+			writeElementTo(createConfigAsXml(), createConfigFileWriter());
+		} catch (IOException e) {
+			Loggers.SERVER.error("[PIAZZA] Unable to save xml configuration", e);
+		}
 	}
 
 	Element createConfigAsXml() {
@@ -71,20 +66,30 @@ public class PiazzaConfiguration {
 		return piazzaConfigRoot;
 	}
 
-	File createConfigFile() throws IOException {
+	Writer createConfigFileWriter() throws IOException {
+		return new FileWriter(createConfigFile());
+	}
+
+	File createConfigFile() {
 		return new File(teamcityConfigDir, CONFIG_FILE_NAME);
 	}
 
-	void writeElementTo(Element element, Writer writer) {
+	void writeElementTo(Element element, Writer writer) throws IOException {
 		try {
 			XMLOutputter outputter = new XMLOutputter();
 			outputter.output(element, writer);
 			writer.close();
-		} catch (IOException e) {
-			Loggers.SERVER.error("[PIAZZA] Unable to save xml configuration", e);
 		} finally {
 			IOUtils.closeQuietly(writer);
 		}
+	}
+
+	public boolean isShowOnFailureOnly() {
+		return showOnFailureOnly;
+	}
+
+	public void setShowOnFailureOnly(boolean showOnFailureOnly) {
+		this.showOnFailureOnly = showOnFailureOnly;
 	}
 
 	public void setTeamcityConfigDir(@NotNull String teamcityConfigDir) {

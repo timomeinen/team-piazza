@@ -93,8 +93,12 @@ public class PiazzaConfigurationTest {
 		Logger mockLogger = mock(Logger.class);
 		MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
 
+		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
+		when(spyPiazzaConfiguration.createConfigAsXml()).thenReturn(element);
+		when(spyPiazzaConfiguration.createConfigFileWriter()).thenReturn(mockWriter);
+
 		// when trying to output
-		piazzaConfiguration.writeElementTo(element, mockWriter);
+		spyPiazzaConfiguration.save();
 
 		// then a log message shall be written
 		verify(mockLogger).error("[PIAZZA] Unable to save xml configuration", toBeThrown);
@@ -126,14 +130,15 @@ public class PiazzaConfigurationTest {
 	}
 
 	@Test
-	public void testSave() throws IOException {
+	public void testSaveAggregatesCreationMethods() throws IOException {
 		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
+		doReturn(new StringWriter()).when(spyPiazzaConfiguration).createConfigFileWriter();
 		doNothing().when(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
 
 		spyPiazzaConfiguration.save();
 
 		verify(spyPiazzaConfiguration).createConfigAsXml();
-		verify(spyPiazzaConfiguration).createConfigFile();
+		verify(spyPiazzaConfiguration).createConfigFileWriter();
 		verify(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
 	}
 }
