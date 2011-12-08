@@ -18,25 +18,23 @@
  */
 package com.natpryce.piazza;
 
+import jetbrains.buildServer.log.Loggers;
+import org.apache.commons.io.IOUtils;
 import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
 
-import jetbrains.buildServer.serverSide.MainConfigProcessor;
-import jetbrains.buildServer.serverSide.SBuildServer;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * @author tmeinen
  */
-public class PiazzaConfiguration implements MainConfigProcessor {
+public class PiazzaConfiguration {
 
-	private static final String ATTRIBUTE_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
-
-	private final SBuildServer server;
+	private static final String XML_ROOT_NAME = "piazza";
+	private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
 
 	private boolean showOnFailureOnly;
-
-	public PiazzaConfiguration(SBuildServer server) {
-		this.server = server;
-	}
 
 	public boolean isShowOnFailureOnly() {
 		return showOnFailureOnly;
@@ -46,6 +44,7 @@ public class PiazzaConfiguration implements MainConfigProcessor {
 		this.showOnFailureOnly = showOnFailureOnly;
 	}
 
+/*
 	public void readFrom(Element serverConfigRoot) {
 		Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
 		if (piazzaConfigRoot != null) {
@@ -53,15 +52,24 @@ public class PiazzaConfiguration implements MainConfigProcessor {
 			showOnFailureOnly = Boolean.valueOf(showOnFailureOnlyFromConfig);
 		}
 	}
+*/
 
-	public void writeTo(Element serverConfigRoot) {
-		Element piazzaConfigRoot = new Element("piazza");
-		piazzaConfigRoot.setAttribute(ATTRIBUTE_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
-		serverConfigRoot.addContent(piazzaConfigRoot);
+	Element createConfigAsXml() {
+		Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
+		piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
+		return piazzaConfigRoot;
 	}
 
-	public void register() {
-		server.registerExtension(MainConfigProcessor.class, Piazza.PLUGIN_NAME, this);
-	}
+	void writeElementTo(Element element, Writer writer) {
+		try {
+			XMLOutputter outputter = new XMLOutputter();
+			outputter.output(element, writer);
+			writer.close();
+		} catch (IOException e) {
+			Loggers.SERVER.error("[PIAZZA] Unable to save xml configuration", e);
+		} finally {
+			IOUtils.closeQuietly(writer);
+		}
 
+	}
 }
