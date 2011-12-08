@@ -18,21 +18,32 @@
  */
 package com.natpryce.piazza;
 
+import com.intellij.openapi.diagnostic.Logger;
+import jetbrains.buildServer.log.Loggers;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.support.membermodification.MemberModifier;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.Writer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
+import static org.powermock.api.support.membermodification.MemberMatcher.method;
 
 /**
  * @author Timo Meinen
  * @since 07.12.11
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Loggers.class)
 public class PiazzaConfigurationTest {
 
 	private PiazzaConfiguration piazzaConfiguration;
@@ -64,16 +75,41 @@ public class PiazzaConfigurationTest {
 
 		assertNotNull(showOnFailureOnlyAttribute);
 		assertEquals(showOnFailureOnly.toString(), showOnFailureOnlyAttribute.getValue());
+		assertEquals(showOnFailureOnly, piazzaConfiguration.isShowOnFailureOnly());
+	}
+
+	@Test
+	public void testErrorHandling() throws Exception {
+		// given an element
+		Element element = new Element("piazza");
+
+		// given the writer is not able to write and throws an IO Exception
+		Writer mockWriter = mock(Writer.class);
+		IOException toBeThrown = new IOException("test exception");
+		doThrow(toBeThrown).when(mockWriter).write("<");
+
+		// given the TeamCity Log mechanism catches the Exception
+		Logger mockLogger = mock(Logger.class);
+		MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
+
+		// when trying to output
+		piazzaConfiguration.writeElementTo(element, mockWriter);
+
+		// then a log message shall be written
+		verify(mockLogger).error("[PIAZZA] Unable to save xml configuration", toBeThrown);
+		// then the writer shall be closed
+		verify(mockWriter).close();
 	}
 
 	@Test
 	public void testSave() throws IOException {
 		Element element = new Element("piazza");
+		element.setAttribute("testAttribute", "testValue");
 		StringWriter stringWriter = new StringWriter();
 
 		piazzaConfiguration.writeElementTo(element, stringWriter);
 
-		assertEquals("<piazza />", stringWriter.toString());
+		assertEquals("<piazza testAttribute=\"testValue\" />", stringWriter.toString());
 	}
 
 }

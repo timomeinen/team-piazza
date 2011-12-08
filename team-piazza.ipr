@@ -583,6 +583,19 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="powermock-mockito-junit-1.4">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+      </SOURCES>
+      <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" type="SOURCES" />
+    </library>
     <library name="TeamCity">
       <CLASSES>
         <root url="jar://$TeamCityDistribution$/devPackage/server-api.jar!/" />
@@ -600,6 +613,7 @@
       <SOURCES>
         <root url="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/" />
         <root url="file://$TeamCityDistribution$/webapps/ROOT" />
+        <root url="jar://$PROJECT_DIR$/lib/jdom-1.1-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

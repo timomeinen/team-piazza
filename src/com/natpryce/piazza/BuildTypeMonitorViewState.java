@@ -18,18 +18,14 @@
  */
 package com.natpryce.piazza;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import jetbrains.buildServer.Build;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SRunningBuild;
 import jetbrains.buildServer.serverSide.ShortStatistics;
 import jetbrains.buildServer.vcs.SelectPrevBuildPolicy;
 import jetbrains.buildServer.vcs.VcsModification;
+
+import java.util.*;
 
 public class BuildTypeMonitorViewState {
 
@@ -63,7 +59,7 @@ public class BuildTypeMonitorViewState {
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
 			String userName = vcsModification.getUserName();
 			if (userName != null) {
-				if (!userFiltered())
+				if (userUnfiltered())
 					committers.add(userName.trim());
 			}
 		}
@@ -75,16 +71,15 @@ public class BuildTypeMonitorViewState {
 
 		ArrayList<String> commitMessages = new ArrayList<String>();
 		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-            String description = vcsModification.getDescription();
-            if (description != null && !userFiltered()) {
-                commitMessages.add(description.trim());
-            }
+			if (userUnfiltered()) {
+				commitMessages.add(vcsModification.getDescription().trim());
+			}
 		}
 		return commitMessages;
 	}
 
-	private boolean userFiltered() {
-		return showOnFailureOnly && (status() != BuildStatus.FAILURE);
+	private boolean userUnfiltered() {
+		return !showOnFailureOnly || (status() == BuildStatus.FAILURE);
 	}
 
 	private TestStatisticsViewState testStatistics() {
@@ -106,10 +101,6 @@ public class BuildTypeMonitorViewState {
 		return Text.toTitleCase(buildType.getFullName());
 	}
 
-	public String getName() {
-		return Text.toTitleCase(buildType.getName());
-	}
-
 	public String getBuildNumber() {
 		return latestBuild.getBuildNumber();
 	}
@@ -120,10 +111,6 @@ public class BuildTypeMonitorViewState {
 
 	public boolean isBuilding() {
 		return !latestBuild.isFinished();
-	}
-
-	public Build getLatestBuild() {
-		return latestBuild;
 	}
 
 	public String getActivity() {
