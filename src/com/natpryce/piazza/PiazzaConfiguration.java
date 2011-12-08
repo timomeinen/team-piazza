@@ -22,7 +22,10 @@ import jetbrains.buildServer.log.Loggers;
 import org.apache.commons.io.IOUtils;
 import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -33,8 +36,11 @@ public class PiazzaConfiguration {
 
 	private static final String XML_ROOT_NAME = "piazza";
 	private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
+	static final String CONFIG_FILE_NAME = "piazza.xml";
 
 	private boolean showOnFailureOnly;
+
+	private String teamcityConfigDir;
 
 	public boolean isShowOnFailureOnly() {
 		return showOnFailureOnly;
@@ -54,10 +60,19 @@ public class PiazzaConfiguration {
 	}
 */
 
+	public void save() throws IOException {
+		Writer configFileWriter = new FileWriter(createConfigFile());
+		writeElementTo(createConfigAsXml(), configFileWriter);
+	}
+
 	Element createConfigAsXml() {
 		Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
 		piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
 		return piazzaConfigRoot;
+	}
+
+	File createConfigFile() throws IOException {
+		return new File(teamcityConfigDir, CONFIG_FILE_NAME);
 	}
 
 	void writeElementTo(Element element, Writer writer) {
@@ -70,6 +85,9 @@ public class PiazzaConfiguration {
 		} finally {
 			IOUtils.closeQuietly(writer);
 		}
+	}
 
+	public void setTeamcityConfigDir(@NotNull String teamcityConfigDir) {
+		this.teamcityConfigDir = teamcityConfigDir;
 	}
 }

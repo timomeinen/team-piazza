@@ -29,6 +29,7 @@ import org.powermock.api.support.membermodification.MemberModifier;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -102,7 +103,7 @@ public class PiazzaConfigurationTest {
 	}
 
 	@Test
-	public void testSave() throws IOException {
+	public void testWriteElementTo() throws IOException {
 		Element element = new Element("piazza");
 		element.setAttribute("testAttribute", "testValue");
 		StringWriter stringWriter = new StringWriter();
@@ -112,4 +113,27 @@ public class PiazzaConfigurationTest {
 		assertEquals("<piazza testAttribute=\"testValue\" />", stringWriter.toString());
 	}
 
+	@Test
+	public void testConfigFile() throws IOException {
+		String teamcityConfigDir = "/teamcity-config-dir";
+		piazzaConfiguration.setTeamcityConfigDir(teamcityConfigDir);
+
+		File file = piazzaConfiguration.createConfigFile();
+
+		assertNotNull(file);
+		String expectedPath = String.format("%s/%s", teamcityConfigDir, PiazzaConfiguration.CONFIG_FILE_NAME);
+		assertEquals(expectedPath, file.getAbsolutePath());
+	}
+
+	@Test
+	public void testSave() throws IOException {
+		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
+		doNothing().when(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
+
+		spyPiazzaConfiguration.save();
+
+		verify(spyPiazzaConfiguration).createConfigAsXml();
+		verify(spyPiazzaConfiguration).createConfigFile();
+		verify(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
+	}
 }
