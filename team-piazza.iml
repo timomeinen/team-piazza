@@ -37,7 +37,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="IntelliJ IDEA" level="application" />
+    <orderEntry type="library" name="Intellij IDEA" level="project" />
   </component>
 </module>
 

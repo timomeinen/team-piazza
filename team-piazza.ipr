@@ -168,12 +168,13 @@
     <option name="PROJECT_PROFILE" value="Project Default" />
     <option name="USE_PROJECT_PROFILE" value="true" />
     <version value="1.0" />
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="WEAK WARNING" />
-      <item index="1" class="java.lang.String" itemvalue="WARNING" />
-      <item index="2" class="java.lang.String" itemvalue="SERVER PROBLEM" />
-      <item index="3" class="java.lang.String" itemvalue="INFO" />
-      <item index="4" class="java.lang.String" itemvalue="ERROR" />
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="TYPO" />
+      <item index="1" class="java.lang.String" itemvalue="WEAK WARNING" />
+      <item index="2" class="java.lang.String" itemvalue="WARNING" />
+      <item index="3" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="4" class="java.lang.String" itemvalue="INFO" />
+      <item index="5" class="java.lang.String" itemvalue="ERROR" />
     </list>
   </component>
   <component name="JavadocGenerationManager">
@@ -314,6 +315,15 @@
       </item>
     </group>
   </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
+    </option>
+  </component>
   <component name="ProjectDetails">
     <option name="projectName" value="team-piazza" />
   </component>
@@ -372,14 +382,14 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TeamCity 6.5.4" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 6.5.4">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8111/" />
+    <configuration default="false" name="TeamCity 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 7">
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m -Dteamcity.development.mode=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
       <server-settings>
-        <option name="DEPLOY_TOMCAT_APPS" value="false" />
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_team-piazza" />
+        <option name="DEPLOY_TOMCAT_APPS" value="true" />
+        <option name="HTTP_PORT" value="8080" />
       </server-settings>
       <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -389,6 +399,7 @@
         <option name="minimize" value="true" />
         <option name="reorder" value="FAILFAST" />
       </RunnerSettings>
+      <RunnerSettings RunnerId="Cover" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="53642" />
         <option name="TRANSPORT" value="0" />
@@ -427,64 +438,79 @@
           <option name="PROGRAM_PARAMETERS" value=" stop" />
         </SHUTDOWN>
       </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="                 " />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="                 " />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JavaRebel">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JavaRebel Debug">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <method>
@@ -498,31 +524,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://team-piazza.googlecode.com/svn/branches">
-                    <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1317029488832" />
-                          <option name="revision" value="86" />
-                          <option name="url" value="https://team-piazza.googlecode.com/svn/branches/new-teamcity-format" />
-                        </SvnBranchItem>
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="https://team-piazza.googlecode.com/svn/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://team-piazza.googlecode.com/svn/wiki">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://team-piazza.googlecode.com/svn/branches" />
@@ -543,6 +544,13 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="Intellij IDEA">
+      <CLASSES>
+        <root url="jar://$APPLICATION_HOME_DIR$/lib/annotations.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="TeamCity">
       <CLASSES>
         <root url="jar://$TeamCityDistribution$/devPackage/server-api.jar!/" />
