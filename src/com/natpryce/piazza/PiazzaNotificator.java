@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen.
  *
  * This file is part of Team Piazza.
  *
@@ -18,27 +18,23 @@
  */
 package com.natpryce.piazza;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
 import jetbrains.buildServer.Build;
 import jetbrains.buildServer.notification.Notificator;
 import jetbrains.buildServer.notification.NotificatorRegistry;
 import jetbrains.buildServer.responsibility.ResponsibilityEntry;
 import jetbrains.buildServer.responsibility.TestNameResponsibilityEntry;
-import jetbrains.buildServer.serverSide.SBuildType;
-import jetbrains.buildServer.serverSide.SProject;
-import jetbrains.buildServer.serverSide.SRunningBuild;
-import jetbrains.buildServer.serverSide.STest;
-import jetbrains.buildServer.serverSide.UserPropertyInfo;
+import jetbrains.buildServer.serverSide.*;
 import jetbrains.buildServer.serverSide.mute.MuteInfo;
 import jetbrains.buildServer.tests.TestName;
 import jetbrains.buildServer.users.NotificatorPropertyKey;
 import jetbrains.buildServer.users.PropertyKey;
 import jetbrains.buildServer.users.SUser;
 import jetbrains.buildServer.vcs.VcsRoot;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * We use the {@link Notificator} to generate input fields on the user settings => notification rules page
@@ -49,82 +45,89 @@ public class PiazzaNotificator implements Notificator {
 
 	private static final String TYPE = Piazza.PLUGIN_NAME;
 	private static final String PROPERTY_USER_IMAGE_NAME = "userImage";
-	private static final PropertyKey PROPERTY_USER_IMAGE_KEY = new NotificatorPropertyKey(TYPE, PROPERTY_USER_IMAGE_NAME);
+	private static final PropertyKey PROPERTY_USER_IMAGE_KEY = new NotificatorPropertyKey(TYPE,
+			PROPERTY_USER_IMAGE_NAME);
 
-	public PiazzaNotificator (NotificatorRegistry registry) {
-		List<UserPropertyInfo> userProps = Collections.singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL"));
+	public PiazzaNotificator(NotificatorRegistry registry) {
+		List<UserPropertyInfo> userProps = Collections
+				.singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL"));
 		registry.register(this, userProps);
 	}
 
-	public String getNotificatorType () {
+	public String getNotificatorType() {
 		return TYPE;
 	}
 
-	public String getDisplayName () {
+	public String getDisplayName() {
 		return "Piazza Build Monitor";
 	}
 
-	static String getPortraitUrl (SUser user) {
+	static String getPortraitUrl(SUser user) {
 		return user.getPropertyValue(PROPERTY_USER_IMAGE_KEY);
 	}
 
-	public void notifyBuildStarted (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildStarted(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyBuildSuccessful (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildSuccessful(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyBuildFailed (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildFailed(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyBuildFailedToStart (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildFailedToStart(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyLabelingFailed (Build build, VcsRoot root, Throwable exception, Set<SUser> users) {
+	public void notifyLabelingFailed(Build build, VcsRoot root, Throwable exception, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyBuildFailing (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildFailing(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyBuildProbablyHanging (SRunningBuild build, Set<SUser> users) {
+	public void notifyBuildProbablyHanging(SRunningBuild build, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleChanged (SBuildType buildType, Set<SUser> users) {
+	public void notifyResponsibleChanged(SBuildType buildType, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleAssigned (SBuildType buildType, Set<SUser> users) {
+	public void notifyResponsibleAssigned(SBuildType buildType, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleChanged (TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue, SProject project, Set<SUser> users) {
+	public void notifyResponsibleChanged(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue,
+										 SProject project, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleAssigned (TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue, SProject project, Set<SUser> users) {
+	public void notifyResponsibleAssigned(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue,
+										  SProject project, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleChanged (Collection<TestName> testNames, ResponsibilityEntry entry, SProject project, Set<SUser> users) {
+	public void notifyResponsibleChanged(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project,
+										 Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyResponsibleAssigned (Collection<TestName> testNames, ResponsibilityEntry entry, SProject project, Set<SUser> users) {
+	public void notifyResponsibleAssigned(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project,
+										  Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyTestsMuted (Collection<STest> tests, MuteInfo muteInfo, Set<SUser> users) {
+	public void notifyTestsMuted(Collection<STest> tests, MuteInfo muteInfo, Set<SUser> users) {
 		// ignored
 	}
 
-	public void notifyTestsUnmuted (Collection<STest> tests, MuteInfo muteInfo, Set<SUser> users) {
+	@Override
+	public void notifyTestsUnmuted(Collection<STest> tests, MuteInfo muteInfo, SUser user, Set<SUser> users) {
 		// ignored
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen.
  *
  * This file is part of Team Piazza.
  *
@@ -19,38 +19,48 @@
 package com.natpryce.piazza.extension;
 
 import com.natpryce.piazza.Piazza;
-import jetbrains.buildServer.web.openapi.PagePlaces;
-import jetbrains.buildServer.web.openapi.PlaceId;
-import jetbrains.buildServer.web.openapi.SimpleCustomTab;
+import com.natpryce.piazza.PiazzaConfiguration;
+import jetbrains.buildServer.controllers.admin.AdminPage;
+import jetbrains.buildServer.log.Loggers;
+import jetbrains.buildServer.web.openapi.WebControllerManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author tmeinen
  */
-public class PiazzaConfigurationPageExtension extends SimpleCustomTab {
+public class PiazzaConfigurationPageExtension extends AdminPage {
 
 	private static final String TAB_TITLE = "Piazza Notifier";
 
-	public PiazzaConfigurationPageExtension(PagePlaces pagePlaces) {
-        super(pagePlaces);
-        setIncludeUrl("piazza-settings.jsp");
-        setPlaceId(PlaceId.ADMIN_SERVER_CONFIGURATION_TAB);
-        setPluginName(Piazza.PLUGIN_NAME);
-        register();
-    }
+	private PiazzaConfiguration piazzaConfiguration;
 
-	@NotNull
-	public String getTabTitle() {
-		return TAB_TITLE;
+	public PiazzaConfigurationPageExtension(@NotNull final WebControllerManager manager,
+											@NotNull PiazzaConfiguration piazzaConfiguration) {
+		super(manager);
+
+		this.piazzaConfiguration = piazzaConfiguration;
+
+		setIncludeUrl("piazza-settings.jsp");
+		setTabTitle(TAB_TITLE);
+		setPluginName(Piazza.PLUGIN_NAME);
+
+		register();
+		Loggers.SERVER.info(Piazza.PLUGIN_NAME + ": AdminPage registered");
 	}
 
-	public boolean isAvailable(HttpServletRequest request) {
-        return super.isAvailable(request);
-    }
+	@Override
+	public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
+		super.fillModel(model, request);
+		boolean showOnFailureOnly = piazzaConfiguration.isShowOnFailureOnly();
+		model.put("showOnFailureOnly", showOnFailureOnly);
+	}
 
-	public boolean isVisible() {
-		return true;
+	@NotNull
+	@Override
+	public String getGroup() {
+		return SERVER_RELATED_GROUP;
 	}
 }

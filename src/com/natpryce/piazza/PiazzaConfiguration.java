@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen.
  *
  * This file is part of Team Piazza.
  *

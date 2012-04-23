@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen.
  *
  * This file is part of Team Piazza.
  *
@@ -32,14 +32,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author tmeinen
  */
 public class ConfigurationController extends BaseController {
-	private final WebControllerManager myManager;
 	private final PiazzaConfiguration piazzaConfiguration;
 	private final Piazza piazza;
 
-	public ConfigurationController(SBuildServer server, WebControllerManager manager, 
+	public ConfigurationController(SBuildServer server, WebControllerManager manager,
 								   PiazzaConfiguration piazzaConfiguration, Piazza piazza) {
 		super(server);
-		myManager = manager;
+		manager.registerController("/configurePiazza.html", this);
 		this.piazza = piazza;
 		this.piazzaConfiguration = piazzaConfiguration;
 	}
@@ -49,16 +48,11 @@ public class ConfigurationController extends BaseController {
 		boolean showOnFailureOnly = getShowOnFailureOnlyValueFromView(request);
 		this.piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
 		return new ModelAndView(piazza.resourcePath("piazza-settings.jsp"))
-						.addObject("version", piazza.version())
-						.addObject("resourceRoot", piazza.resourcePath(""));
+				.addObject("version", piazza.version())
+				.addObject("resourceRoot", piazza.resourcePath(""));
 	}
 
 	private boolean getShowOnFailureOnlyValueFromView(HttpServletRequest request) {
 		return request.getParameter("showOnFailureOnly") != null;
 	}
-
-	public void register() {
-		myManager.registerController("/configurePiazza.html", this);
-	}
-
 }

@@ -1,5 +1,5 @@
 <%--
-  ~ Copyright (c) 2011 Nat Pryce, Timo Meinen.
+  ~ Copyright (c) 2012 Nat Pryce, Timo Meinen.
   ~
   ~ This file is part of Team Piazza.
   ~
@@ -18,20 +18,21 @@
   --%>
 <%@ include file="/include.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="showOnFailureOnly" type="java.lang.Boolean" scope="request"/>
 
 <div id="serverSettings">
 
     <h2>Piazza Build Monitor Configuration</h2>
 
     <c:url var="actionUrl" value="/configurePiazza.html"/>
-    <form action="${actionUrl}" method="post" onsubmit="return BS.ServerConfigForm.submitSettings()">
-        <input id="showOnFailureOnly" name="showOnFailureOnly" type="checkbox"/>
-        <label for="showOnFailureOnly">Show user pictures only on build failure</label>
+    <form action="${actionUrl}" method="post">
+        <p>
+            <label for="showOnFailureOnly">Show user pictures only on build failure</label>
+            <forms:checkbox name="showOnFailureOnly" checked="${showOnFailureOnly}"/>
+        </p>
 
         <div class="saveButtonsBlock">
             <input class="submitButton" type="submit" value="Save">
-            <input type="hidden" id="submitSettings" name="submitSettings" value="store">
-            <img id="saving" style="display: none; padding-top: 0.1em; float: right;" src="/img/ajax-loader.gif" width="16" height="16" alt="Please wait..." title="Please wait...">
         </div>
     </form>
 

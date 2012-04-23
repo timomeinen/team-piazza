@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
-  ~ Copyright (c) 2011 Nat Pryce, Timo Meinen.
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012 Nat Pryce, Timo Meinen.
   ~
   ~ This file is part of Team Piazza.
   ~
@@ -24,7 +25,7 @@
     <bean id="piazza" class="com.natpryce.piazza.Piazza"/>
     <bean class="com.natpryce.piazza.PiazzaNotificator"/>
 
-    <!--<bean class="com.natpryce.piazza.extension.PiazzaConfigurationPageExtension"/>-->
+    <bean id="piazzaAdminPage" class="com.natpryce.piazza.extension.PiazzaConfigurationPageExtension"/>
     <!--<bean class="com.natpryce.piazza.controller.ConfigurationController" init-method="register"/>-->
 
 </beans>
