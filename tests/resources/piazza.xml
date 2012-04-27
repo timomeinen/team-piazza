@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2012 Nat Pryce, Timo Meinen.
+  ~ Copyright (c) 2012 Nat Pryce, Timo Meinen, Frank Bregulla.
   ~
   ~ This file is part of Team Piazza.
   ~
@@ -17,15 +16,4 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-
-<beans default-autowire="constructor">
-    <bean id="piazzaConfiguration" class="com.natpryce.piazza.PiazzaConfiguration"/>
-
-    <bean id="piazza" class="com.natpryce.piazza.Piazza"/>
-    <bean class="com.natpryce.piazza.PiazzaNotificator"/>
-
-    <bean id="piazzaAdminPage" class="com.natpryce.piazza.extension.PiazzaConfigurationPageExtension"/>
-    <bean class="com.natpryce.piazza.controller.ConfigurationController" />
-
-</beans>
+<piazza showOnFailureOnly="true" />

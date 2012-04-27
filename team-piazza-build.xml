@@ -66,6 +66,7 @@
         <include name="**/?*.html"/>
         <include name="**/?*.dtd"/>
         <include name="**/?*.tld"/>
+        <include name="**/?*.js"/>
         <include name="**/?*.jsp"/>
         <include name="**/?*.css"/>
         <include name="**/?*.html"/>

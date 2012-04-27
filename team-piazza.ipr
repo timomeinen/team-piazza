@@ -13,6 +13,14 @@
       </properties>
     </buildFile>
   </component>
+  <component name="ArtifactManager">
+    <artifact build-on-make="true" name="piazza">
+      <output-path>$TeamCityDistribution$/webapps/ROOT/plugins/piazza</output-path>
+      <root id="root">
+        <element id="dir-copy" path="$PROJECT_DIR$/resources/buildServerResources" />
+      </root>
+    </artifact>
+  </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
@@ -56,7 +64,7 @@
     </option>
   </component>
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
+    <option name="DEFAULT_COMPILER" value="compAPI" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -77,12 +85,13 @@
       <entry name="?*.htm" />
       <entry name="?*.ftl" />
       <entry name="?*.ftl" />
+      <entry name="?*.js" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="GPL 3">
     <copyright>
-      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce, Timo Meinen.&#10;&#10;This file is part of Team Piazza.&#10;&#10;Team Piazza is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 3 of the License, or&#10;(at your option) any later version.&#10;&#10;Team Piazza is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
+      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce, Timo Meinen, Frank Bregulla.&#10;&#10;This file is part of Team Piazza.&#10;&#10;Team Piazza is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 3 of the License, or&#10;(at your option) any later version.&#10;&#10;Team Piazza is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
       <option name="keyword" value="Copyright" />
       <option name="allowReplaceKeyword" value="" />
       <option name="myName" value="GPL 3" />
@@ -100,7 +109,7 @@
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="ISO-8859-1" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
     <list size="1">
@@ -115,8 +124,9 @@
         <option name="myLocal" value="false" />
         <inspection_tool class="ComparatorMethodParameterNotUsed" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="EqualsWhichDoesntCheckParameterClass" enabled="false" level="WARNING" enabled_by_default="false" />
-        <inspection_tool class="GWTRemoteServiceAsyncCheck" level="ERROR" enabled="false" />
-        <inspection_tool class="GWTStyleCheck" level="ERROR" enabled="false" />
+        <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
+        <inspection_tool class="GWTRemoteServiceAsyncCheck" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="GWTStyleCheck" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="TOP_LEVEL_CLASS_OPTIONS">
             <value>
@@ -161,11 +171,6 @@
           <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
         </inspection_tool>
         <inspection_tool class="ObjectEqualsNull" enabled="false" level="WARNING" enabled_by_default="false" />
-        <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
-          <option name="processCode" value="true" />
-          <option name="processLiterals" value="true" />
-          <option name="processComments" value="true" />
-        </inspection_tool>
         <inspection_tool class="SpringBeanConstructorArgInspection" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -199,28 +204,6 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
-  </component>
-  <component name="NullableNotNullManager">
-    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
-    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
-    <option name="myNullables">
-      <value>
-        <list size="3">
-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
-        </list>
-      </value>
-    </option>
-    <option name="myNotNulls">
-      <value>
-        <list size="3">
-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
-        </list>
-      </value>
-    </option>
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -346,33 +329,21 @@
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
-        <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
-        <codeStyleSettings language="JAVA">
-          <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
-          <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
-          <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
-          <option name="CALL_PARAMETERS_WRAP" value="1" />
-          <option name="METHOD_PARAMETERS_WRAP" value="1" />
-          <option name="EXTENDS_LIST_WRAP" value="1" />
-          <option name="THROWS_LIST_WRAP" value="1" />
-          <option name="EXTENDS_KEYWORD_WRAP" value="1" />
-          <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
-          <indentOptions>
-            <option name="USE_TAB_CHARACTER" value="true" />
-          </indentOptions>
-        </codeStyleSettings>
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
   </component>
   <component name="ProjectDetails">
     <option name="projectName" value="team-piazza" />
   </component>
   <component name="ProjectDictionaryState">
-    <dictionary name="tmeinen" />
+    <dictionary name="fbregulla">
+      <words>
+        <w>outputter</w>
+      </words>
+    </dictionary>
   </component>
   <component name="ProjectKey">
     <option name="state" value="https://team-piazza.googlecode.com/svn/trunk/team-piazza.ipr" />
@@ -389,53 +360,14 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Run All Tests" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="JavaRebel">
-        <option name="bootstrapPath" />
-        <option name="jrebelArgs" value="" />
-        <option name="loggingEnabled" value="false" />
-        <option name="useBootstrapDefaults" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="JavaRebel Debug">
-        <option name="bootstrapPath" />
-        <option name="debugPort" value="55908" />
-        <option name="jrebelArgs" value="" />
-        <option name="loggingEnabled" value="false" />
-        <option name="transport" value="0" />
-        <option name="useBootstrapDefaults" value="true" />
-        <option name="DEBUG_PORT" value="55908" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TeamCity 6.5.4" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat (TeamCity Dist)">
+    <configuration default="false" name="TeamCity 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 7.0">
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m -Dteamcity.development.mode=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_team-piazza" />
         <option name="DEPLOY_TOMCAT_APPS" value="true" />
+        <option name="HTTP_PORT" value="8080" />
       </server-settings>
       <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -473,13 +405,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="SCRIPT" value="$TeamCityDistribution$/bin/catalina.sh" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value=" run" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="SCRIPT" value="$TeamCityDistribution$/bin/catalina.sh" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value=" stop" />
         </SHUTDOWN>
@@ -488,13 +420,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="    " />
+          <option name="SCRIPT" value="                    " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="    " />
+          <option name="SCRIPT" value="                    " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -503,13 +435,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run   " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop   " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -518,43 +450,43 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JavaRebel Debug">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" run" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh" />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value=" stop" />
+          <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run   " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop   " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -562,6 +494,46 @@
       <method>
         <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="deploy" />
       </method>
+    </configuration>
+    <configuration default="false" name="Run All Tests" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Team-piazza" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="JavaRebel">
+        <option name="bootstrapPath" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="useBootstrapDefaults" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JavaRebel Debug">
+        <option name="bootstrapPath" />
+        <option name="debugPort" value="55908" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="transport" value="0" />
+        <option name="useBootstrapDefaults" value="true" />
+        <option name="DEBUG_PORT" value="55908" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
     </configuration>
   </component>
   <component name="SvnBranchConfigurationManager">
@@ -590,26 +562,31 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="IntelliJ IDEA 11">
+    <library name="Intellij IDEA">
       <CLASSES>
         <root url="jar://$APPLICATION_HOME_DIR$/lib/annotations.jar!/" />
         <root url="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/" />
         <root url="jar://$APPLICATION_HOME_DIR$/lib/util.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$APPLICATION_HOME_DIR$/lib" />
+      </SOURCES>
+      <jarDirectory url="file://$APPLICATION_HOME_DIR$/lib" recursive="false" type="SOURCES" />
     </library>
-    <library name="powermock-mockito-junit-1.4">
+    <library name="team-piazza-libs">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+        <root url="file://$PROJECT_DIR$/lib" />
         <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+        <root url="file://$PROJECT_DIR$/lib" />
         <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
       </SOURCES>
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
       <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
       <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" type="SOURCES" />
     </library>
     <library name="TeamCity">
@@ -629,7 +606,6 @@
       <SOURCES>
         <root url="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/" />
         <root url="file://$TeamCityDistribution$/webapps/ROOT" />
-        <root url="jar://$PROJECT_DIR$/lib/jdom-1.1-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

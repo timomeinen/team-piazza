@@ -23,22 +23,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <jsp:useBean id="project"
              type="com.natpryce.piazza.ProjectMonitorViewState"
-             scope="request" />
+             scope="request"/>
 
 <jsp:useBean id="resourceRoot"
              type="java.lang.String"
-             scope="request" />
+             scope="request"/>
 
 <jsp:useBean id="version"
              type="java.lang.String"
-             scope="request" />
+             scope="request"/>
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Piazza - ${project.projectName}</title>
     <meta http-equiv="refresh" content="${project.building ? 1 : 10}">
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css" />
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
 <body class="${project.combinedStatusClasses}">
 <h1>${project.projectName}</h1>
@@ -47,15 +47,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
 <div class="Content">
-
     <c:if test="${! empty project.committers}">
         <div class="Portraits">
+            <%--@elvariable id="committer" type="com.natpryce.piazza.PiazzaUser"--%>
             <c:forEach var="committer" items="${project.committers}">
-            <div class="Portrait">
-                <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
-
-                <p class="Name">${committer.name}</p>
-            </div>
+                <div class="Portrait">
+                    <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
+                    <p class="Name">${committer.name}</p>
+                </div>
             </c:forEach>
         </div>
     </c:if>
@@ -64,15 +63,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <div class="Builds">
         <c:if test="${empty project.builds}">
             <p class="Tip">
-                No monitored builds. Enable the status widget for builds that you want to appear in the Project monitor.
+                No monitored builds. Enable the status widget for builds that you want to appear in the Project
+                monitor.
             </p>
         </c:if>
 
+        <%--@elvariable id="build" type="com.natpryce.piazza.BuildTypeMonitorViewState"--%>
         <c:forEach var="build" items="${project.builds}">
-        <div class="Build ${build.combinedStatusClasses}">
-            <h3>${build.name} #${build.buildNumber}</h3>
+            <div class="Build ${build.combinedStatusClasses}">
+                <h3 class="${build.investigationInfo.state}">
+                    ${build.name} #${build.buildNumber}
+                </h3>
+                <span class="Investigate">${build.investigationInfo.description}</span>
 
-            <c:if test="${build.building}">
                 <c:if test="${build.building}">
                     <div class="ProgressBar">
                         <div class="Activity ${build.runningBuildStatus}" style="width: ${build.completedPercent}%">
@@ -85,8 +88,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         </div>
                     </div>
                 </c:if>
-            </c:if>
-        </div>
+            </div>
         </c:forEach>
     </div>
 

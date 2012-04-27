@@ -36,14 +36,17 @@ public class PiazzaConfigurationPageExtension extends AdminPage {
 	private static final String TAB_TITLE = "Piazza Notifier";
 
 	private PiazzaConfiguration piazzaConfiguration;
+    private Piazza piazza;
 
-	public PiazzaConfigurationPageExtension(@NotNull final WebControllerManager manager,
-											@NotNull PiazzaConfiguration piazzaConfiguration) {
+    public PiazzaConfigurationPageExtension(@NotNull final WebControllerManager manager,
+											@NotNull PiazzaConfiguration piazzaConfiguration,
+                                            @NotNull Piazza piazza) {
 		super(manager);
 
-		this.piazzaConfiguration = piazzaConfiguration;
+		this.piazza = piazza;
+        this.piazzaConfiguration = piazzaConfiguration;
 
-		setIncludeUrl("piazza-settings.jsp");
+		setIncludeUrl("settings.jsp");
 		setTabTitle(TAB_TITLE);
 		setPluginName(Piazza.PLUGIN_NAME);
 
@@ -56,7 +59,8 @@ public class PiazzaConfigurationPageExtension extends AdminPage {
 		super.fillModel(model, request);
 		boolean showOnFailureOnly = piazzaConfiguration.isShowOnFailureOnly();
 		model.put("showOnFailureOnly", showOnFailureOnly);
-	}
+        model.put("resourceRoot", this.piazza.resourcePath(""));
+    }
 
 	@NotNull
 	@Override

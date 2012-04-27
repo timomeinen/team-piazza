@@ -20,6 +20,7 @@ package com.natpryce.piazza;
 
 import com.intellij.openapi.diagnostic.Logger;
 import jetbrains.buildServer.log.Loggers;
+import jetbrains.buildServer.serverSide.ServerPaths;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.junit.Before;
@@ -34,13 +35,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.support.membermodification.MemberMatcher.method;
 
 /**
- * @author Timo Meinen
+ * @author Timo Meinen, fbregulla
  * @since 07.12.11
  */
 @RunWith(PowerMockRunner.class)
@@ -49,9 +49,11 @@ public class PiazzaConfigurationTest {
 
 	private PiazzaConfiguration piazzaConfiguration;
 
-	@Before
+    @Before
 	public void setUp() {
-		piazzaConfiguration = new PiazzaConfiguration();
+        ServerPaths serverPaths = mock(ServerPaths.class);
+        when(serverPaths.getConfigDir()).thenReturn("tests/resources");
+        piazzaConfiguration = new PiazzaConfiguration(serverPaths);
 	}
 
 	@Test
@@ -120,7 +122,7 @@ public class PiazzaConfigurationTest {
 	@Test
 	public void testConfigFile() throws IOException {
 		String teamcityConfigDir = "/teamcity-config-dir";
-		piazzaConfiguration.setTeamcityConfigDir(teamcityConfigDir);
+		piazzaConfiguration.setTeamCityConfigDir(teamcityConfigDir);
 
 		File file = piazzaConfiguration.createConfigFile();
 
@@ -141,4 +143,26 @@ public class PiazzaConfigurationTest {
 		verify(spyPiazzaConfiguration).createConfigFileWriter();
 		verify(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
 	}
+
+
+    @Test
+    public void testReadElement() {
+        piazzaConfiguration.loadConfigurationFromXmlFile();
+        assertTrue(piazzaConfiguration.isShowOnFailureOnly());
+    }
+
+    @Test
+    public void testConfigFileMissing() {
+        try {
+            piazzaConfiguration.setShowOnFailureOnly(false);
+            piazzaConfiguration.configFileName = "not_existent.xml";
+            piazzaConfiguration.loadConfigurationFromXmlFile();
+
+            assertFalse(piazzaConfiguration.isShowOnFailureOnly());
+        } finally {
+            piazzaConfiguration.createConfigFile().delete();
+        }
+    }
+
+
 }

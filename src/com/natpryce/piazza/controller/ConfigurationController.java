@@ -18,9 +18,9 @@
  */
 package com.natpryce.piazza.controller;
 
-import com.natpryce.piazza.Piazza;
 import com.natpryce.piazza.PiazzaConfiguration;
 import jetbrains.buildServer.controllers.BaseController;
+import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,30 +29,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author tmeinen
+ * @author tmeinen, fbregulla
  */
 public class ConfigurationController extends BaseController {
-	private final PiazzaConfiguration piazzaConfiguration;
-	private final Piazza piazza;
+    private final PiazzaConfiguration piazzaConfiguration;
 
-	public ConfigurationController(SBuildServer server, WebControllerManager manager,
-								   PiazzaConfiguration piazzaConfiguration, Piazza piazza) {
-		super(server);
-		manager.registerController("/configurePiazza.html", this);
-		this.piazza = piazza;
-		this.piazzaConfiguration = piazzaConfiguration;
-	}
+    public ConfigurationController(SBuildServer server, WebControllerManager manager, PiazzaConfiguration piazzaConfiguration) {
+        super(server);
+        manager.registerController("/configurePiazza.html", this);
+        this.piazzaConfiguration = piazzaConfiguration;
+    }
 
-	@Override
-	protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		boolean showOnFailureOnly = getShowOnFailureOnlyValueFromView(request);
-		this.piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
-		return new ModelAndView(piazza.resourcePath("piazza-settings.jsp"))
-				.addObject("version", piazza.version())
-				.addObject("resourceRoot", piazza.resourcePath(""));
-	}
+    @Override
+    protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        boolean showOnFailureOnly = getShowOnFailureOnlyValueFromView(request);
+        updateConfiguration(showOnFailureOnly, request);
+        return null;
+    }
 
-	private boolean getShowOnFailureOnlyValueFromView(HttpServletRequest request) {
-		return request.getParameter("showOnFailureOnly") != null;
-	}
+    private void updateConfiguration(boolean showOnFailureOnly, HttpServletRequest request) {
+        this.piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
+        try {
+            this.piazzaConfiguration.save();
+            addSuccessMessage(request);
+        } catch (PiazzaConfiguration.SaveConfigFailedException e) {
+            Loggers.SERVER.error(e);
+            addPiazzaMessage(request, "Save failed: " + e.getLocalizedMessage());
+        }
+    }
+
+    private boolean getShowOnFailureOnlyValueFromView(HttpServletRequest request) {
+        String parameter = request.getParameter("showOnFailureOnly");
+        if (parameter == null)
+            return false;
+        return Boolean.valueOf(parameter);
+    }
+
+    private void addSuccessMessage(HttpServletRequest request) {
+        addPiazzaMessage(request, "Saved");
+    }
+
+    private void addPiazzaMessage(HttpServletRequest request, String message) {
+        getOrCreateMessages(request).addMessage("piazzaMessage", message);
+    }
 }

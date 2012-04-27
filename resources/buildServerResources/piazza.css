@@ -75,6 +75,10 @@ body.Building .Content {
     -webkit-border-radius: 10px;
 }
 
+.Build h3 {
+    display: inline;
+}
+
 .Build.Success {
     border-color: #42AA52;
 }
@@ -180,4 +184,32 @@ body.Building .Content {
     right: 4px;
     font-size: 12px;
     color: #444444;
+}
+
+.Investigate {
+    margin-left: 30px;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.Build h3.FIXED {
+    background: url('green-tick-small.png') no-repeat 0 -4px;
+    padding-left: 50px;
+    height: 32px;
+    display: inline-block;
+}
+
+.Build h3.GIVEN_UP {
+    background: url('red-cross-small.png') no-repeat 0 -2px;
+    padding-left: 50px;
+    height: 35px;
+    display: inline-block;
+}
+
+.Build h3.TAKEN {
+    background: url('viewmag.png') no-repeat 0 -2px;
+    padding-left: 50px;
+    height: 35px;
+    display: inline-block;
 }

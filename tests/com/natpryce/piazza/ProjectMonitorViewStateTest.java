@@ -18,7 +18,6 @@ import static org.mockito.Mockito.when;
  */
 public class ProjectMonitorViewStateTest {
 
-
     @Mock
     private SProject projectMock;
 

@@ -19,80 +19,116 @@
 package com.natpryce.piazza;
 
 import jetbrains.buildServer.log.Loggers;
+import jetbrains.buildServer.serverSide.ServerPaths;
 import org.apache.commons.io.IOUtils;
+import org.jdom.DataConversionException;
+import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 
 /**
- * @author tmeinen
+ * @author tmeinen, fbregulla
  */
 public class PiazzaConfiguration {
 
-	private static final String XML_ROOT_NAME = "piazza";
-	private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
-	static final String CONFIG_FILE_NAME = "piazza.xml";
+    static final String XML_ROOT_NAME = "piazza";
+    private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
 
-	private boolean showOnFailureOnly;
+    static final String CONFIG_FILE_NAME = "piazza.xml";
+    String configFileName = CONFIG_FILE_NAME;
 
-	private String teamcityConfigDir;
+    private boolean showOnFailureOnly;
+    private String teamCityConfigDir;
 
-/*
-	public void readFrom(Element serverConfigRoot) {
-		Element piazzaConfigRoot = serverConfigRoot.getChild("piazza");
-		if (piazzaConfigRoot != null) {
-			String showOnFailureOnlyFromConfig = piazzaConfigRoot.getAttributeValue(ATTRIBUTE_SHOW_ON_FAILURE_ONLY);
-			showOnFailureOnly = Boolean.valueOf(showOnFailureOnlyFromConfig);
-		}
-	}
-*/
+    public PiazzaConfiguration(@NotNull ServerPaths serverPaths) {
+        this.teamCityConfigDir = serverPaths.getConfigDir();
+        this.loadConfigurationFromXmlFile();
+    }
 
-	public synchronized void save() {
-		try {
-			writeElementTo(createConfigAsXml(), createConfigFileWriter());
-		} catch (IOException e) {
-			Loggers.SERVER.error("[PIAZZA] Unable to save xml configuration", e);
-		}
-	}
+    public synchronized void save() throws SaveConfigFailedException {
+        try {
+            writeElementTo(createConfigAsXml(), createConfigFileWriter());
+        } catch (IOException e) {
+            Loggers.SERVER.error("[PIAZZA] Unable to save xml configuration", e);
+            throw new SaveConfigFailedException(e);
+        }
+    }
 
-	Element createConfigAsXml() {
-		Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
-		piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
-		return piazzaConfigRoot;
-	}
+    Element createConfigAsXml() {
+        Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
+        piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
+        return piazzaConfigRoot;
+    }
 
-	Writer createConfigFileWriter() throws IOException {
-		return new FileWriter(createConfigFile());
-	}
+    Writer createConfigFileWriter() throws IOException {
+        return new FileWriter(createConfigFile());
+    }
 
-	File createConfigFile() {
-		return new File(teamcityConfigDir, CONFIG_FILE_NAME);
-	}
+    File createConfigFile() {
+        return new File(teamCityConfigDir, getConfigFileName());
+    }
 
-	void writeElementTo(Element element, Writer writer) throws IOException {
-		try {
-			XMLOutputter outputter = new XMLOutputter();
-			outputter.output(element, writer);
-			writer.close();
-		} finally {
-			IOUtils.closeQuietly(writer);
-		}
-	}
+    String getConfigFileName() {
+        return configFileName;
+    }
 
-	public boolean isShowOnFailureOnly() {
-		return showOnFailureOnly;
-	}
+    void writeElementTo(Element element, Writer writer) throws IOException {
+        try {
+            XMLOutputter outputter = new XMLOutputter();
+            outputter.output(element, writer);
+            writer.close();
+        } finally {
+            IOUtils.closeQuietly(writer);
+        }
+    }
 
-	public void setShowOnFailureOnly(boolean showOnFailureOnly) {
-		this.showOnFailureOnly = showOnFailureOnly;
-	}
+    void loadConfigurationFromXmlFile() {
+        SAXBuilder builder = new SAXBuilder();
+        try {
+            Document document = builder.build(createConfigFile());
+            Element rootElement = document.getRootElement();
+            parseConfigFromXml(rootElement);
+        } catch (FileNotFoundException e){
+            save();
+        } catch (JDOMException e) {
+            Loggers.SERVER.error(e);
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            Loggers.SERVER.error(e);
+            throw new RuntimeException(e);
+        }
 
-	public void setTeamcityConfigDir(@NotNull String teamcityConfigDir) {
-		this.teamcityConfigDir = teamcityConfigDir;
-	}
+    }
+
+    private void parseConfigFromXml(Element rootElement) {
+        try {
+            this.showOnFailureOnly = rootElement.getAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY).getBooleanValue();
+        } catch (DataConversionException e) {
+            Loggers.SERVER.error(e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean isShowOnFailureOnly() {
+        return showOnFailureOnly;
+    }
+
+    public void setShowOnFailureOnly(boolean showOnFailureOnly) {
+        this.showOnFailureOnly = showOnFailureOnly;
+    }
+
+    public void setTeamCityConfigDir(@NotNull String teamCityConfigDir) {
+        this.teamCityConfigDir = teamCityConfigDir;
+    }
+
+    public class SaveConfigFailedException extends RuntimeException {
+        public SaveConfigFailedException(Throwable e) {
+            super(e);
+        }
+    }
 }
