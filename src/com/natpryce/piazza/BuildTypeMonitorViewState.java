@@ -39,55 +39,62 @@ public class BuildTypeMonitorViewState {
     private final TestStatisticsViewState tests;
     private final InvestigationViewState investigationInfo;
     private final Set<PiazzaUser> committers;
+	private boolean showOnFailureOnly;
 
-    public BuildTypeMonitorViewState(SBuildType buildType, UserGroup userPictures) {
-        this.buildType = buildType;
-        this.lastFinishedBuild = buildType.getLastChangesFinished();
-        this.latestBuild = buildType.getLastChangesStartedBuild();
-        this.commitMessages = commitMessagesForBuild(latestBuild);
+	public BuildTypeMonitorViewState(SBuildType buildType, UserGroup userPictures, boolean showOnFailureOnly) {
+		this.showOnFailureOnly = showOnFailureOnly;
+		this.buildType = buildType;
+		this.lastFinishedBuild = buildType.getLastChangesFinished();
+		this.latestBuild = buildType.getLastChangesStartedBuild();
+		this.commitMessages = commitMessagesForBuild();
 
-        committers = userPictures.usersInvolvedInCommit(
-                committersForBuild(latestBuild),
-                commitMessagesForBuild(latestBuild)
+		this.committers = userPictures.usersInvolvedInCommit(
+                committersForBuild(),
+                commitMessagesForBuild()
         );
-
         this.tests = testStatistics();
         this.investigationInfo = createInvestigationState();
     }
 
-    private Set<String> committersForBuild(Build latestBuild) {
+    private Set<String> committersForBuild() {
         List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
-        HashSet<String> committers = new HashSet<String>();
-        for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-            String userName = vcsModification.getUserName();
-            if (userName != null) {
-                committers.add(userName.trim());
-            }
-        }
-        return committers;
-    }
+		HashSet<String> committers = new HashSet<String>();
+		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
+			String userName = vcsModification.getUserName();
+			if (userName != null) {
+				if (userUnfiltered())
+					committers.add(userName.trim());
+			}
+		}
+		return committers;
+	}
 
-    private ArrayList<String> commitMessagesForBuild(Build latestBuild) {
-        List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
+	private ArrayList<String> commitMessagesForBuild() {
+		List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
-        ArrayList<String> commitMessages = new ArrayList<String>();
-        for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
-            commitMessages.add(vcsModification.getDescription().trim());
-        }
+		ArrayList<String> commitMessages = new ArrayList<String>();
+		for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
+			if (userUnfiltered()) {
+				commitMessages.add(vcsModification.getDescription().trim());
+			}
+		}
+		return commitMessages;
+	}
 
-        return commitMessages;
-    }
+	private boolean userUnfiltered() {
+		return !showOnFailureOnly || (status() == BuildStatus.FAILURE);
+	}
 
-    private TestStatisticsViewState testStatistics() {
-        if (isBuilding()) {
-            ShortStatistics stats = ((SRunningBuild) latestBuild).getShortStatistics();
-            return new TestStatisticsViewState(
-                    stats.getPassedTestCount(), stats.getFailedTestCount(), stats.getIgnoredTestCount());
-        } else {
-            return new TestStatisticsViewState(0, 0, 0);
-        }
-    }
+	private TestStatisticsViewState testStatistics() {
+		if (isBuilding()) {
+			ShortStatistics stats = ((SRunningBuild) latestBuild).getShortStatistics();
+			return new TestStatisticsViewState(
+					stats.getPassedTestCount(), stats.getFailedTestCount(), stats.getIgnoredTestCount());
+		} else {
+			return new TestStatisticsViewState(0, 0, 0);
+		}
+	}
 
     private InvestigationViewState createInvestigationState() {
         ResponsibilityInfo responsibilityInfo = this.buildType.getResponsibilityInfo();
@@ -115,88 +122,88 @@ public class BuildTypeMonitorViewState {
         return latestBuild.getBuildNumber();
     }
 
-    public String getCombinedStatusClasses() {
-        return status().toStringReflectingCurrentlyBuilding(isBuilding());
-    }
+	public String getCombinedStatusClasses () {
+		return status().toStringReflectingCurrentlyBuilding(isBuilding());
+	}
 
-    public boolean isBuilding() {
-        return !latestBuild.isFinished();
-    }
+	public boolean isBuilding () {
+		return !latestBuild.isFinished();
+	}
 
-    public String getActivity() {
-        if (isBuilding()) {
-            return ((SRunningBuild) latestBuild).getShortStatistics().getCurrentStage();
-        } else {
-            return status().toString();
-        }
-    }
+	public String getActivity () {
+		if (isBuilding()) {
+			return ((SRunningBuild) latestBuild).getShortStatistics().getCurrentStage();
+		} else {
+			return status().toString();
+		}
+	}
 
-    public int getCompletedPercent() {
-        if (isBuilding()) {
-            return ((SRunningBuild) latestBuild).getCompletedPercent();
-        } else {
-            return 100;
-        }
-    }
+	public int getCompletedPercent () {
+		if (isBuilding()) {
+			return ((SRunningBuild) latestBuild).getCompletedPercent();
+		} else {
+			return 100;
+		}
+	}
 
-    public TestStatisticsViewState getTests() {
-        return tests;
+	public TestStatisticsViewState getTests () {
+		return tests;
     }
 
     public InvestigationViewState getInvestigationInfo() {
         return investigationInfo;
-    }
+	}
 
-    public long getDurationSeconds() {
-        Date start = latestBuild.getStartDate();
-        Date finished = latestBuild.getFinishDate();
-        Date end = (finished != null) ? finished : now();
+	public long getDurationSeconds () {
+		Date start = latestBuild.getStartDate();
+		Date finished = latestBuild.getFinishDate();
+		Date end = (finished != null) ? finished : now();
 
-        return (end.getTime() - start.getTime()) / 1000L;
-    }
+		return (end.getTime() - start.getTime()) / 1000L;
+	}
 
-    private Date now() {
-        return new Date();
-    }
+	private Date now () {
+		return new Date();
+	}
 
-    public String getStatus() {
-        return status().toString();
-    }
+	public String getStatus () {
+		return status().toString();
+	}
 
-    public BuildStatus status() {
-        if (latestBuild == null) {
-            return BuildStatus.UNKNOWN;
-        } else if (latestBuild.getBuildStatus().isFailed()) {
-            return BuildStatus.FAILURE;
-        }
-        if (lastFinishedBuild == null) {
-            return BuildStatus.UNKNOWN;
-        } else if (lastFinishedBuild.getBuildStatus().isFailed()) {
-            return BuildStatus.FAILURE;
-        } else {
-            return BuildStatus.SUCCESS;
-        }
-    }
+	public BuildStatus status () {
+		if (latestBuild == null) {
+			return BuildStatus.UNKNOWN;
+		} else if (latestBuild.getBuildStatus().isFailed()) {
+			return BuildStatus.FAILURE;
+		}
+		if (lastFinishedBuild == null) {
+			return BuildStatus.UNKNOWN;
+		} else if (lastFinishedBuild.getBuildStatus().isFailed()) {
+			return BuildStatus.FAILURE;
+		} else {
+			return BuildStatus.SUCCESS;
+		}
+	}
 
-    public String getRunningBuildStatus() {
-        return runningBuildStatus().toString();
-    }
+	public String getRunningBuildStatus () {
+		return runningBuildStatus().toString();
+	}
 
-    public BuildStatus runningBuildStatus() {
-        if (latestBuild == null) {
-            return BuildStatus.UNKNOWN;
-        } else if (latestBuild.getBuildStatus().isFailed()) {
-            return BuildStatus.FAILURE;
-        } else {
-            return BuildStatus.SUCCESS;
-        }
-    }
+	public BuildStatus runningBuildStatus () {
+		if (latestBuild == null) {
+			return BuildStatus.UNKNOWN;
+		} else if (latestBuild.getBuildStatus().isFailed()) {
+			return BuildStatus.FAILURE;
+		} else {
+			return BuildStatus.SUCCESS;
+		}
+	}
 
-    public List<String> getCommitMessages() {
-        return commitMessages;
-    }
+	public List<String> getCommitMessages () {
+		return commitMessages;
+	}
 
-    public Set<PiazzaUser> getCommitters() {
-        return committers;
-    }
+	public Set<PiazzaUser> getCommitters () {
+		return committers;
+	}
 }

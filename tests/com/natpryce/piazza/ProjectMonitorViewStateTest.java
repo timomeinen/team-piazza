@@ -38,7 +38,8 @@ public class ProjectMonitorViewStateTest {
         // Issue #31
         when(sBuildTypeMock.isAllowExternalStatus()).thenReturn(true);
         when(projectMock.getBuildTypes()).thenReturn(Collections.singletonList(sBuildTypeMock));
-        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock);
+        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock,
+				true);
 
         assertNotNull(projectMonitorViewState);
     }

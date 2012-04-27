@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen.
  *
  * This file is part of Team Piazza.
  *
@@ -43,85 +43,91 @@ import java.util.Set;
  */
 public class PiazzaNotificator implements Notificator {
 
-    private static final String TYPE = Piazza.PLUGIN_NAME;
-    private static final String PROPERTY_USER_IMAGE_NAME = "userImage";
-    private static final PropertyKey PROPERTY_USER_IMAGE_KEY = new NotificatorPropertyKey(TYPE, PROPERTY_USER_IMAGE_NAME);
+	private static final String TYPE = Piazza.PLUGIN_NAME;
+	private static final String PROPERTY_USER_IMAGE_NAME = "userImage";
+	private static final PropertyKey PROPERTY_USER_IMAGE_KEY = new NotificatorPropertyKey(TYPE,
+			PROPERTY_USER_IMAGE_NAME);
 
-    public PiazzaNotificator(NotificatorRegistry registry) {
-        List<UserPropertyInfo> userProps = Collections.singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL"));
-        registry.register(this, userProps);
-    }
+	public PiazzaNotificator(NotificatorRegistry registry) {
+		List<UserPropertyInfo> userProps = Collections
+				.singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL"));
+		registry.register(this, userProps);
+	}
 
-    public String getNotificatorType() {
-        return TYPE;
-    }
+	public String getNotificatorType() {
+		return TYPE;
+	}
 
-    public String getDisplayName() {
-        return "Piazza Build Monitor";
-    }
+	public String getDisplayName() {
+		return "Piazza Build Monitor";
+	}
 
-    static String getPortraitUrl(SUser user) {
-        return user.getPropertyValue(PROPERTY_USER_IMAGE_KEY);
-    }
+	static String getPortraitUrl(SUser user) {
+		return user.getPropertyValue(PROPERTY_USER_IMAGE_KEY);
+	}
 
-    public void notifyBuildStarted(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildStarted(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyBuildSuccessful(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildSuccessful(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyBuildFailed(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildFailed(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyBuildFailedToStart(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildFailedToStart(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyLabelingFailed(Build build, VcsRoot root, Throwable exception, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyLabelingFailed(Build build, VcsRoot root, Throwable exception, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyBuildFailing(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildFailing(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyBuildProbablyHanging(SRunningBuild build, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyBuildProbablyHanging(SRunningBuild build, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleChanged(SBuildType buildType, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleChanged(SBuildType buildType, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleAssigned(SBuildType buildType, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleAssigned(SBuildType buildType, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleChanged(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue, SProject project, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleChanged(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue,
+										 SProject project, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleAssigned(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue, SProject project, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleAssigned(TestNameResponsibilityEntry oldValue, TestNameResponsibilityEntry newValue,
+										  SProject project, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleChanged(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleChanged(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project,
+										 Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyResponsibleAssigned(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyResponsibleAssigned(Collection<TestName> testNames, ResponsibilityEntry entry, SProject project,
+										  Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyTestsMuted(Collection<STest> tests, MuteInfo muteInfo, Set<SUser> users) {
-        // ignored
-    }
+	public void notifyTestsMuted(Collection<STest> tests, MuteInfo muteInfo, Set<SUser> users) {
+		// ignored
+	}
 
-    public void notifyTestsUnmuted(Collection<STest> tests, MuteInfo muteInfo, SUser user, Set<SUser> users) {
-        // ignored
-    }
-
+	@Override
+	public void notifyTestsUnmuted(Collection<STest> tests, MuteInfo muteInfo, SUser user, Set<SUser> users) {
+		// ignored
+	}
 }

@@ -32,25 +32,31 @@ public class Piazza {
 
 	private final PluginDescriptor pluginDescriptor;
 	private final PiazzaUserAdapter piazzaUserAdapter;
+	private final PiazzaConfiguration piazzaConfiguration;
 
-	public Piazza (SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager, PluginDescriptor pluginDescriptor, UserModel userManager) {
+	public Piazza(SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager,
+				  PluginDescriptor pluginDescriptor, UserModel userManager, PiazzaConfiguration piazzaConfiguration) {
 		this.pluginDescriptor = pluginDescriptor;
+		this.piazzaConfiguration = piazzaConfiguration;
 		this.piazzaUserAdapter = new PiazzaUserAdapter(server, userManager);
 
 		webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, this));
-
 		webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));
 	}
 
-	public String resourcePath (String resourceName) {
+	public String resourcePath(String resourceName) {
 		return this.pluginDescriptor.getPluginResourcesPath(resourceName);
 	}
 
-	public String version () {
+	public String version() {
 		return this.pluginDescriptor.getPluginVersion();
 	}
 
-	public UserGroup userGroup () {
+	public UserGroup userGroup() {
 		return this.piazzaUserAdapter.getUserGroup();
+	}
+
+	public boolean isShowOnFailureOnly() {
+		return piazzaConfiguration.isShowOnFailureOnly();
 	}
 }

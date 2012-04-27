@@ -19,83 +19,84 @@
 
 package com.natpryce.piazza;
 
+import jetbrains.buildServer.serverSide.SBuildType;
+import jetbrains.buildServer.serverSide.SProject;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static com.natpryce.piazza.BuildStatus.SUCCESS;
-import jetbrains.buildServer.serverSide.SBuildType;
-import jetbrains.buildServer.serverSide.SProject;
 
 /**
  * @author Nat Pryce, Timo Meinen
  */
 public class ProjectMonitorViewState {
 
-	private final SProject project;
-	private final Set<PiazzaUser> committers = new HashSet<PiazzaUser>();
-	private final List<BuildTypeMonitorViewState> builds;
+    private final SProject project;
+    private final Set<PiazzaUser> committers = new HashSet<PiazzaUser>();
+    private final List<BuildTypeMonitorViewState> builds;
 
-	public ProjectMonitorViewState (SProject project, UserGroup userGroup) {
-		this.project = project;
+    public ProjectMonitorViewState (SProject project, UserGroup userGroup, boolean showOnFailureOnly) {
+        this.project = project;
 
-		builds = new ArrayList<BuildTypeMonitorViewState>();
-		for (SBuildType buildType : project.getBuildTypes()) {
-			if (hasAtLeastOneBuild(buildType)) {
-				if (buildType.isAllowExternalStatus()) {
-					builds.add(new BuildTypeMonitorViewState(buildType, userGroup));
-				}
-			}
-		}
+        builds = new ArrayList<BuildTypeMonitorViewState>();
+        for (SBuildType buildType : project.getBuildTypes()) {
+            if (hasAtLeastOneBuild(buildType)) {
+                if (buildType.isAllowExternalStatus()) {
+                    builds.add(new BuildTypeMonitorViewState(buildType, userGroup, showOnFailureOnly));
+                }
+            }
+        }
 
-		for (BuildTypeMonitorViewState build : builds) {
-			committers.addAll(build.getCommitters());
-		}
-	}
+        for (BuildTypeMonitorViewState build : builds) {
+            committers.addAll(build.getCommitters());
+        }
+    }
 
-	private boolean hasAtLeastOneBuild (SBuildType buildType) {
-		return buildType.getLastChangesStartedBuild() != null;
-	}
+    private boolean hasAtLeastOneBuild (SBuildType buildType) {
+        return buildType.getLastChangesStartedBuild() != null;
+    }
 
-	public String getProjectName () {
-		return project.getName();
-	}
+    public String getProjectName () {
+        return project.getName();
+    }
 
-	public String getCombinedStatusClasses () {
-		return status().toStringReflectingCurrentlyBuilding(isBuilding());
-	}
+    public String getCombinedStatusClasses () {
+        return status().toStringReflectingCurrentlyBuilding(isBuilding());
+    }
 
-	public String getStatus () {
-		return status().toString();
-	}
+    public String getStatus () {
+        return status().toString();
+    }
 
-	public BuildStatus status () {
-		if (builds.isEmpty()) {
-			return BuildStatus.UNKNOWN;
-		} else {
-			BuildStatus status = SUCCESS;
-			for (BuildTypeMonitorViewState build : builds) {
-				status = status.mostSevere(build.status());
-			}
-			return status;
-		}
-	}
+    public BuildStatus status () {
+        if (builds.isEmpty()) {
+            return BuildStatus.UNKNOWN;
+        } else {
+            BuildStatus status = SUCCESS;
+            for (BuildTypeMonitorViewState build : builds) {
+                status = status.mostSevere(build.status());
+            }
+            return status;
+        }
+    }
 
-	public boolean isBuilding () {
-		for (BuildTypeMonitorViewState build : builds) {
-			if (build.isBuilding()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean isBuilding () {
+        for (BuildTypeMonitorViewState build : builds) {
+            if (build.isBuilding()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public List<BuildTypeMonitorViewState> getBuilds () {
-		return builds;
-	}
+    public List<BuildTypeMonitorViewState> getBuilds () {
+        return builds;
+    }
 
-	public Set<PiazzaUser> getCommitters () {
-		return committers;
-	}
+    public Set<PiazzaUser> getCommitters () {
+        return committers;
+    }
 }

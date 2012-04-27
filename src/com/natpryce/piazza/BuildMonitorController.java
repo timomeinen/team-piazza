@@ -18,18 +18,16 @@
  */
 package com.natpryce.piazza;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class BuildMonitorController extends BaseController {
 
@@ -39,13 +37,13 @@ public class BuildMonitorController extends BaseController {
 	private final ProjectManager projectManager;
 	private final Piazza piazza;
 
-	public BuildMonitorController (SBuildServer server, ProjectManager projectManager, Piazza piazza) {
+	public BuildMonitorController(SBuildServer server, ProjectManager projectManager, Piazza piazza) {
 		super(server);
 		this.projectManager = projectManager;
 		this.piazza = piazza;
 	}
 
-	protected ModelAndView doHandle (HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (requestHasParameter(request, BUILD_TYPE_ID)) {
 			return showBuildType(request.getParameter(BUILD_TYPE_ID), response);
 		} else if (requestHasParameter(request, PROJECT_ID)) {
@@ -56,33 +54,35 @@ public class BuildMonitorController extends BaseController {
 		}
 	}
 
-	private ModelAndView showBuildType (String buildTypeId, HttpServletResponse response) throws IOException {
+	private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
 		SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
 		if (buildType == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "no build type with id " + buildTypeId);
 			return null;
 		}
 		return modelWithView("piazza-build-type-monitor.jsp")
-				.addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup()));
+				.addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup(),
+						piazza.isShowOnFailureOnly()));
 	}
 
-	private ModelAndView showProject (String projectId, HttpServletResponse response) throws IOException {
+	private ModelAndView showProject(String projectId, HttpServletResponse response) throws IOException {
 		SProject project = projectManager.findProjectById(projectId);
 		if (project == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
 			return null;
 		}
 		return modelWithView("piazza-project-monitor.jsp")
-				.addObject("project", new ProjectMonitorViewState(project, piazza.userGroup()));
+				.addObject("project", new ProjectMonitorViewState(project, piazza.userGroup(),
+						piazza.isShowOnFailureOnly()));
 	}
 
-	private ModelAndView modelWithView (String viewJSP) {
+	private ModelAndView modelWithView(String viewJSP) {
 		return new ModelAndView(piazza.resourcePath(viewJSP))
 				.addObject("version", piazza.version())
 				.addObject("resourceRoot", piazza.resourcePath(""));
 	}
 
-	private boolean requestHasParameter (HttpServletRequest request, String parameterName) {
+	private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
 		return request.getParameterMap().containsKey(parameterName);
 	}
 }

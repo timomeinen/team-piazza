@@ -13,6 +13,14 @@
       </properties>
     </buildFile>
   </component>
+  <component name="ArtifactManager">
+    <artifact build-on-make="true" name="piazza">
+      <output-path>$TeamCityDistribution$/webapps/ROOT/plugins/piazza</output-path>
+      <root id="root">
+        <element id="dir-copy" path="$PROJECT_DIR$/resources/buildServerResources" />
+      </root>
+    </artifact>
+  </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
@@ -77,6 +85,7 @@
       <entry name="?*.htm" />
       <entry name="?*.ftl" />
       <entry name="?*.ftl" />
+      <entry name="?*.js" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -162,6 +171,7 @@
           <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
         </inspection_tool>
         <inspection_tool class="ObjectEqualsNull" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="SpringBeanConstructorArgInspection" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
       </profile>
@@ -328,6 +338,13 @@
   <component name="ProjectDetails">
     <option name="projectName" value="team-piazza" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="fbregulla">
+      <words>
+        <w>outputter</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectKey">
     <option name="state" value="https://team-piazza.googlecode.com/svn/trunk/team-piazza.ipr" />
   </component>
@@ -339,50 +356,10 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Run All Tests" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Team-piazza" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="JavaRebel">
-        <option name="bootstrapPath" />
-        <option name="jrebelArgs" value="" />
-        <option name="loggingEnabled" value="false" />
-        <option name="useBootstrapDefaults" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="JavaRebel Debug">
-        <option name="bootstrapPath" />
-        <option name="debugPort" value="55908" />
-        <option name="jrebelArgs" value="" />
-        <option name="loggingEnabled" value="false" />
-        <option name="transport" value="0" />
-        <option name="useBootstrapDefaults" value="true" />
-        <option name="DEBUG_PORT" value="55908" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="TeamCity 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 7.0">
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m -Dteamcity.development.mode=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -428,13 +405,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="SCRIPT" value="$TeamCityDistribution$/bin/catalina.sh" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value=" run" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.sh" />
+          <option name="SCRIPT" value="$TeamCityDistribution$/bin/catalina.sh" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value=" stop" />
         </SHUTDOWN>
@@ -518,6 +495,46 @@
         <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="deploy" />
       </method>
     </configuration>
+    <configuration default="false" name="Run All Tests" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Team-piazza" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="JavaRebel">
+        <option name="bootstrapPath" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="useBootstrapDefaults" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JavaRebel Debug">
+        <option name="bootstrapPath" />
+        <option name="debugPort" value="55908" />
+        <option name="jrebelArgs" value="" />
+        <option name="loggingEnabled" value="false" />
+        <option name="transport" value="0" />
+        <option name="useBootstrapDefaults" value="true" />
+        <option name="DEBUG_PORT" value="55908" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="myConfigurationMap">
@@ -548,9 +565,29 @@
     <library name="Intellij IDEA">
       <CLASSES>
         <root url="jar://$APPLICATION_HOME_DIR$/lib/annotations.jar!/" />
+        <root url="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/" />
+        <root url="jar://$APPLICATION_HOME_DIR$/lib/util.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$APPLICATION_HOME_DIR$/lib" />
+      </SOURCES>
+      <jarDirectory url="file://$APPLICATION_HOME_DIR$/lib" recursive="false" type="SOURCES" />
+    </library>
+    <library name="team-piazza-libs">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib" />
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/lib" />
+        <root url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" />
+      </SOURCES>
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" recursive="false" type="SOURCES" />
     </library>
     <library name="TeamCity">
       <CLASSES>
