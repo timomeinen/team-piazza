@@ -56,7 +56,7 @@
     </option>
   </component>
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
+    <option name="DEFAULT_COMPILER" value="compAPI" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -82,7 +82,7 @@
   </component>
   <component name="CopyrightManager" default="GPL 3">
     <copyright>
-      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce, Timo Meinen.&#10;&#10;This file is part of Team Piazza.&#10;&#10;Team Piazza is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 3 of the License, or&#10;(at your option) any later version.&#10;&#10;Team Piazza is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
+      <option name="notice" value="Copyright (c) &amp;#36;today.year Nat Pryce, Timo Meinen, Frank Bregulla.&#10;&#10;This file is part of Team Piazza.&#10;&#10;Team Piazza is free software; you can redistribute it and/or modify&#10;it under the terms of the GNU General Public License as published by&#10;the Free Software Foundation; either version 3 of the License, or&#10;(at your option) any later version.&#10;&#10;Team Piazza is distributed in the hope that it will be useful,&#10;but WITHOUT ANY WARRANTY; without even the implied warranty of&#10;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#10;GNU General Public License for more details.&#10;&#10;You should have received a copy of the GNU General Public License&#10;along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;." />
       <option name="keyword" value="Copyright" />
       <option name="allowReplaceKeyword" value="" />
       <option name="myName" value="GPL 3" />
@@ -100,7 +100,7 @@
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="ISO-8859-1" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
     <list size="1">
@@ -115,8 +115,9 @@
         <option name="myLocal" value="false" />
         <inspection_tool class="ComparatorMethodParameterNotUsed" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="EqualsWhichDoesntCheckParameterClass" enabled="false" level="WARNING" enabled_by_default="false" />
-        <inspection_tool class="GWTRemoteServiceAsyncCheck" level="ERROR" enabled="false" />
-        <inspection_tool class="GWTStyleCheck" level="ERROR" enabled="false" />
+        <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
+        <inspection_tool class="GWTRemoteServiceAsyncCheck" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="GWTStyleCheck" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="TOP_LEVEL_CLASS_OPTIONS">
             <value>
@@ -382,7 +383,7 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="TeamCity 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 7">
+    <configuration default="false" name="TeamCity 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="TeamCity 7.0">
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=150m -Dteamcity.development.mode=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
@@ -442,13 +443,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="                 " />
+          <option name="SCRIPT" value="                    " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="                 " />
+          <option name="SCRIPT" value="                    " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -457,13 +458,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -472,13 +473,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -487,13 +488,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -502,13 +503,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  run                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                " />
+          <option name="SCRIPT" value="/Applications/apache-tomcat-7.0.8/bin/catalina.sh  stop                   " />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>

@@ -1,8 +1,5 @@
 package com.natpryce.piazza;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
-
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 import org.junit.Before;
@@ -12,12 +9,14 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+
 /**
  * @author Timo Meinen
  * @since 08.10.11
  */
 public class ProjectMonitorViewStateTest {
-
 
     @Mock
     private SProject projectMock;
