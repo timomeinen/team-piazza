@@ -20,7 +20,6 @@ package com.natpryce.piazza;
 
 import jetbrains.buildServer.Build;
 import jetbrains.buildServer.responsibility.ResponsibilityEntry;
-import jetbrains.buildServer.serverSide.ResponsibilityInfo;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SRunningBuild;
 import jetbrains.buildServer.serverSide.ShortStatistics;
@@ -97,7 +96,7 @@ public class BuildTypeMonitorViewState {
 	}
 
     private InvestigationViewState createInvestigationState() {
-        ResponsibilityInfo responsibilityInfo = this.buildType.getResponsibilityInfo();
+        ResponsibilityEntry responsibilityInfo = this.buildType.getResponsibilityInfo();
         if (responsibilityInfo.getState() != ResponsibilityEntry.State.NONE) {
             return new InvestigationViewState(responsibilityInfo.getState(), responsibilityInfo.getResponsibleUser().getDescriptiveName(), responsibilityInfo.getComment());
         } else {
