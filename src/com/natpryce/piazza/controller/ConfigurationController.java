@@ -42,13 +42,16 @@ public class ConfigurationController extends BaseController {
 
     @Override
     protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        boolean showOnFailureOnly = getShowOnFailureOnlyValueFromView(request);
-        updateConfiguration(showOnFailureOnly, request);
+        this.piazzaConfiguration.setShowOnFailureOnly(getShowOnFailureOnlyValueFromView(request));
+        this.piazzaConfiguration.setShowFeatureBranches(getShowFeatureBranchesValueFromView(request));
+        this.piazzaConfiguration.setMaxNumberOfFeatureBranchesToShow(getMaxNumberOfFeatureBranchesFromView(request));
+        this.piazzaConfiguration.setMaxAgeInDaysOfFeatureBranches(getMaxAgeInDaysOfFeatureBranchesFromView(request));
+
+        updateConfiguration(request);
         return null;
     }
 
-    private void updateConfiguration(boolean showOnFailureOnly, HttpServletRequest request) {
-        this.piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
+    private void updateConfiguration(HttpServletRequest request) {
         try {
             this.piazzaConfiguration.save();
             addSuccessMessage(request);
@@ -58,11 +61,35 @@ public class ConfigurationController extends BaseController {
         }
     }
 
+    private boolean getShowFeatureBranchesValueFromView(HttpServletRequest request) {
+        return getBooleanParameter(request, "showFeatureBranches");
+    }
+
     private boolean getShowOnFailureOnlyValueFromView(HttpServletRequest request) {
-        String parameter = request.getParameter("showOnFailureOnly");
+        return getBooleanParameter(request, "showOnFailureOnly");
+    }
+
+    private boolean getBooleanParameter(HttpServletRequest request, String parameterName) {
+        String parameter = request.getParameter(parameterName);
         if (parameter == null)
             return false;
         return Boolean.valueOf(parameter);
+    }
+
+    private int getMaxNumberOfFeatureBranchesFromView(HttpServletRequest request) {
+        return getIntParameter(request, "maxNumberOfFeatureBranches");
+    }
+
+    private int getMaxAgeInDaysOfFeatureBranchesFromView(HttpServletRequest request) {
+        return getIntParameter(request, "maxAgeInDaysOfFeatureBranches");
+    }
+
+    private int getIntParameter(HttpServletRequest request, String parameterName) {
+        String parameter = request.getParameter(parameterName);
+        if (parameter == null) {
+            return 0;
+        }
+        return Integer.parseInt(parameter);
     }
 
     private void addSuccessMessage(HttpServletRequest request) {

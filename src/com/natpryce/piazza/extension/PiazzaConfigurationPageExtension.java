@@ -57,8 +57,10 @@ public class PiazzaConfigurationPageExtension extends AdminPage {
 	@Override
 	public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
 		super.fillModel(model, request);
-		boolean showOnFailureOnly = piazzaConfiguration.isShowOnFailureOnly();
-		model.put("showOnFailureOnly", showOnFailureOnly);
+        model.put("showOnFailureOnly", piazzaConfiguration.isShowOnFailureOnly());
+        model.put("showFeatureBranches", piazzaConfiguration.isShowFeatureBranches());
+        model.put("maxNumberOfFeatureBranches", piazzaConfiguration.getMaxNumberOfFeatureBranchesToShow());
+        model.put("maxAgeInDaysOfFeatureBranches", piazzaConfiguration.getMaxAgeInDaysOfFeatureBranches());
         model.put("resourceRoot", this.piazza.resourcePath(""));
     }
 

@@ -18,21 +18,27 @@
  */
 
 var Piazza = {
-    save: function () {
-        BS.ajaxRequest($('piazzaForm').action, {
-            parameters: 'showOnFailureOnly='+ $('showOnFailureOnly').checked,
-            onComplete: function(transport) {
-                if (transport.responseXML) {
-                    BS.XMLResponse.processErrors(transport.responseXML, {
-                        onProfilerProblemError: function(elem) {
-                            alert(elem.firstChild.nodeValue);
+        save:function () {
+            BS.ajaxRequest($('piazzaForm').action, {
+                    parameters:'showOnFailureOnly=' + $('showOnFailureOnly').checked +
+                        '&showFeatureBranches=' + $('showFeatureBranches').checked +
+                        '&maxNumberOfFeatureBranches=' + $('maxNumberOfFeatureBranches').value +
+                        '&maxAgeInDaysOfFeatureBranches=' + $('maxAgeInDaysOfFeatureBranches').value,
+                    onComplete:function (transport) {
+                        if (transport.responseXML) {
+                            BS.XMLResponse.processErrors(transport.responseXML, {
+                                onProfilerProblemError:function (elem) {
+                                    alert(elem.firstChild.nodeValue);
+                                }
+                            });
                         }
-                    });
-                }
 
-                $('piazzaComponent').refresh();
-            }
-        });
-        return false;
+                        $('piazzaComponent').refresh();
+                    }
+                }
+            )
+            ;
+            return false;
+        }
     }
-};
+    ;

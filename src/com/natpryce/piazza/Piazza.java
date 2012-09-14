@@ -20,6 +20,8 @@ package com.natpryce.piazza;
 
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.auth.SecurityContext;
+import jetbrains.buildServer.users.SUser;
 import jetbrains.buildServer.users.UserModel;
 import jetbrains.buildServer.web.openapi.PlaceId;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
@@ -32,12 +34,17 @@ public class Piazza {
 
 	private final PluginDescriptor pluginDescriptor;
 	private final PiazzaUserAdapter piazzaUserAdapter;
-	private final PiazzaConfiguration piazzaConfiguration;
+    private SecurityContext securityContext;
+    private final PiazzaConfiguration piazzaConfiguration;
+    private final SUser guestUser;
 
-	public Piazza(SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager,
-				  PluginDescriptor pluginDescriptor, UserModel userManager, PiazzaConfiguration piazzaConfiguration) {
+    public Piazza(SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager,
+				  PluginDescriptor pluginDescriptor, UserModel userManager, SecurityContext securityContext, PiazzaConfiguration piazzaConfiguration) {
 		this.pluginDescriptor = pluginDescriptor;
-		this.piazzaConfiguration = piazzaConfiguration;
+        this.securityContext = securityContext;
+        guestUser = userManager.getGuestUser();
+
+        this.piazzaConfiguration = piazzaConfiguration;
 		this.piazzaUserAdapter = new PiazzaUserAdapter(server, userManager);
 
 		webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, this));
@@ -59,4 +66,16 @@ public class Piazza {
 	public boolean isShowOnFailureOnly() {
 		return piazzaConfiguration.isShowOnFailureOnly();
 	}
+
+    public PiazzaConfiguration getConfiguration() {
+        return this.piazzaConfiguration;
+    }
+
+    public SecurityContext getSecurityContext() {
+        return securityContext;
+    }
+
+    public SUser getGuestUser() {
+        return guestUser;
+    }
 }

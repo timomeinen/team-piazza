@@ -53,13 +53,13 @@ h3 {
     font-size: 20px;
 }
 
-.Content {
+.DefaultBranches {
     border: 1px solid #444444;
     background-color: #FFFFFF;
     padding: 8px;
 }
 
-body.Building .Content {
+.DefaultBranches.Building {
     background-color: #FFFF00;
 }
 
@@ -79,12 +79,14 @@ body.Building .Content {
     display: inline;
 }
 
-.Build.Success {
-    border-color: #42AA52;
-}
-
 .Build.Failure {
     border-color: #ff0000;
+    background-color: #E23B30;
+}
+
+.Build.Success {
+    border-color: #42AA52;
+    background-color: #A5DDAD;
 }
 
 .Portrait {
@@ -162,20 +164,20 @@ body.Building .Content {
     white-space: nowrap;
 }
 
-.ProgressBar .Success {
+.Activity.Success {
     background-color: #42aa6a;
 }
 
-.ProgressBar .Failure {
+.Activity.Failure {
     background-color: #E23B30;
 }
 
-.Builds .Build.Failure {
-    background-color: #E23B30;
+.ProgressBar.Success {
+    background-color: #42aa6a;
 }
 
-.Builds .Build.Success {
-    background-color: #A5DDAD;
+.ProgressBar.Failure {
+    background-color: #E23B30;
 }
 
 .Version {
@@ -213,3 +215,46 @@ body.Building .Content {
     height: 35px;
     display: inline-block;
 }
+
+.FeatureBranches {
+    border: 1px solid #444444;
+    background-color: #FFFFFF;
+    padding: 8px;
+}
+
+.FeatureBranches h2 {
+    margin: 0;
+}
+
+.FeatureBranches .Build {
+    padding: 4px;
+}
+
+.FeatureBranchBuilds {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+.FeatureBranchBuild {
+    position: relative;
+    display: table-cell;
+    border: 1px solid #444;
+    height: 30px;
+    overflow: hidden;
+}
+
+.FeatureBranchBuild .ProgressBar {
+    position: absolute;
+    height: 30px;
+    border: 0;
+}
+
+.FeatureBranchBuildTypeName {
+    position: absolute;
+    line-height: 30px;
+    margin-left: 4px
+}
+
+

@@ -45,7 +45,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <h2>${build.status}. Duration: <bs:printTime time="${build.durationSeconds}"/>.</h2>
 
-<div class="Content">
+<div class="DefaultBranches">
     <c:if test="${build.building}">
         <div class="ProgressBar">
             <div class="Activity ${build.runningBuildStatus}" style="width: ${build.completedPercent}%">

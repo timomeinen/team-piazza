@@ -2,11 +2,13 @@ package com.natpryce.piazza;
 
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import jetbrains.buildServer.users.SUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
@@ -26,11 +28,15 @@ public class ProjectMonitorViewStateTest {
 
     @Mock
     private SBuildType sBuildTypeMock;
-
+    @Mock
+    private SUser user;
+    @Mock
+    private PiazzaConfiguration configuration;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+
     }
 
     @Test
@@ -38,8 +44,9 @@ public class ProjectMonitorViewStateTest {
         // Issue #31
         when(sBuildTypeMock.isAllowExternalStatus()).thenReturn(true);
         when(projectMock.getBuildTypes()).thenReturn(Collections.singletonList(sBuildTypeMock));
-        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock,
-				true);
+        when(user.getOrderedBuildTypes(projectMock)).thenReturn(new ArrayList<SBuildType>());
+        when(configuration.isShowFeatureBranches()).thenReturn(false);
+        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock, configuration, user);
 
         assertNotNull(projectMonitorViewState);
     }

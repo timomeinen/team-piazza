@@ -23,6 +23,8 @@ import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import jetbrains.buildServer.serverSide.auth.AuthorityHolder;
+import jetbrains.buildServer.users.SUser;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,9 +73,11 @@ public class BuildMonitorController extends BaseController {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
 			return null;
 		}
-		return modelWithView("piazza-project-monitor.jsp")
+
+        SUser associatedUser = getAssociatedUser();
+        return modelWithView("piazza-project-monitor.jsp")
 				.addObject("project", new ProjectMonitorViewState(project, piazza.userGroup(),
-						piazza.isShowOnFailureOnly()));
+						piazza.getConfiguration(), associatedUser));
 	}
 
 	private ModelAndView modelWithView(String viewJSP) {
@@ -85,4 +89,16 @@ public class BuildMonitorController extends BaseController {
 	private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
 		return request.getParameterMap().containsKey(parameterName);
 	}
+
+    private SUser getAssociatedUser() {
+        AuthorityHolder authorityHolder = piazza.getSecurityContext().getAuthorityHolder();
+        SUser associatedUser = (SUser) authorityHolder.getAssociatedUser();
+        if (associatedUser == null) {
+            return piazza.getGuestUser();
+        } else {
+            return associatedUser;
+        }
+
+    }
+
 }

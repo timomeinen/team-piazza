@@ -40,19 +40,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     <meta http-equiv="refresh" content="${project.building ? 1 : 10}">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>${resourceRoot}piazza.css"/>
 </head>
-<body class="${project.combinedStatusClasses}">
+<body class="${project.status}">
 <h1>${project.projectName}</h1>
 
 <h2>${project.status}.</h2>
 
 
-<div class="Content">
+<div class="DefaultBranches ${project.buildingStatus}">
     <c:if test="${! empty project.committers}">
         <div class="Portraits">
             <%--@elvariable id="committer" type="com.natpryce.piazza.PiazzaUser"--%>
             <c:forEach var="committer" items="${project.committers}">
                 <div class="Portrait">
                     <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
+
                     <p class="Name">${committer.name}</p>
                 </div>
             </c:forEach>
@@ -70,7 +71,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
         <%--@elvariable id="build" type="com.natpryce.piazza.BuildTypeMonitorViewState"--%>
         <c:forEach var="build" items="${project.builds}">
-            <div class="Build ${build.combinedStatusClasses}">
+            <div class="Build ${build.status}">
                 <h3 class="${build.investigationInfo.state}">
                     ${build.name} #${build.buildNumber}
                 </h3>
@@ -91,10 +92,39 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             </div>
         </c:forEach>
     </div>
-
-    <div class="Version">
-        Team Piazza version ${version}
-    </div>
+    <p></p>
 </div>
+<div><p></p></div>
+
+<c:if test="<%=!project.getFeatureBranchesView().getFeatureBranches().isEmpty()%>">
+    <div class="FeatureBranches">
+        <h2>Feature Branches</h2>
+
+        <%--@elvariable id="featureBranch" type="com.natpryce.piazza.featureBranches.FeatureBranchMonitorViewState"--%>
+        <c:forEach var="featureBranch" items="${project.featureBranchesView.featureBranches}">
+            <div>
+                <div class="Build ${featureBranch.combinedBuildStatus}">
+                    <h3 class="FeatureBranchName">${featureBranch.name}</h3>
+
+                    <div class="FeatureBranchBuilds">
+                        <%--@elvariable id="buildType" type="com.natpryce.piazza.featureBranches.BuildTypeWithLatestBuildMonitorViewState"--%>
+                        <c:forEach var="buildType" items="${featureBranch.buildTypes}">
+                            <div class="FeatureBranchBuild">
+                                <div class="ProgressBar ${buildType.runningBuildStatus}"
+                                     style="width: ${buildType.completedPercent}%;"></div>
+                                <div class="FeatureBranchBuildTypeName">${buildType.name}</div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</c:if>
+
+<div class="Version">
+    Team Piazza version ${version}
+</div>
+
 </body>
 </html>

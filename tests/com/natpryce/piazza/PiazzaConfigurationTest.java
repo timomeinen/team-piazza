@@ -47,108 +47,115 @@ import static org.powermock.api.support.membermodification.MemberMatcher.method;
 @PrepareForTest(Loggers.class)
 public class PiazzaConfigurationTest {
 
-	private PiazzaConfiguration piazzaConfiguration;
+    private PiazzaConfiguration piazzaConfiguration;
 
     @Before
-	public void setUp() {
+    public void setUp() {
         ServerPaths serverPaths = mock(ServerPaths.class);
         when(serverPaths.getConfigDir()).thenReturn("tests/resources");
         piazzaConfiguration = new PiazzaConfiguration(serverPaths);
-	}
+    }
 
-	@Test
-	public void testRootXml() {
-		Element element = piazzaConfiguration.createConfigAsXml();
+    @Test
+    public void testRootXml() {
+        Element element = piazzaConfiguration.createConfigAsXml();
 
-		assertNotNull(element);
-		assertEquals("piazza", element.getName());
-	}
+        assertNotNull(element);
+        assertEquals("piazza", element.getName());
+    }
 
-	@Test
-	public void testAttributeShowOnFailureOnly() {
-		assertAttributeForShowOnFailureOnly(true);
-		assertAttributeForShowOnFailureOnly(false);
-	}
+    @Test
+    public void testAttributeShowOnFailureOnly() {
+        assertAttributeForShowOnFailureOnly(true);
+        assertAttributeForShowOnFailureOnly(false);
+    }
 
-	private void assertAttributeForShowOnFailureOnly(Boolean showOnFailureOnly) {
-		piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
+    private void assertAttributeForShowOnFailureOnly(Boolean showOnFailureOnly) {
+        piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
 
-		Element element = piazzaConfiguration.createConfigAsXml();
-		Attribute showOnFailureOnlyAttribute = element.getAttribute("showOnFailureOnly");
+        Element element = piazzaConfiguration.createConfigAsXml();
+        Attribute showOnFailureOnlyAttribute = element.getAttribute("showOnFailureOnly");
 
-		assertNotNull(showOnFailureOnlyAttribute);
-		assertEquals(showOnFailureOnly.toString(), showOnFailureOnlyAttribute.getValue());
-		assertEquals(showOnFailureOnly, piazzaConfiguration.isShowOnFailureOnly());
-	}
+        assertNotNull(showOnFailureOnlyAttribute);
+        assertEquals(showOnFailureOnly.toString(), showOnFailureOnlyAttribute.getValue());
+        assertEquals(showOnFailureOnly, piazzaConfiguration.isShowOnFailureOnly());
+    }
 
-	@Test
-	public void testErrorHandling() throws Exception {
-		// given an element
-		Element element = new Element("piazza");
+    @Test
+    public void testErrorHandling() throws Exception {
+        // given an element
+        Element element = new Element("piazza");
 
-		// given the writer is not able to write and throws an IO Exception
-		Writer mockWriter = mock(Writer.class);
-		IOException toBeThrown = new IOException("test exception");
-		doThrow(toBeThrown).when(mockWriter).write("<");
+        // given the writer is not able to write and throws an IO Exception
+        Writer mockWriter = mock(Writer.class);
+        IOException toBeThrown = new IOException("test exception");
+        doThrow(toBeThrown).when(mockWriter).write("<");
 
-		// given the TeamCity Log mechanism catches the Exception
-		Logger mockLogger = mock(Logger.class);
-		MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
+        // given the TeamCity Log mechanism catches the Exception
+        Logger mockLogger = mock(Logger.class);
+        MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
 
-		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
-		doReturn(element).when(spyPiazzaConfiguration).createConfigAsXml();
-		doReturn(mockWriter).when(spyPiazzaConfiguration).createConfigFileWriter();
+        PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
+        doReturn(element).when(spyPiazzaConfiguration).createConfigAsXml();
+        doReturn(mockWriter).when(spyPiazzaConfiguration).createConfigFileWriter();
 
-		// when trying to output
-		spyPiazzaConfiguration.save();
+        // when trying to output
+        try {
+            spyPiazzaConfiguration.save();
+            fail("exception expected");
+        } catch (PiazzaConfiguration.SaveConfigFailedException e) {
+            assertEquals("java.io.IOException: test exception", e.getMessage());
+        }
+        // then a log message shall be written
+        verify(mockLogger).error("[PIAZZA] Unable to save xml configuration", toBeThrown);
+        // then the writer shall be closed
+        verify(mockWriter).close();
+    }
 
-		// then a log message shall be written
-		verify(mockLogger).error("[PIAZZA] Unable to save xml configuration", toBeThrown);
-		// then the writer shall be closed
-		verify(mockWriter).close();
-	}
+    @Test
+    public void testWriteElementTo() throws IOException {
+        Element element = new Element("piazza");
+        element.setAttribute("testAttribute", "testValue");
+        StringWriter stringWriter = new StringWriter();
 
-	@Test
-	public void testWriteElementTo() throws IOException {
-		Element element = new Element("piazza");
-		element.setAttribute("testAttribute", "testValue");
-		StringWriter stringWriter = new StringWriter();
+        piazzaConfiguration.writeElementTo(element, stringWriter);
 
-		piazzaConfiguration.writeElementTo(element, stringWriter);
+        assertEquals("<piazza testAttribute=\"testValue\" />", stringWriter.toString());
+    }
 
-		assertEquals("<piazza testAttribute=\"testValue\" />", stringWriter.toString());
-	}
+    @Test
+    public void testConfigFile() throws IOException {
+        String teamcityConfigDir = "/teamcity-config-dir";
+        piazzaConfiguration.setTeamCityConfigDir(teamcityConfigDir);
 
-	@Test
-	public void testConfigFile() throws IOException {
-		String teamcityConfigDir = "/teamcity-config-dir";
-		piazzaConfiguration.setTeamCityConfigDir(teamcityConfigDir);
+        File file = piazzaConfiguration.createConfigFile();
 
-		File file = piazzaConfiguration.createConfigFile();
+        assertNotNull(file);
+        String expectedPath = String.format("%s/%s", teamcityConfigDir, PiazzaConfiguration.CONFIG_FILE_NAME);
+        assertEquals(expectedPath, file.getAbsolutePath());
+    }
 
-		assertNotNull(file);
-		String expectedPath = String.format("%s/%s", teamcityConfigDir, PiazzaConfiguration.CONFIG_FILE_NAME);
-		assertEquals(expectedPath, file.getAbsolutePath());
-	}
+    @Test
+    public void testSaveAggregatesCreationMethods() throws IOException {
+        PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
+        doReturn(new StringWriter()).when(spyPiazzaConfiguration).createConfigFileWriter();
+        doNothing().when(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
 
-	@Test
-	public void testSaveAggregatesCreationMethods() throws IOException {
-		PiazzaConfiguration spyPiazzaConfiguration = spy(piazzaConfiguration);
-		doReturn(new StringWriter()).when(spyPiazzaConfiguration).createConfigFileWriter();
-		doNothing().when(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
+        spyPiazzaConfiguration.save();
 
-		spyPiazzaConfiguration.save();
-
-		verify(spyPiazzaConfiguration).createConfigAsXml();
-		verify(spyPiazzaConfiguration).createConfigFileWriter();
-		verify(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
-	}
+        verify(spyPiazzaConfiguration).createConfigAsXml();
+        verify(spyPiazzaConfiguration).createConfigFileWriter();
+        verify(spyPiazzaConfiguration).writeElementTo(any(Element.class), any(Writer.class));
+    }
 
 
     @Test
     public void testReadElement() {
         piazzaConfiguration.loadConfigurationFromXmlFile();
         assertTrue(piazzaConfiguration.isShowOnFailureOnly());
+        assertTrue(piazzaConfiguration.isShowFeatureBranches());
+        assertEquals(5, piazzaConfiguration.getMaxAgeInDaysOfFeatureBranches());
+        assertEquals(3, piazzaConfiguration.getMaxNumberOfFeatureBranchesToShow());
     }
 
     @Test

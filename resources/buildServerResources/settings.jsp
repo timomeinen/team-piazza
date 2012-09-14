@@ -18,6 +18,7 @@
   --%>
 <%@ include file="/include.jsp" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
+<%--<%@ taglib prefix="forms" uri="http://www.springframework.org/tags/form" %>--%>
 <jsp:useBean id="resourceRoot" type="java.lang.String" scope="request"/>
 
 <bs:linkScript>
@@ -38,6 +39,23 @@
                     <p>
                         <forms:checkbox name="showOnFailureOnly" checked="${showOnFailureOnly}"/>
                         <label for="showOnFailureOnly">Show user pictures only on build failure</label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Feature Branches</th>
+                <td>
+                    <p>
+                        <forms:checkbox name="showFeatureBranches" checked="${showFeatureBranches}"/>
+                        <label for="showFeatureBranches">Show feature branches in project view</label>
+                    </p>
+                    <p>
+                        <input type="text" id="maxAgeInDaysOfFeatureBranches" value="${maxAgeInDaysOfFeatureBranches}" accept="number" maxlength="3" size="3"/>
+                        <label for="maxAgeInDaysOfFeatureBranches">Max age in days of feature branches</label>
+                    </p>
+                    <p>
+                        <input type="text" id="maxNumberOfFeatureBranches" value="${maxNumberOfFeatureBranches}" accept="number" maxlength="3" size="3"/>
+                        <label for="maxNumberOfFeatureBranches">Max number of feature branches with recent activity to show</label>
                     </p>
                 </td>
             </tr>

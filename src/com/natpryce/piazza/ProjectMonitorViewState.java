@@ -19,8 +19,11 @@
 
 package com.natpryce.piazza;
 
+import com.natpryce.piazza.featureBranches.FeatureBranchMonitorViewState;
+import com.natpryce.piazza.featureBranches.FeatureBranchesMonitorViewState;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
+import jetbrains.buildServer.users.SUser;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,15 +40,16 @@ public class ProjectMonitorViewState {
     private final SProject project;
     private final Set<PiazzaUser> committers = new HashSet<PiazzaUser>();
     private final List<BuildTypeMonitorViewState> builds;
+    private final FeatureBranchesMonitorViewState featureBranchesView;
 
-    public ProjectMonitorViewState (SProject project, UserGroup userGroup, boolean showOnFailureOnly) {
+    public ProjectMonitorViewState(SProject project, UserGroup userGroup, PiazzaConfiguration configuration, SUser user) {
         this.project = project;
 
         builds = new ArrayList<BuildTypeMonitorViewState>();
         for (SBuildType buildType : project.getBuildTypes()) {
             if (hasAtLeastOneBuild(buildType)) {
                 if (buildType.isAllowExternalStatus()) {
-                    builds.add(new BuildTypeMonitorViewState(buildType, userGroup, showOnFailureOnly));
+                    builds.add(new BuildTypeMonitorViewState(buildType, userGroup, configuration.isShowOnFailureOnly()));
                 }
             }
         }
@@ -53,25 +57,23 @@ public class ProjectMonitorViewState {
         for (BuildTypeMonitorViewState build : builds) {
             committers.addAll(build.getCommitters());
         }
+
+        featureBranchesView = new FeatureBranchesMonitorViewState(project, configuration, user.getOrderedBuildTypes(project));
     }
 
-    private boolean hasAtLeastOneBuild (SBuildType buildType) {
+    private boolean hasAtLeastOneBuild(SBuildType buildType) {
         return buildType.getLastChangesStartedBuild() != null;
     }
 
-    public String getProjectName () {
+    public String getProjectName() {
         return project.getName();
     }
 
-    public String getCombinedStatusClasses () {
-        return status().toStringReflectingCurrentlyBuilding(isBuilding());
-    }
-
-    public String getStatus () {
+    public String getStatus() {
         return status().toString();
     }
 
-    public BuildStatus status () {
+    public BuildStatus status() {
         if (builds.isEmpty()) {
             return BuildStatus.UNKNOWN;
         } else {
@@ -83,7 +85,18 @@ public class ProjectMonitorViewState {
         }
     }
 
-    public boolean isBuilding () {
+    public boolean isBuilding() {
+        if (isBuildingDefaultBranches()) return true;
+        for (FeatureBranchMonitorViewState featureBranch : getFeatureBranchesView().getFeatureBranches()) {
+            if (featureBranch.isBuilding()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isBuildingDefaultBranches() {
         for (BuildTypeMonitorViewState build : builds) {
             if (build.isBuilding()) {
                 return true;
@@ -92,11 +105,19 @@ public class ProjectMonitorViewState {
         return false;
     }
 
-    public List<BuildTypeMonitorViewState> getBuilds () {
+    public String getBuildingStatus() {
+        return isBuildingDefaultBranches() ? "Building" : "";
+    }
+
+    public List<BuildTypeMonitorViewState> getBuilds() {
         return builds;
     }
 
-    public Set<PiazzaUser> getCommitters () {
+    public Set<PiazzaUser> getCommitters() {
         return committers;
+    }
+
+    public FeatureBranchesMonitorViewState getFeatureBranchesView() {
+        return featureBranchesView;
     }
 }
