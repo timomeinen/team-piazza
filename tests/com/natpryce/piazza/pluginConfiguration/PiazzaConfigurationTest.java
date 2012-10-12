@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.natpryce.piazza;
+package com.natpryce.piazza.pluginConfiguration;
 
 import com.intellij.openapi.diagnostic.Logger;
 import jetbrains.buildServer.log.Loggers;
@@ -153,9 +153,6 @@ public class PiazzaConfigurationTest {
     public void testReadElement() {
         piazzaConfiguration.loadConfigurationFromXmlFile();
         assertTrue(piazzaConfiguration.isShowOnFailureOnly());
-        assertTrue(piazzaConfiguration.isShowFeatureBranches());
-        assertEquals(5, piazzaConfiguration.getMaxAgeInDaysOfFeatureBranches());
-        assertEquals(3, piazzaConfiguration.getMaxNumberOfFeatureBranchesToShow());
     }
 
     @Test

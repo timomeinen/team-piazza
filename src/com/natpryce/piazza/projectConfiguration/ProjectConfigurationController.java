@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Nat Pryce, Timo Meinen.
+ * Copyright (c) 2012 Nat Pryce, Timo Meinen, Frank Bregulla.
  *
  * This file is part of Team Piazza.
  *
@@ -16,13 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.natpryce.piazza.controller;
+package com.natpryce.piazza.projectConfiguration;
 
-import com.natpryce.piazza.PiazzaConfiguration;
+import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
 import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.log.Loggers;
+import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
+import jetbrains.buildServer.serverSide.SProject;
+import jetbrains.buildServer.serverSide.settings.ProjectSettingsManager;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +35,26 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author tmeinen, fbregulla
  */
-public class ConfigurationController extends BaseController {
-    private final PiazzaConfiguration piazzaConfiguration;
+public class ProjectConfigurationController extends BaseController {
 
-    public ConfigurationController(SBuildServer server, WebControllerManager manager, PiazzaConfiguration piazzaConfiguration) {
+    private ProjectSettingsManager projectSettingsManager;
+    private ProjectManager projectManager;
+
+    public ProjectConfigurationController(SBuildServer server, WebControllerManager manager, @NotNull ProjectSettingsManager projectSettingsManager, @NotNull ProjectManager projectManager) {
         super(server);
-        manager.registerController("/configurePiazza.html", this);
-        this.piazzaConfiguration = piazzaConfiguration;
+        this.projectSettingsManager = projectSettingsManager;
+        this.projectManager = projectManager;
+        manager.registerController("/configurePiazzaProject.html", this);
     }
 
     @Override
     protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        this.piazzaConfiguration.setShowOnFailureOnly(getShowOnFailureOnlyValueFromView(request));
-        this.piazzaConfiguration.setShowFeatureBranches(getShowFeatureBranchesValueFromView(request));
-        this.piazzaConfiguration.setMaxNumberOfFeatureBranchesToShow(getMaxNumberOfFeatureBranchesFromView(request));
-        this.piazzaConfiguration.setMaxAgeInDaysOfFeatureBranches(getMaxAgeInDaysOfFeatureBranchesFromView(request));
+        String projectId = getProjectId(request);
+        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(projectId, PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
+
+        projectSettings.setShowFeatureBranches(getShowFeatureBranchesValueFromView(request));
+        projectSettings.setMaxNumberOfFeatureBranchesToShow(getMaxNumberOfFeatureBranchesFromView(request));
+        projectSettings.setMaxAgeInDaysOfFeatureBranches(getMaxAgeInDaysOfFeatureBranchesFromView(request));
 
         updateConfiguration(request);
         return null;
@@ -53,7 +62,8 @@ public class ConfigurationController extends BaseController {
 
     private void updateConfiguration(HttpServletRequest request) {
         try {
-            this.piazzaConfiguration.save();
+            SProject project = this.projectManager.findProjectById(getProjectId(request));
+            project.persist();
             addSuccessMessage(request);
         } catch (PiazzaConfiguration.SaveConfigFailedException e) {
             Loggers.SERVER.error(e);
@@ -61,12 +71,12 @@ public class ConfigurationController extends BaseController {
         }
     }
 
-    private boolean getShowFeatureBranchesValueFromView(HttpServletRequest request) {
-        return getBooleanParameter(request, "showFeatureBranches");
+    private String getProjectId(HttpServletRequest request) {
+        return request.getParameter("projectId");
     }
 
-    private boolean getShowOnFailureOnlyValueFromView(HttpServletRequest request) {
-        return getBooleanParameter(request, "showOnFailureOnly");
+    private boolean getShowFeatureBranchesValueFromView(HttpServletRequest request) {
+        return getBooleanParameter(request, "showFeatureBranches");
     }
 
     private boolean getBooleanParameter(HttpServletRequest request, String parameterName) {

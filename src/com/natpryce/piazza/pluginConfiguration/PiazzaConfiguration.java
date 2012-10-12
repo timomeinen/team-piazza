@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.natpryce.piazza;
+package com.natpryce.piazza.pluginConfiguration;
 
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.ServerPaths;
@@ -37,17 +37,11 @@ public class PiazzaConfiguration {
 
     static final String XML_ROOT_NAME = "piazza";
     private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
-    private static final String XML_ATTRIBUTE_NAME_SHOW_FEATURE_BRANCHES = "showFeatureBranches";
-    private static final String XML_ATTRIBUTE_NAME_MAX_NUMBER_OF_FEATURE_BRANCHES = "maxNumberOfFeatureBranches";
-    private static final String XML_ATTRIBUTE_NAME_MAX_AGE_IN_DAYS_OF_FEATURE_BRANCHES = "maxAgeInDaysOfFeatureBranches";
 
     static final String CONFIG_FILE_NAME = "piazza.xml";
     String configFileName = CONFIG_FILE_NAME;
     private boolean showOnFailureOnly;
-    private boolean showFeatureBranches;
-    private int maxNumberOfFeatureBranchesToShow;
     private String teamCityConfigDir;
-    private int maxAgeInDaysOfFeatureBranches;
 
     public PiazzaConfiguration(@NotNull ServerPaths serverPaths) {
         this.teamCityConfigDir = serverPaths.getConfigDir();
@@ -66,9 +60,6 @@ public class PiazzaConfiguration {
     Element createConfigAsXml() {
         Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
         piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
-        piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_FEATURE_BRANCHES, String.valueOf(showFeatureBranches));
-        piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_MAX_NUMBER_OF_FEATURE_BRANCHES, String.valueOf(maxNumberOfFeatureBranchesToShow));
-        piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_MAX_AGE_IN_DAYS_OF_FEATURE_BRANCHES, String.valueOf(maxAgeInDaysOfFeatureBranches));
         return piazzaConfigRoot;
     }
 
@@ -114,9 +105,6 @@ public class PiazzaConfiguration {
 
     private void parseConfigFromXml(Element rootElement) {
         this.showOnFailureOnly = Boolean.parseBoolean(rootElement.getAttributeValue(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(false)));
-        this.showFeatureBranches = Boolean.parseBoolean(rootElement.getAttributeValue(XML_ATTRIBUTE_NAME_SHOW_FEATURE_BRANCHES, String.valueOf(false)));
-        this.maxNumberOfFeatureBranchesToShow = Integer.parseInt(rootElement.getAttributeValue(XML_ATTRIBUTE_NAME_MAX_NUMBER_OF_FEATURE_BRANCHES, "0"));
-        this.maxAgeInDaysOfFeatureBranches = Integer.parseInt(rootElement.getAttributeValue(XML_ATTRIBUTE_NAME_MAX_AGE_IN_DAYS_OF_FEATURE_BRANCHES, "5"));
     }
 
     public boolean isShowOnFailureOnly() {
@@ -127,32 +115,8 @@ public class PiazzaConfiguration {
         this.showOnFailureOnly = showOnFailureOnly;
     }
 
-    public boolean isShowFeatureBranches() {
-        return showFeatureBranches;
-    }
-
-    public void setShowFeatureBranches(boolean showFeatureBranches) {
-        this.showFeatureBranches = showFeatureBranches;
-    }
-
-    public int getMaxNumberOfFeatureBranchesToShow() {
-        return maxNumberOfFeatureBranchesToShow;
-    }
-
-    public void setMaxNumberOfFeatureBranchesToShow(int maxNumberOfFeatureBranchesToShow) {
-        this.maxNumberOfFeatureBranchesToShow = maxNumberOfFeatureBranchesToShow;
-    }
-
     public void setTeamCityConfigDir(@NotNull String teamCityConfigDir) {
         this.teamCityConfigDir = teamCityConfigDir;
-    }
-
-    public void setMaxAgeInDaysOfFeatureBranches(int maxAgeInDaysOfFeatureBranches) {
-        this.maxAgeInDaysOfFeatureBranches = maxAgeInDaysOfFeatureBranches;
-    }
-
-    public int getMaxAgeInDaysOfFeatureBranches() {
-        return maxAgeInDaysOfFeatureBranches;
     }
 
     public class SaveConfigFailedException extends RuntimeException {

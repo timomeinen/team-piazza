@@ -20,8 +20,27 @@
 var Piazza = {
         save:function () {
             BS.ajaxRequest($('piazzaForm').action, {
-                    parameters:'showOnFailureOnly=' + $('showOnFailureOnly').checked +
-                        '&showFeatureBranches=' + $('showFeatureBranches').checked +
+                    parameters:'showOnFailureOnly=' + $('showOnFailureOnly').checked,
+                    onComplete:function (transport) {
+                        if (transport.responseXML) {
+                            BS.XMLResponse.processErrors(transport.responseXML, {
+                                onProfilerProblemError:function (elem) {
+                                    alert(elem.firstChild.nodeValue);
+                                }
+                            });
+                        }
+
+                        $('piazzaComponent').refresh();
+                    }
+                }
+            )
+            ;
+            return false;
+        },
+
+        saveProjectSettings:function () {
+            BS.ajaxRequest($('piazzaProjectForm').action, {
+                    parameters:'showFeatureBranches=' + $('showFeatureBranches').checked +
                         '&maxNumberOfFeatureBranches=' + $('maxNumberOfFeatureBranches').value +
                         '&maxAgeInDaysOfFeatureBranches=' + $('maxAgeInDaysOfFeatureBranches').value,
                     onComplete:function (transport) {
@@ -33,7 +52,7 @@ var Piazza = {
                             });
                         }
 
-                        $('piazzaComponent').refresh();
+                        $('piazzaProjectComponent').refresh();
                     }
                 }
             )

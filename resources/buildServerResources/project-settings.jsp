@@ -25,20 +25,28 @@
     ${resourceRoot}js/piazza.js
 </bs:linkScript>
 
-<c:url var="actionUrl" value="/configurePiazza.html"/>
-<bs:refreshable containerId="piazzaComponent" pageUrl="${pageUrl}">
+<c:url var="actionUrl" value="/configurePiazzaProject.html?projectId=${projectId}"/>
+<bs:refreshable containerId="piazzaProjectComponent" pageUrl="${pageUrl}">
     <h2>Piazza Build Monitor Settings</h2>
 
     <bs:messages key="piazzaMessage"/>
 
-    <form action="${actionUrl}" id="piazzaForm">
+    <form action="${actionUrl}" id="piazzaProjectForm">
         <table>
             <tr>
-                <th>Show Failure</th>
+                <th>Feature Branches</th>
                 <td>
                     <p>
-                        <forms:checkbox name="showOnFailureOnly" checked="${showOnFailureOnly}"/>
-                        <label for="showOnFailureOnly">Show user pictures only on build failure</label>
+                        <forms:checkbox name="showFeatureBranches" checked="${showFeatureBranches}"/>
+                        <label for="showFeatureBranches">Show feature branches in project view</label>
+                    </p>
+                    <p>
+                        <input type="text" id="maxAgeInDaysOfFeatureBranches" value="${maxAgeInDaysOfFeatureBranches}" accept="number" maxlength="3" size="3"/>
+                        <label for="maxAgeInDaysOfFeatureBranches">Max age in days of feature branches</label>
+                    </p>
+                    <p>
+                        <input type="text" id="maxNumberOfFeatureBranches" value="${maxNumberOfFeatureBranches}" accept="number" maxlength="3" size="3"/>
+                        <label for="maxNumberOfFeatureBranches">Max number of feature branches with recent activity to show</label>
                     </p>
                 </td>
             </tr>
@@ -46,7 +54,7 @@
                 <th>Save Settings:</th>
                 <td>
                     <div>
-                        <input type="button" id="piazzaSaveButton" onclick="$('piazzaSaveButton').disabled='true';  BS.Util.show($('piazzaSaveProgress')); return Piazza.save();" value="Save"/>
+                        <input type="button" id="piazzaSaveButton" onclick="$('piazzaSaveButton').disabled='true';  BS.Util.show($('piazzaSaveProgress')); return Piazza.saveProjectSettings();" value="Save"/>
                         <forms:saving id="piazzaSaveProgress" style="float:none"/>
                     </div>
                 </td>

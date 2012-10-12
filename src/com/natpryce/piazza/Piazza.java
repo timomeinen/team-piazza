@@ -18,9 +18,11 @@
  */
 package com.natpryce.piazza;
 
+import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.auth.SecurityContext;
+import jetbrains.buildServer.serverSide.settings.ProjectSettingsManager;
 import jetbrains.buildServer.users.SUser;
 import jetbrains.buildServer.users.UserModel;
 import jetbrains.buildServer.web.openapi.PlaceId;
@@ -38,7 +40,7 @@ public class Piazza {
     private final PiazzaConfiguration piazzaConfiguration;
     private final SUser guestUser;
 
-    public Piazza(SBuildServer server, ProjectManager projectManager, WebControllerManager webControllerManager,
+    public Piazza(SBuildServer server, ProjectManager projectManager, ProjectSettingsManager projectSettingsManager, WebControllerManager webControllerManager,
 				  PluginDescriptor pluginDescriptor, UserModel userManager, SecurityContext securityContext, PiazzaConfiguration piazzaConfiguration) {
 		this.pluginDescriptor = pluginDescriptor;
         this.securityContext = securityContext;
@@ -47,7 +49,7 @@ public class Piazza {
         this.piazzaConfiguration = piazzaConfiguration;
 		this.piazzaUserAdapter = new PiazzaUserAdapter(server, userManager);
 
-		webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, this));
+		webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, projectSettingsManager, this));
 		webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));
 	}
 

@@ -16,10 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.natpryce.piazza.extension;
+package com.natpryce.piazza.pluginConfiguration;
 
 import com.natpryce.piazza.Piazza;
-import com.natpryce.piazza.PiazzaConfiguration;
 import jetbrains.buildServer.controllers.admin.AdminPage;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
@@ -58,9 +57,6 @@ public class PiazzaConfigurationPageExtension extends AdminPage {
 	public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
 		super.fillModel(model, request);
         model.put("showOnFailureOnly", piazzaConfiguration.isShowOnFailureOnly());
-        model.put("showFeatureBranches", piazzaConfiguration.isShowFeatureBranches());
-        model.put("maxNumberOfFeatureBranches", piazzaConfiguration.getMaxNumberOfFeatureBranchesToShow());
-        model.put("maxAgeInDaysOfFeatureBranches", piazzaConfiguration.getMaxAgeInDaysOfFeatureBranches());
         model.put("resourceRoot", this.piazza.resourcePath(""));
     }
 

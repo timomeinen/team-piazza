@@ -18,12 +18,14 @@
  */
 package com.natpryce.piazza;
 
+import com.natpryce.piazza.projectConfiguration.PiazzaProjectSettings;
 import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 import jetbrains.buildServer.serverSide.auth.AuthorityHolder;
+import jetbrains.buildServer.serverSide.settings.ProjectSettingsManager;
 import jetbrains.buildServer.users.SUser;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,62 +35,65 @@ import java.io.IOException;
 
 public class BuildMonitorController extends BaseController {
 
-	public static final String BUILD_TYPE_ID = "buildTypeId";
-	public static final String PROJECT_ID = "projectId";
+    public static final String BUILD_TYPE_ID = "buildTypeId";
+    public static final String PROJECT_ID = "projectId";
+    private static final String SHOW_FEATURE_BRANCH_BUILDS_ONLY = "featureBranchBuildsOnly";
 
-	private final ProjectManager projectManager;
-	private final Piazza piazza;
+    private final ProjectManager projectManager;
+    private ProjectSettingsManager projectSettingsManager;
+    private final Piazza piazza;
 
-	public BuildMonitorController(SBuildServer server, ProjectManager projectManager, Piazza piazza) {
-		super(server);
-		this.projectManager = projectManager;
-		this.piazza = piazza;
-	}
+    public BuildMonitorController(SBuildServer server, ProjectManager projectManager, ProjectSettingsManager projectSettingsManager, Piazza piazza) {
+        super(server);
+        this.projectManager = projectManager;
+        this.projectSettingsManager = projectSettingsManager;
+        this.piazza = piazza;
+    }
 
-	protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (requestHasParameter(request, BUILD_TYPE_ID)) {
-			return showBuildType(request.getParameter(BUILD_TYPE_ID), response);
-		} else if (requestHasParameter(request, PROJECT_ID)) {
-			return showProject(request.getParameter(PROJECT_ID), response);
-		} else {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "no build type id specified");
-			return null;
-		}
-	}
+    protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (requestHasParameter(request, BUILD_TYPE_ID)) {
+            return showBuildType(request.getParameter(BUILD_TYPE_ID), response);
+        } else if (requestHasParameter(request, PROJECT_ID)) {
+            return showProject(request.getParameter(PROJECT_ID), Boolean.parseBoolean(request.getParameter(SHOW_FEATURE_BRANCH_BUILDS_ONLY)), response);
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "no build type id specified");
+            return null;
+        }
+    }
 
-	private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
-		SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
-		if (buildType == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "no build type with id " + buildTypeId);
-			return null;
-		}
-		return modelWithView("piazza-build-type-monitor.jsp")
-				.addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup(),
-						piazza.isShowOnFailureOnly()));
-	}
+    private ModelAndView showBuildType(String buildTypeId, HttpServletResponse response) throws IOException {
+        SBuildType buildType = projectManager.findBuildTypeById(buildTypeId);
+        if (buildType == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "no build type with id " + buildTypeId);
+            return null;
+        }
+        return modelWithView("piazza-build-type-monitor.jsp").addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup(), piazza.isShowOnFailureOnly()));
+    }
 
-	private ModelAndView showProject(String projectId, HttpServletResponse response) throws IOException {
-		SProject project = projectManager.findProjectById(projectId);
-		if (project == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
-			return null;
-		}
+    private ModelAndView showProject(String projectId, boolean showFeatureBranchBuildsOnly, HttpServletResponse response) throws IOException {
+        SProject project = projectManager.findProjectById(projectId);
+        if (project == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "no project with id " + projectId);
+            return null;
+        }
+
+        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(projectId, PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
 
         SUser associatedUser = getAssociatedUser();
-        return modelWithView("piazza-project-monitor.jsp")
-				.addObject("project", new ProjectMonitorViewState(project, piazza.userGroup(),
-						piazza.getConfiguration(), associatedUser));
-	}
+        String view = showFeatureBranchBuildsOnly ? "piazza-project-monitor-feature-branches.jsp" : "piazza-project-monitor.jsp";
 
-	private ModelAndView modelWithView(String viewJSP) {
-		return new ModelAndView(piazza.resourcePath(viewJSP))
-				.addObject("version", piazza.version())
-				.addObject("resourceRoot", piazza.resourcePath(""));
-	}
+        return modelWithView(view).addObject("project", new ProjectMonitorViewState(project, piazza.userGroup(), piazza.getConfiguration(), projectSettings, associatedUser));
+    }
 
-	private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
-		return request.getParameterMap().containsKey(parameterName);
-	}
+    private ModelAndView modelWithView(String viewJSP) {
+        return new ModelAndView(piazza.resourcePath(viewJSP))
+                .addObject("version", piazza.version())
+                .addObject("resourceRoot", piazza.resourcePath(""));
+    }
+
+    private boolean requestHasParameter(HttpServletRequest request, String parameterName) {
+        return request.getParameterMap().containsKey(parameterName);
+    }
 
     private SUser getAssociatedUser() {
         AuthorityHolder authorityHolder = piazza.getSecurityContext().getAuthorityHolder();

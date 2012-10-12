@@ -19,8 +19,9 @@
 
 package com.natpryce.piazza;
 
-import com.natpryce.piazza.featureBranches.FeatureBranchMonitorViewState;
 import com.natpryce.piazza.featureBranches.FeatureBranchesMonitorViewState;
+import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
+import com.natpryce.piazza.projectConfiguration.PiazzaProjectSettings;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 import jetbrains.buildServer.users.SUser;
@@ -38,12 +39,14 @@ import static com.natpryce.piazza.BuildStatus.SUCCESS;
 public class ProjectMonitorViewState {
 
     private final SProject project;
+    private PiazzaProjectSettings projectSettings;
     private final Set<PiazzaUser> committers = new HashSet<PiazzaUser>();
     private final List<BuildTypeMonitorViewState> builds;
     private final FeatureBranchesMonitorViewState featureBranchesView;
 
-    public ProjectMonitorViewState(SProject project, UserGroup userGroup, PiazzaConfiguration configuration, SUser user) {
+    public ProjectMonitorViewState(SProject project, UserGroup userGroup, PiazzaConfiguration configuration, PiazzaProjectSettings projectSettings, SUser user) {
         this.project = project;
+        this.projectSettings = projectSettings;
 
         builds = new ArrayList<BuildTypeMonitorViewState>();
         for (SBuildType buildType : project.getBuildTypes()) {
@@ -58,7 +61,7 @@ public class ProjectMonitorViewState {
             committers.addAll(build.getCommitters());
         }
 
-        featureBranchesView = new FeatureBranchesMonitorViewState(project, configuration, user.getOrderedBuildTypes(project));
+        featureBranchesView = new FeatureBranchesMonitorViewState(project, projectSettings, user.getOrderedBuildTypes(project));
     }
 
     private boolean hasAtLeastOneBuild(SBuildType buildType) {
@@ -86,14 +89,7 @@ public class ProjectMonitorViewState {
     }
 
     public boolean isBuilding() {
-        if (isBuildingDefaultBranches()) return true;
-        for (FeatureBranchMonitorViewState featureBranch : getFeatureBranchesView().getFeatureBranches()) {
-            if (featureBranch.isBuilding()) {
-                return true;
-            }
-        }
-
-        return false;
+        return isBuildingDefaultBranches() || (projectSettings.isShowFeatureBranches() && getFeatureBranchesView().isBuilding());
     }
 
     private boolean isBuildingDefaultBranches() {

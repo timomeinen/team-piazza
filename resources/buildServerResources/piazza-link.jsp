@@ -17,10 +17,12 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 
-<jsp:useBean id="piazzaHref"
-			 type="java.lang.String"
-			 scope="request"/>
+<jsp:useBean id="piazzaHref" type="java.lang.String" scope="request"/>
+<jsp:useBean id="showFeatureBranchBuildLink" scope="request" type="java.lang.Boolean"/>
 
 <div>
-    <a href="${piazzaHref}" title="Team Piazza Build Monitor">Team Piazza Build Monitor</a>
+    <a href="${piazzaHref}&featureBranchBuildsOnly=false" title="Team Piazza Build Monitor" style="margin-right: 20px">Team Piazza Build Monitor</a>
+    <c:if test="${showFeatureBranchBuildLink}">
+        <a href="${piazzaHref}&featureBranchBuildsOnly=true" title="Team Piazza Feature Branch Builds">Team Piazza Feature Branch Builds</a>
+    </c:if>
 </div>

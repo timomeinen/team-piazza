@@ -18,7 +18,7 @@
  */
 package com.natpryce.piazza.featureBranches;
 
-import com.natpryce.piazza.PiazzaConfiguration;
+import com.natpryce.piazza.projectConfiguration.PiazzaProjectSettings;
 import jetbrains.buildServer.serverSide.*;
 
 import java.util.*;
@@ -29,15 +29,13 @@ import java.util.*;
 public class FeatureBranchesMonitorViewState {
 
     private Map<Branch, FeatureBranchMonitorViewState> featureBranchMonitorViewState = new HashMap<Branch, FeatureBranchMonitorViewState>();
-    private PiazzaConfiguration configuration;
+    private PiazzaProjectSettings projectSettings;
     private List<SBuildType> orderedBuildTypes;
 
-    public FeatureBranchesMonitorViewState(SProject project, PiazzaConfiguration configuration, List<SBuildType> orderedBuildTypes) {
-        this.configuration = configuration;
+    public FeatureBranchesMonitorViewState(SProject project, PiazzaProjectSettings projectSettings, List<SBuildType> orderedBuildTypes) {
+        this.projectSettings = projectSettings;
         this.orderedBuildTypes = orderedBuildTypes;
-        if (configuration.isShowFeatureBranches()) {
-            assembleRecentFeatureBranchesWithBuildTypesAndLatestBuilds(project);
-        }
+        assembleRecentFeatureBranchesWithBuildTypesAndLatestBuilds(project);
     }
 
     private void assembleRecentFeatureBranchesWithBuildTypesAndLatestBuilds(SProject project) {
@@ -76,7 +74,7 @@ public class FeatureBranchesMonitorViewState {
     }
 
     private boolean isBuildTooOld(SBuild build) {
-        return (build.getStartDate().before(getTodayMinusNDays(configuration.getMaxAgeInDaysOfFeatureBranches())));
+        return (build.getStartDate().before(getTodayMinusNDays(projectSettings.getMaxAgeInDaysOfFeatureBranches())));
     }
 
     private boolean isNewBranch(Branch branch) {
@@ -86,7 +84,7 @@ public class FeatureBranchesMonitorViewState {
     public List<FeatureBranchMonitorViewState> getFeatureBranches() {
         ArrayList<FeatureBranchMonitorViewState> featureBranches = new ArrayList<FeatureBranchMonitorViewState>(featureBranchMonitorViewState.values());
         sortFeatureBranchesByStartDate(featureBranches);
-        return featureBranches.subList(0, Math.min(featureBranches.size(), configuration.getMaxNumberOfFeatureBranchesToShow()));
+        return featureBranches.subList(0, Math.min(featureBranches.size(), projectSettings.getMaxNumberOfFeatureBranchesToShow()));
     }
 
     private void sortFeatureBranchesByStartDate(ArrayList<FeatureBranchMonitorViewState> featureBranches) {
@@ -96,6 +94,19 @@ public class FeatureBranchesMonitorViewState {
                 return branch2.getLatestBuildDate().compareTo(branch1.getLatestBuildDate());
             }
         });
+    }
+
+    public boolean isShowFeatureBranches() {
+        return projectSettings.isShowFeatureBranches();
+    }
+
+    public boolean isBuilding() {
+        for (FeatureBranchMonitorViewState featureBranch : getFeatureBranches()) {
+            if (featureBranch.isBuilding()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Map<Branch, FeatureBranchMonitorViewState> getFeatureBranchMonitorViewState() {

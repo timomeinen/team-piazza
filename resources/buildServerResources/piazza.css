@@ -33,6 +33,10 @@ body.Failure {
     background-image: url("red-cross.png");
 }
 
+body.Neutral {
+    background-color: #a9aeb6;
+}
+
 h1 {
     margin: 0;
     margin-bottom: 16px;
@@ -256,5 +260,6 @@ h3 {
     line-height: 30px;
     margin-left: 4px
 }
+
 
 

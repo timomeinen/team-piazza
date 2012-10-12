@@ -1,5 +1,7 @@
 package com.natpryce.piazza;
 
+import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
+import com.natpryce.piazza.projectConfiguration.PiazzaProjectSettings;
 import jetbrains.buildServer.serverSide.SBuildType;
 import jetbrains.buildServer.serverSide.SProject;
 import jetbrains.buildServer.users.SUser;
@@ -32,6 +34,8 @@ public class ProjectMonitorViewStateTest {
     private SUser user;
     @Mock
     private PiazzaConfiguration configuration;
+    @Mock
+    private PiazzaProjectSettings projectSettings;
 
     @Before
     public void setUp() throws Exception {
@@ -45,8 +49,7 @@ public class ProjectMonitorViewStateTest {
         when(sBuildTypeMock.isAllowExternalStatus()).thenReturn(true);
         when(projectMock.getBuildTypes()).thenReturn(Collections.singletonList(sBuildTypeMock));
         when(user.getOrderedBuildTypes(projectMock)).thenReturn(new ArrayList<SBuildType>());
-        when(configuration.isShowFeatureBranches()).thenReturn(false);
-        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock, configuration, user);
+        ProjectMonitorViewState projectMonitorViewState = new ProjectMonitorViewState(projectMock, userGroupMock, configuration, projectSettings, user);
 
         assertNotNull(projectMonitorViewState);
     }

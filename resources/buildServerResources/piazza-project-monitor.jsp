@@ -21,17 +21,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="project"
-             type="com.natpryce.piazza.ProjectMonitorViewState"
-             scope="request"/>
+<jsp:useBean id="project" type="com.natpryce.piazza.ProjectMonitorViewState" scope="request"/>
 
-<jsp:useBean id="resourceRoot"
-             type="java.lang.String"
-             scope="request"/>
+<jsp:useBean id="resourceRoot" type="java.lang.String" scope="request"/>
 
-<jsp:useBean id="version"
-             type="java.lang.String"
-             scope="request"/>
+<jsp:useBean id="version" type="java.lang.String" scope="request"/>
 
 <html>
 <head>
@@ -44,7 +38,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <h1>${project.projectName}</h1>
 
 <h2>${project.status}.</h2>
-
 
 <div class="DefaultBranches ${project.buildingStatus}">
     <c:if test="${! empty project.committers}">
@@ -59,7 +52,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             </c:forEach>
         </div>
     </c:if>
-
 
     <div class="Builds">
         <c:if test="${empty project.builds}">
@@ -96,30 +88,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </div>
 <div><p></p></div>
 
-<c:if test="<%=!project.getFeatureBranchesView().getFeatureBranches().isEmpty()%>">
-    <div class="FeatureBranches">
-        <h2>Feature Branches</h2>
-
-        <%--@elvariable id="featureBranch" type="com.natpryce.piazza.featureBranches.FeatureBranchMonitorViewState"--%>
-        <c:forEach var="featureBranch" items="${project.featureBranchesView.featureBranches}">
-            <div>
-                <div class="Build ${featureBranch.combinedBuildStatus}">
-                    <h3 class="FeatureBranchName">${featureBranch.name}</h3>
-
-                    <div class="FeatureBranchBuilds">
-                        <%--@elvariable id="buildType" type="com.natpryce.piazza.featureBranches.BuildTypeWithLatestBuildMonitorViewState"--%>
-                        <c:forEach var="buildType" items="${featureBranch.buildTypes}">
-                            <div class="FeatureBranchBuild">
-                                <div class="ProgressBar ${buildType.runningBuildStatus}"
-                                     style="width: ${buildType.completedPercent}%;"></div>
-                                <div class="FeatureBranchBuildTypeName">${buildType.name}</div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
+<c:if test="${project.featureBranchesView.showFeatureBranches}">
+    <%@include file="piazza-feature-branches.jsp" %>
 </c:if>
 
 <div class="Version">
