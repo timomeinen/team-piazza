@@ -22,30 +22,42 @@ import java.util.regex.Pattern;
 
 public class Text {
 
-	public static final Pattern WORD_BOUNDARIES = Pattern.compile("\\W+");
+    public static final Pattern WORD_BOUNDARIES = Pattern.compile("\\s+|-");
 
-	public static String toTitleCase (String input) {
-		String[] words = WORD_BOUNDARIES.split(input);
+    public static String toTitleCase(String input) {
+        String[] words = WORD_BOUNDARIES.split(input);
 
-		StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder();
 
-		for (String word : words) {
-			if (result.length() > 0) {
-				result.append(" ");
-			}
-			result.append(Character.toTitleCase(word.charAt(0)));
-			result.append(word.substring(1));
-		}
+        for (String word : words) {
+            if (word.length() > 0) {
+                if (result.length() > 0) {
+                    result.append(" ");
+                }
 
-		return result.toString();
-	}
+                String firstLetter = firstLetterToTitleCase(word);
+                result.append(firstLetter);
+            }
+        }
 
-	public static String withoutExtension (String string) {
-		int end = string.lastIndexOf('.');
-		if (end == -1) {
-			return string;
-		} else {
-			return string.substring(0, end);
-		}
-	}
+        return result.toString();
+    }
+
+    private static String firstLetterToTitleCase(String word) {
+        for (int i=0; i<word.length(); i++) {
+            if (Character.isLetter(word.charAt(i))) {
+                return word.substring(0, i) + Character.toTitleCase(word.charAt(i)) + word.substring(i + 1, word.length());
+            }
+        }
+        return word;
+    }
+
+    public static String withoutExtension(String string) {
+        int end = string.lastIndexOf('.');
+        if (end == -1) {
+            return string;
+        } else {
+            return string.substring(0, end);
+        }
+    }
 }

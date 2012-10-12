@@ -31,6 +31,11 @@ public class TextTests {
         assertEquals("JMock2", Text.toTitleCase("jMock2"));
         assertEquals("More Cheese", Text.toTitleCase("more cheese"));
         assertEquals("Quick Build", Text.toTitleCase("quick-build"));
+        assertEquals("\"Q\"", Text.toTitleCase("\"q\""));
+        assertEquals("Q", Text.toTitleCase("q"));
+        assertEquals("123", Text.toTitleCase("123"));
+        assertEquals("\"Quick\" Build", Text.toTitleCase("\"quick\"-build"));
+        assertEquals("\" Quick \" B\"uild", Text.toTitleCase("\" quick \"-b\"uild"));
     }
 
     @Test
