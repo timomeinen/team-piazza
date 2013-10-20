@@ -46,4 +46,10 @@
         <module>build</module>
     </modules>
 
+    <scm>
+        <connection>scm:svn:http://team-piazza.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://team-piazza.googlecode.com/svn/trunk/</developerConnection>
+        <url>https://code.google.com/p/team-piazza/source/browse/</url>
+    </scm>
+
 </project>
