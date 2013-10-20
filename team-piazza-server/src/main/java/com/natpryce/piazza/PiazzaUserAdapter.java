@@ -18,6 +18,8 @@
  */
 package com.natpryce.piazza;
 
+import com.timgroup.jgravatar.Gravatar;
+import com.timgroup.jgravatar.GravatarDefaultImage;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.users.*;
 import org.jetbrains.annotations.NotNull;
@@ -61,8 +63,17 @@ public class PiazzaUserAdapter implements UserModelListener {
             String portraitUrl = PiazzaNotificator.getPortraitUrl(user);
             if (StringUtils.hasText(portraitUrl)) {
                 addUserToPiazzaMonitor(user, portraitUrl);
+            } else {
+                addUserToPiazzaMonitor(user, determineGravatarUrl(user));
             }
         }
+    }
+
+    private String determineGravatarUrl(SUser user) {
+        Gravatar gravatar = new Gravatar()
+                .setDefaultImage(GravatarDefaultImage.IDENTICON)
+                .setSize(150);
+        return gravatar.getUrl(user.getEmail());
     }
 
     private void addUserToPiazzaMonitor(SUser user, String portraitUrl) {

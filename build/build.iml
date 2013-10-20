@@ -10,6 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="team-piazza-server" />
+    <orderEntry type="library" name="Maven: com.timgroup:jgravatar:1.0" level="project" />
   </component>
 </module>
 

@@ -94,6 +94,22 @@
     <option name="gradleHome" value="/opt/local/share/java/gradle" />
   </component>
   <component name="IdProvider" IDEtalkID="D7DCDDFFE62D79B347DFA616DFB697E6" />
+  <component name="InspectionProjectProfileManager">
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+          <option name="processCode" value="true" />
+          <option name="processLiterals" value="true" />
+          <option name="processComments" value="true" />
+        </inspection_tool>
+      </profile>
+    </profiles>
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -460,6 +476,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/thoughtworks/xstream/xstream/1.4.1/xstream-1.4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.timgroup:jgravatar:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/timgroup/jgravatar/1.0/jgravatar-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/timgroup/jgravatar/1.0/jgravatar-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/timgroup/jgravatar/1.0/jgravatar-1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.yahoo.platform.yui:yuicompressor:2.4.7">

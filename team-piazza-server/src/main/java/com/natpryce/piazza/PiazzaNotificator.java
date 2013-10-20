@@ -53,7 +53,7 @@ public class PiazzaNotificator implements Notificator {
 
     public PiazzaNotificator(NotificatorRegistry registry) {
         List<UserPropertyInfo> userProps = Collections
-                .singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL"));
+                .singletonList(new UserPropertyInfo(PROPERTY_USER_IMAGE_NAME, "Your image URL (Leave empty to use Gravatar.com)"));
         registry.register(this, userProps);
     }
 

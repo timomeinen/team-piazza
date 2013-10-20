@@ -61,7 +61,11 @@
             <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.timgroup</groupId>
+            <artifactId>jgravatar</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
