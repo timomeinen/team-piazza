@@ -51,8 +51,12 @@ public class PiazzaConfigurationTest {
 
     @Before
     public void setUp() {
+        // given the TeamCity Log mechanism catches the Exception
+        Logger mockLogger = mock(Logger.class);
+        MemberModifier.stub(method(Loggers.class, "createLoggerInstance")).toReturn(mockLogger);
+
         ServerPaths serverPaths = mock(ServerPaths.class);
-        when(serverPaths.getConfigDir()).thenReturn("tests/resources");
+        when(serverPaths.getConfigDir()).thenReturn("src/test/resources");
         piazzaConfiguration = new PiazzaConfiguration(serverPaths);
     }
 

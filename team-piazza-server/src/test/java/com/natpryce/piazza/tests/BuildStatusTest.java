@@ -5,7 +5,7 @@ import org.junit.Test;
 import static com.natpryce.piazza.BuildStatus.*;
 import static org.junit.Assert.assertEquals;
 
-public class BuildStatusTests {
+public class BuildStatusTest {
 
     @Test
     public void testCanReduceTwoStatusesToMostSevere() {

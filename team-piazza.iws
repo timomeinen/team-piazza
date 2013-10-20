@@ -22,113 +22,25 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970ff077-290d-4aa0-a26d-11a8196e5f5f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/main" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/resources" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/src/test" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/team-piazza-server/team-piazza-server.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/team-piazza-build.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/teamcity-common.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/cglib-nodep-2.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-io-2.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-io-2.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/javassist-3.15.0-GA.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jdom-1.1-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/junit-4.8.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/log4j-1.2.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/mockito-all-1.8.5-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/mockito-all-1.8.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/objenesis-1.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10/powermock-mockito-1.4.10-full.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/powermock-mockito-junit-1.4.10" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/js/piazza.js" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/js/piazza.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza-build-type-monitor.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza-build-type-monitor.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza-feature-branches.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza-feature-branches.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza-link.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza-link.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza-project-monitor-feature-branches.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza-project-monitor-feature-branches.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza-project-monitor.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza-project-monitor.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/piazza.css" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/piazza.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/project-settings.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/project-settings.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/settings.jsp" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/settings.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/META-INF/build-server-plugin.xml" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/META-INF/build-server-plugin.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/BuildMonitorController.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildMonitorController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/BuildStatus.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildStatus.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/BuildTypeMonitorViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildTypeMonitorViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/InvestigationViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/InvestigationViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/Piazza.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/Piazza.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/PiazzaLinkPageExtension.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaLinkPageExtension.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/PiazzaNotificator.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaNotificator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/PiazzaUser.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaUser.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/PiazzaUserAdapter.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaUserAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/ProjectMonitorViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/ProjectMonitorViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/TestStatisticsViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/TestStatisticsViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/Text.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/Text.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/UserGroup.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/UserGroup.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/featureBranches/BuildTypeWithLatestBuildMonitorViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/featureBranches/BuildTypeWithLatestBuildMonitorViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/featureBranches/FeatureBranchMonitorViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/featureBranches/FeatureBranchMonitorViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/featureBranches/FeatureBranchesMonitorViewState.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/featureBranches/FeatureBranchesMonitorViewState.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/pluginConfiguration/ConfigurationController.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/ConfigurationController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/pluginConfiguration/PiazzaConfiguration.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfiguration.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationPageExtension.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationPageExtension.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration/EditProjectTab.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/EditProjectTab.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration/PiazzaProjectConfigurationPageExtension.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/PiazzaProjectConfigurationPageExtension.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration/PiazzaProjectSettings.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/PiazzaProjectSettings.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration/PiazzaProjectSettingsFactory.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/PiazzaProjectSettingsFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration/ProjectConfigurationController.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/ProjectConfigurationController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/InvestigationViewStateTest.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/InvestigationViewStateTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/ProjectMonitorViewStateTest.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/ProjectMonitorViewStateTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/tests/BuildStatusTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTests.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/tests/TextTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/TextTests.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/tests/UserGroupTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/UserGroupTests.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/resources/piazza.xml" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/resources/piazza.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza.iml" afterPath="$PROJECT_DIR$/team-piazza.iml" />
+    <list default="true" readonly="true" id="970ff077-290d-4aa0-a26d-11a8196e5f5f" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/TextTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/TextTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/UserGroupTests.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/UserGroupTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza-server/pom.xml" afterPath="$PROJECT_DIR$/team-piazza-server/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza-server/team-piazza-server.iml" afterPath="$PROJECT_DIR$/team-piazza-server/team-piazza-server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza.ipr" afterPath="$PROJECT_DIR$/team-piazza.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/team-piazza.iws" afterPath="$PROJECT_DIR$/team-piazza.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teamcity-plugin.xml" afterPath="$PROJECT_DIR$/teamcity-plugin.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/META-INF" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/META-INF" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/controller" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/controller" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/extension" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/extension" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/featureBranches" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/featureBranches" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/green-tick-small.png" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/green-tick-small.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/green-tick.png" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/green-tick.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/js" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/pluginConfiguration" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/pluginConfiguration" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/natpryce/piazza/projectConfiguration" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/red-cross-small.png" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/red-cross-small.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/red-cross.png" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/red-cross.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/com/natpryce/piazza/tests" afterPath="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/buildServerResources/viewmag.png" afterPath="$PROJECT_DIR$/team-piazza-server/src/main/resources/buildServerResources/viewmag.png" />
     </list>
     <ignored path="team-piazza.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382214669459" ignored="false" />
-    <file path="/pom.xml" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382212465198" ignored="false" />
+    <file path="/Dummy.txt" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382281811874" ignored="false" />
+    <file path="/pom.xml" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382281665195" ignored="false" />
     <file path="/teamcity-plugin.xml" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382212506208" ignored="false" />
     <file path="/BuildMonitorController.java" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382213395155" ignored="false" />
-    <file path="/a.dummy" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382213556571" ignored="false" />
+    <file path="/a.dummy" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382281166319" ignored="false" />
+    <file path="/fragment.java" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382281509273" ignored="false" />
+    <file path="/a.xml" changelist="970ff077-290d-4aa0-a26d-11a8196e5f5f" time="1382281785564" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,8 +92,23 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/ProjectConfigurationController.java" line="51" class="com.natpryce.piazza.projectConfiguration.ProjectConfigurationController" package="com.natpryce.piazza.projectConfiguration">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" line="156" class="com.natpryce.piazza.pluginConfiguration.PiazzaConfigurationTest" package="com.natpryce.piazza.pluginConfiguration">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -205,100 +132,7 @@
     <favorites_list name="team-piazza" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="7" selection-start="613" selection-end="613" vertical-scroll-proportion="0.36206895">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectConfigurationController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/ProjectConfigurationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="28" selection-start="1526" selection-end="1526" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildMonitorController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildMonitorController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="3518" selection-end="3518" vertical-scroll-proportion="2.2">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildTypeMonitorViewState.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildTypeMonitorViewState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="13" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Piazza.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/Piazza.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="13" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PiazzaLinkPageExtension.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaLinkPageExtension.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="13" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PiazzaUser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="836" selection-end="836" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigurationController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/ConfigurationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="36" selection-start="2136" selection-end="2160" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Loggers.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/openApi-source/8.0.4/openApi-source-8.0.4.jar!/jetbrains/buildServer/log/Loggers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="13" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InvestigationViewState.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/InvestigationViewState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -317,21 +151,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/natpryce/piazza/BuildMonitorController.java" />
-        <option value="$PROJECT_DIR$/resources/buildServerResources/piazza-project-monitor-all-green.jsp" />
         <option value="$PROJECT_DIR$/resources/buildServerResources/piazza.css" />
         <option value="$PROJECT_DIR$/src/com/natpryce/piazza/Piazza.java" />
         <option value="$PROJECT_DIR$/build.properties" />
         <option value="$PROJECT_DIR$/src/com/natpryce/piazza/extension/PiazzaConfigurationPageExtension.java" />
         <option value="$PROJECT_DIR$/resources/buildServerResources/settings.jsp" />
-        <option value="$PROJECT_DIR$/build/pom.xml" />
         <option value="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaNotificator.java" />
-        <option value="$PROJECT_DIR$/team-piazza-server/pom.xml" />
         <option value="$PROJECT_DIR$/team-piazza-server/src/main/resources/META-INF/build-server-plugin.xml" />
         <option value="$PROJECT_DIR$/build/plugin-assembly.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/teamcity-plugin.xml" />
         <option value="$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildMonitorController.java" />
+        <option value="$PROJECT_DIR$/build/pom.xml" />
+        <option value="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTests.java" />
+        <option value="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTest.java" />
+        <option value="$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java" />
+        <option value="$PROJECT_DIR$/team-piazza-server/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -365,6 +200,10 @@
           <option name="myItemId" value="Modules" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ModulesNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="team-piazza-server" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
       </PATH>
       <PATH>
         <PATH_ELEMENT>
@@ -376,8 +215,40 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="Modules" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ModulesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="team-piazza-server" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="Lifecycle" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="team-piazza" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Modules" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ModulesNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="team-piazza" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
       </PATH>
     </treeState>
@@ -415,26 +286,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="team-piazza" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="team-piazza" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="team-piazza-maven" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -459,6 +310,40 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza-maven" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza-maven" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="team-piazza-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -469,8 +354,8 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="com.zeroturnaround.javarebel.idea.plugin.settings.JRebelSettingsComponent" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/team-piazza-tc-8-0-3.diff" />
+    <property name="options.lastSelected" value="preferences.sourceCode.XML" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/team-piazza-server" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -478,9 +363,9 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PublishConfig" persistUploadOnCheckin="false" />
   <component name="RecentsManager">
@@ -491,7 +376,136 @@
       <recent name="$PROJECT_DIR$/team-piazza-server/src/main/java" />
     </key>
   </component>
-  <component name="RunManager" selected="Remote.Debug TeamCity">
+  <component name="RunManager" selected="JUnit.PiazzaConfigurationTest">
+    <configuration default="false" name="PiazzaConfigurationTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.natpryce.piazza.pluginConfiguration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="team-piazza-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.natpryce.piazza.pluginConfiguration" />
+      <option name="MAIN_CLASS_NAME" value="com.natpryce.piazza.pluginConfiguration.PiazzaConfigurationTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/team-piazza-server" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="All in team-piazza-server" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="team-piazza-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PiazzaConfigurationTest.testRootXml" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.natpryce.piazza.pluginConfiguration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="team-piazza-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.natpryce.piazza.pluginConfiguration" />
+      <option name="MAIN_CLASS_NAME" value="com.natpryce.piazza.pluginConfiguration.PiazzaConfigurationTest" />
+      <option name="METHOD_NAME" value="testRootXml" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PiazzaConfigurationTest.testReadElement" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.natpryce.piazza.pluginConfiguration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="team-piazza-server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.natpryce.piazza.pluginConfiguration" />
+      <option name="MAIN_CLASS_NAME" value="com.natpryce.piazza.pluginConfiguration.PiazzaConfigurationTest" />
+      <option name="METHOD_NAME" value="testReadElement" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/team-piazza-server" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -528,19 +542,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -567,6 +568,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -626,9 +640,21 @@
       <ConfigurationWrapper RunnerId="Debug" />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Remote.Debug TeamCity" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.All in team-piazza-server" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest.testRootXml" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest.testReadElement" />
+      <item index="4" class="java.lang.String" itemvalue="Remote.Debug TeamCity" />
     </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest.testReadElement" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.PiazzaConfigurationTest.testRootXml" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.All in team-piazza-server" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -652,6 +678,7 @@
     <option name="IGNORE_EXTERNALS" value="false" />
     <configuration useDefault="true">$USER_HOME$/.subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnFileUrlMappingImpl">
     <option name="myMappingRoots">
@@ -696,6 +723,11 @@
       <created>1335539645897</created>
       <updated>1335539645897</updated>
     </task>
+    <task id="LOCAL-00001" summary="Upgrade to Maven&#10;Make compatible with TC8">
+      <created>1382214736106</created>
+      <updated>1382214736106</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -705,11 +737,11 @@
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30506608" sideWeight="0.32852563" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34911895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34801763" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4229075" sideWeight="0.5534188" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4581498" sideWeight="0.5534188" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4025026" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4004171" sideWeight="0.49839744" order="11" side_tool="true" content_ui="tabs" />
@@ -724,7 +756,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21257861" sideWeight="0.60022026" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26603773" sideWeight="0.6949339" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977974" sideWeight="0.49786323" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39867842" sideWeight="0.49786323" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="JavaRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Struts Assistant" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -781,7 +813,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgrade to Maven&#10;Make compatible with TC8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Run Tests" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -796,6 +828,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Upgrade to Maven&#10;Make compatible with TC8" />
+    <MESSAGE value="Run Tests" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -839,109 +872,107 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="21" selection-start="1960" selection-end="1960" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teamcity-plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="19" selection-start="361" selection-end="361" vertical-scroll-proportion="0.11931818">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="42" selection-start="770" selection-end="788" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/INSTALL">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="12" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildTypeMonitorViewState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="13" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/InvestigationViewState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="13" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/Piazza.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaLinkPageExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="13" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/PiazzaUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="836" selection-end="836" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/openApi-source/8.0.4/openApi-source-8.0.4.jar!/jetbrains/buildServer/log/Loggers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="13" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/ConfigurationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="36" selection-start="2136" selection-end="2160" vertical-scroll-proportion="0.0">
+        <state line="55" column="36" selection-start="2136" selection-end="2160" vertical-scroll-proportion="0.48979592">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/projectConfiguration/ProjectConfigurationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="28" selection-start="1526" selection-end="1526" vertical-scroll-proportion="0.0">
+        <state line="37" column="28" selection-start="1526" selection-end="1526" vertical-scroll-proportion="0.01726122">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/BuildMonitorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="3518" selection-end="3518" vertical-scroll-proportion="2.2">
+        <state line="73" column="0" selection-start="3518" selection-end="3518" vertical-scroll-proportion="0.3095512">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/plugin-assembly.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="70" selection-start="2413" selection-end="2413" vertical-scroll-proportion="0.6938776">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/team-piazza-server.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/tests/BuildStatusTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="28" selection-start="183" selection-end="183" vertical-scroll-proportion="0.06818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/idea/util/95.677/util-95.677.jar!/com/intellij/openapi/diagnostic/Logger.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="57" selection-start="487" selection-end="487" vertical-scroll-proportion="0.21377672">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/openApi-source/8.0.4/openApi-source-8.0.4.jar!/jetbrains/buildServer/log/Loggers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="2389" selection-end="2389" vertical-scroll-proportion="0.59659094">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.18.0-GA/javassist-3.18.0-GA-sources.jar!/javassist/runtime/Desc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.175">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/test/resources/piazza.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="25" selection-start="784" selection-end="801" vertical-scroll-proportion="0.3068182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/main/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="17" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.13636364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/src/test/java/com/natpryce/piazza/pluginConfiguration/PiazzaConfigurationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="1725" selection-end="1725" vertical-scroll-proportion="0.23863636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/team-piazza-server/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="38" selection-start="1205" selection-end="1205" vertical-scroll-proportion="0.4375">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="7" selection-start="613" selection-end="613" vertical-scroll-proportion="0.36206895">
+        <state line="40" column="27" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.6818182">
           <folding />
         </state>
       </provider>

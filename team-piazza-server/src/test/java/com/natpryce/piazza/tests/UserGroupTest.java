@@ -30,7 +30,7 @@ import java.util.Set;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
-public class UserGroupTests {
+public class UserGroupTest {
 
     private PiazzaUser alice = new PiazzaUser("Alice", set("alice"), "alice.png");
     private PiazzaUser bob = new PiazzaUser("Bob", set("bob"), "bob.png");

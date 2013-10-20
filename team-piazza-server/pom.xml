@@ -16,7 +16,6 @@
         <powermock.version>1.5.1</powermock.version>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.teamcity</groupId>
@@ -29,6 +28,12 @@
             <artifactId>tests-support</artifactId>
             <version>${teamcity-version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

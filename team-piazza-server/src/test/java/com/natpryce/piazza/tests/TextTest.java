@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TextTests {
+public class TextTest {
 
     @Test
     public void testTimeCasesWordsInString() {
