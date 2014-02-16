@@ -18,6 +18,8 @@
  */
 package com.natpryce.piazza;
 
+import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import jetbrains.buildServer.Build;
 import jetbrains.buildServer.responsibility.ResponsibilityEntry;
 import jetbrains.buildServer.serverSide.SBuildType;
@@ -34,7 +36,7 @@ public class BuildTypeMonitorViewState {
 
     private final List<String> commitMessages;
     private Build lastFinishedBuild;
-    private final Build latestBuild;
+    private final Optional<? extends Build> latestBuild;
     private final TestStatisticsViewState tests;
     private final InvestigationViewState investigationInfo;
     private final Set<PiazzaUser> committers;
@@ -44,7 +46,7 @@ public class BuildTypeMonitorViewState {
         this.showOnFailureOnly = showOnFailureOnly;
         this.buildType = buildType;
         this.lastFinishedBuild = buildType.getLastChangesFinished();
-        this.latestBuild = buildType.getLastChangesStartedBuild();
+        this.latestBuild = Optional.fromNullable(buildType.getLastChangesStartedBuild());
         this.commitMessages = commitMessagesForBuild();
 
         this.committers = userPictures.usersInvolvedInCommit(
@@ -58,7 +60,7 @@ public class BuildTypeMonitorViewState {
     private Set<String> committersForBuild() {
         List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
-        HashSet<String> committers = new HashSet<String>();
+        HashSet<String> committers = new HashSet<>();
         for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
             String userName = vcsModification.getUserName();
             if (userName != null) {
@@ -72,7 +74,7 @@ public class BuildTypeMonitorViewState {
     private ArrayList<String> commitMessagesForBuild() {
         List<? extends VcsModification> changesSinceLastSuccessfulBuild = changesInBuild(latestBuild);
 
-        ArrayList<String> commitMessages = new ArrayList<String>();
+        ArrayList<String> commitMessages = new ArrayList<>();
         for (VcsModification vcsModification : changesSinceLastSuccessfulBuild) {
             if (userUnfiltered()) {
                 commitMessages.add(vcsModification.getDescription().trim());
@@ -105,8 +107,12 @@ public class BuildTypeMonitorViewState {
     }
 
     @SuppressWarnings("unchecked")
-    private List<? extends VcsModification> changesInBuild(Build latestBuild) {
-        return latestBuild.getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
+    private List<? extends VcsModification> changesInBuild(Optional<? extends Build> latestBuild) {
+        if (latestBuild.isPresent()) {
+            return latestBuild.get().getChanges(SelectPrevBuildPolicy.SINCE_LAST_SUCCESSFULLY_FINISHED_BUILD, true);
+        } else {
+            return Lists.newArrayList();
+        }
     }
 
     public String getFullName() {
@@ -118,7 +124,11 @@ public class BuildTypeMonitorViewState {
     }
 
     public String getBuildNumber() {
-        return latestBuild.getBuildNumber();
+        if (latestBuild.isPresent()) {
+            return latestBuild.get().getBuildNumber();
+        } else {
+            return "";
+        }
     }
 
     public String getCombinedStatusClasses() {
@@ -126,7 +136,11 @@ public class BuildTypeMonitorViewState {
     }
 
     public boolean isBuilding() {
-        return !latestBuild.isFinished();
+        if (latestBuild.isPresent()) {
+            return !latestBuild.get().isFinished();
+        } else {
+            return false;
+        }
     }
 
     public String getActivity() {
@@ -154,11 +168,15 @@ public class BuildTypeMonitorViewState {
     }
 
     public long getDurationSeconds() {
-        Date start = latestBuild.getStartDate();
-        Date finished = latestBuild.getFinishDate();
-        Date end = (finished != null) ? finished : now();
+        if (latestBuild.isPresent()) {
+            Date start = latestBuild.get().getStartDate();
+            Date finished = latestBuild.get().getFinishDate();
+            Date end = (finished != null) ? finished : now();
 
-        return (end.getTime() - start.getTime()) / 1000L;
+            return (end.getTime() - start.getTime()) / 1000L;
+        } else {
+            return 0;
+        }
     }
 
     private Date now() {
@@ -170,9 +188,9 @@ public class BuildTypeMonitorViewState {
     }
 
     public BuildStatus status() {
-        if (latestBuild == null) {
+        if (!latestBuild.isPresent()) {
             return BuildStatus.UNKNOWN;
-        } else if (latestBuild.getBuildStatus().isFailed()) {
+        } else if (latestBuild.get().getBuildStatus().isFailed()) {
             return BuildStatus.FAILURE;
         }
         if (lastFinishedBuild == null) {
@@ -189,9 +207,9 @@ public class BuildTypeMonitorViewState {
     }
 
     public BuildStatus runningBuildStatus() {
-        if (latestBuild == null) {
+        if (!latestBuild.isPresent()) {
             return BuildStatus.UNKNOWN;
-        } else if (latestBuild.getBuildStatus().isFailed()) {
+        } else if (latestBuild.get().getBuildStatus().isFailed()) {
             return BuildStatus.FAILURE;
         } else {
             return BuildStatus.SUCCESS;

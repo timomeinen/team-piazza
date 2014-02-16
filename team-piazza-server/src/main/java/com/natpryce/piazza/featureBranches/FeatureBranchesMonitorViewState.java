@@ -28,7 +28,7 @@ import java.util.*;
  */
 public class FeatureBranchesMonitorViewState {
 
-    private Map<Branch, FeatureBranchMonitorViewState> featureBranchMonitorViewState = new HashMap<Branch, FeatureBranchMonitorViewState>();
+    private Map<Branch, FeatureBranchMonitorViewState> featureBranchMonitorViewState = new HashMap<>();
     private PiazzaProjectSettings projectSettings;
     private List<SBuildType> orderedBuildTypes;
 
@@ -39,13 +39,17 @@ public class FeatureBranchesMonitorViewState {
     }
 
     private void assembleRecentFeatureBranchesWithBuildTypesAndLatestBuilds(SProject project) {
-        for (SBuildType buildType : project.getBuildTypes()) {
-            for (SRunningBuild runningBuild : buildType.getRunningBuilds()) {
-                addBuildToFeatureBranch(runningBuild);
-            }
+        List<SProject> allProjects = project.getProjects();
+        allProjects.add(project);
+        for (SProject childProject : allProjects) {
+            for (SBuildType buildType : childProject.getBuildTypes()) {
+                for (SRunningBuild runningBuild : buildType.getRunningBuilds()) {
+                    addBuildToFeatureBranch(runningBuild);
+                }
 
-            for (SFinishedBuild finishedBuild : buildType.getHistory()) {
-                addBuildToFeatureBranch(finishedBuild);
+                for (SFinishedBuild finishedBuild : buildType.getHistory()) {
+                    addBuildToFeatureBranch(finishedBuild);
+                }
             }
         }
     }
@@ -82,7 +86,7 @@ public class FeatureBranchesMonitorViewState {
     }
 
     public List<FeatureBranchMonitorViewState> getFeatureBranches() {
-        ArrayList<FeatureBranchMonitorViewState> featureBranches = new ArrayList<FeatureBranchMonitorViewState>(featureBranchMonitorViewState.values());
+        ArrayList<FeatureBranchMonitorViewState> featureBranches = new ArrayList<>(featureBranchMonitorViewState.values());
         sortFeatureBranchesByStartDate(featureBranches);
         return featureBranches.subList(0, Math.min(featureBranches.size(), projectSettings.getMaxNumberOfFeatureBranchesToShow()));
     }
@@ -107,10 +111,6 @@ public class FeatureBranchesMonitorViewState {
             }
         }
         return false;
-    }
-
-    public Map<Branch, FeatureBranchMonitorViewState> getFeatureBranchMonitorViewState() {
-        return featureBranchMonitorViewState;
     }
 
     private Date getTodayMinusNDays(int numberOfDays) {

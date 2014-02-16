@@ -1,5 +1,6 @@
 package com.natpryce.piazza.projectConfiguration;
 
+import com.google.common.base.Optional;
 import jetbrains.buildServer.serverSide.ProjectManager;
 import jetbrains.buildServer.serverSide.SProject;
 import jetbrains.buildServer.web.openapi.PagePlaces;
@@ -20,12 +21,12 @@ public abstract class EditProjectTab extends SimpleCustomTab {
         register();
     }
 
-    public SProject getProject(@NotNull HttpServletRequest request) {
+    public Optional<SProject> getProject(@NotNull HttpServletRequest request) {
         String projectId = request.getParameter("projectId");
         if (projectId != null) {
-            return myProjectManager.findProjectById(projectId);
+            return Optional.fromNullable(myProjectManager.findProjectByExternalId(projectId));
         }
-        return null;
+        return Optional.absent();
     }
 
     public void fillModel(@NotNull final Map<String, Object> model, @NotNull final HttpServletRequest request) {
@@ -34,6 +35,6 @@ public abstract class EditProjectTab extends SimpleCustomTab {
     }
 
     public boolean isAvailable(@NotNull final HttpServletRequest request) {
-        return getProject(request) != null;
+        return getProject(request).isPresent();
     }
 }

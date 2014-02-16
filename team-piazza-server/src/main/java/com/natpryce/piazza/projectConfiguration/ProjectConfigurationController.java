@@ -48,7 +48,7 @@ public class ProjectConfigurationController extends BaseController {
     }
 
     @Override
-    protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected ModelAndView doHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
         String projectId = getProjectId(request);
         PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(projectId, PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
 
@@ -62,9 +62,11 @@ public class ProjectConfigurationController extends BaseController {
 
     private void updateConfiguration(HttpServletRequest request) {
         try {
-            SProject project = this.projectManager.findProjectById(getProjectId(request));
-            project.persist();
-            addSuccessMessage(request);
+            SProject project = this.projectManager.findProjectByExternalId(getProjectId(request));
+            if (project != null) {
+                project.persist();
+                addSuccessMessage(request);
+            }
         } catch (PiazzaConfiguration.SaveConfigFailedException e) {
             Loggers.SERVER.error(e);
             addPiazzaMessage(request, "Save failed: " + e.getLocalizedMessage());

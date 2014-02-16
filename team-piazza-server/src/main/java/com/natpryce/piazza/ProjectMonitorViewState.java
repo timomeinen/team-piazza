@@ -40,7 +40,7 @@ public class ProjectMonitorViewState {
 
     private final SProject project;
     private PiazzaProjectSettings projectSettings;
-    private final Set<PiazzaUser> committers = new HashSet<PiazzaUser>();
+    private final Set<PiazzaUser> committers = new HashSet<>();
     private final List<BuildTypeMonitorViewState> builds;
     private final FeatureBranchesMonitorViewState featureBranchesView;
 
@@ -48,7 +48,7 @@ public class ProjectMonitorViewState {
         this.project = project;
         this.projectSettings = projectSettings;
 
-        builds = new ArrayList<BuildTypeMonitorViewState>();
+        builds = new ArrayList<>();
         for (SBuildType buildType : project.getBuildTypes()) {
             if (hasAtLeastOneBuild(buildType)) {
                 if (buildType.isAllowExternalStatus()) {
@@ -61,7 +61,15 @@ public class ProjectMonitorViewState {
             committers.addAll(build.getCommitters());
         }
 
-        featureBranchesView = new FeatureBranchesMonitorViewState(project, projectSettings, user.getOrderedBuildTypes(project));
+        featureBranchesView = new FeatureBranchesMonitorViewState(project, projectSettings, getOrderedBuildTypesOfProjectAndSubprojects(project, user));
+    }
+
+    private List<SBuildType> getOrderedBuildTypesOfProjectAndSubprojects(SProject project, SUser user) {
+        List<SBuildType> orderedBuildTypes = user.getOrderedBuildTypes(project);
+        for (SProject childProject : project.getProjects()) {
+            orderedBuildTypes.addAll(user.getOrderedBuildTypes(childProject));
+        }
+        return orderedBuildTypes;
     }
 
     private boolean hasAtLeastOneBuild(SBuildType buildType) {
