@@ -7,16 +7,16 @@ Piazza provides a high-visibility display of the current state of the build to a
 
 For any build, Piazza displays:
 
- * The project and build name
- * The current build number
- * Whether the build is "red" or "green"
- * Textual success/failure indication for the colour-blind
- * Whether the Team City server is currently building
- * The changes that caused the current build to be kicked off
- * Pictures of the team members that made those changes
- * The progress of the build
- * The build step that the Team City agent is currently running
- * The number of passed, failed and ignored tests
+* The project and build name
+* The current build number
+* Whether the build is "red" or "green"
+* Textual success/failure indication for the colour-blind
+* Whether the Team City server is currently building
+* The changes that caused the current build to be kicked off
+* Pictures of the team members that made those changes
+* The progress of the build
+* The build step that the Team City agent is currently running
+* The number of passed, failed and ignored tests
 
 Piazza can also display an overview of all the builds in a project.
 
