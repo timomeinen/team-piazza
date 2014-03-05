@@ -23,6 +23,7 @@ Piazza can also display an overview of all the builds in a project.
 Introduction
 ------------
 [![Video Software Success Disciplines.03 - Continuous Integration 4/4](http://img.youtube.com/vi/MoSbwXVmjOQ/0.jpg)](http://www.youtube.com/watch?v=MoSbwXVmjOQ)
+
 Screencast by Mike Hogan of [Software Confidence](http://www.softwareconfidence.com).
 
 Licensing
