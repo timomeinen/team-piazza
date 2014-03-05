@@ -23,7 +23,9 @@ Piazza can also display an overview of all the builds in a project.
 Introduction
 ------------
 
-<wiki:video width="500" height="405" url="http://www.youtube.com/v/MoSbwXVmjOQ" />
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=MoSbwXVmjOQ" target="_blank">
+    <img src="http://img.youtube.com/vi/MoSbwXVmjOQ/0.jpg" alt="Video Software Success Disciplines.03 - Continuous Integration 4/4" width="240" height="180" border="10" />
+</a>
 
 Screencast by Mike Hogan of [Software Confidence](http://www.softwareconfidence.com).
 
