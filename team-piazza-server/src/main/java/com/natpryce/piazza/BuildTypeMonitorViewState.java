@@ -89,7 +89,7 @@ public class BuildTypeMonitorViewState {
 
     private TestStatisticsViewState testStatistics() {
         if (isBuilding()) {
-            ShortStatistics stats = ((SRunningBuild) latestBuild).getShortStatistics();
+            ShortStatistics stats = ((SRunningBuild) latestBuild.get()).getShortStatistics();
             return new TestStatisticsViewState(
                     stats.getPassedTestCount(), stats.getFailedTestCount(), stats.getIgnoredTestCount());
         } else {
@@ -145,7 +145,7 @@ public class BuildTypeMonitorViewState {
 
     public String getActivity() {
         if (isBuilding()) {
-            return ((SRunningBuild) latestBuild).getShortStatistics().getCurrentStage();
+            return ((SRunningBuild) latestBuild.get()).getShortStatistics().getCurrentStage();
         } else {
             return status().toString();
         }
@@ -153,7 +153,7 @@ public class BuildTypeMonitorViewState {
 
     public int getCompletedPercent() {
         if (isBuilding()) {
-            return ((SRunningBuild) latestBuild).getCompletedPercent();
+            return ((SRunningBuild) latestBuild.get()).getCompletedPercent();
         } else {
             return 100;
         }
