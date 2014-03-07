@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven.build.timestamp.format>yyyyddMMHHmmss</maven.build.timestamp.format>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
