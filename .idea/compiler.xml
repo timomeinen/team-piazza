@@ -27,6 +27,9 @@
         <module name="team-piazza-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="team-piazza-server" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
