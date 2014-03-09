@@ -4,8 +4,19 @@ import org.junit.Test;
 
 import static com.natpryce.piazza.BuildStatus.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class BuildStatusTest {
+
+    @Test
+    public void testCodeshipIo() throws Exception {
+        // given
+
+        // when
+
+        // then
+        fail("Test codeship.io");
+    }
 
     @Test
     public void testCanReduceTwoStatusesToMostSevere() {
