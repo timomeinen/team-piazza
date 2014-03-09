@@ -73,7 +73,15 @@ public class PiazzaUserAdapter implements UserModelListener {
         Gravatar gravatar = new Gravatar()
                 .setDefaultImage(GravatarDefaultImage.IDENTICON)
                 .setSize(150);
-        return gravatar.getUrl(user.getEmail());
+
+        return gravatar.getUrl(createGravatarUsernameOrEmail(user));
+    }
+
+    private String createGravatarUsernameOrEmail(SUser user) {
+        if (StringUtils.hasText(user.getEmail()))
+            return user.getEmail();
+        else
+            return user.getUsername();
     }
 
     private void addUserToPiazzaMonitor(SUser user, String portraitUrl) {
@@ -83,7 +91,7 @@ public class PiazzaUserAdapter implements UserModelListener {
     }
 
     private Set<String> getVcsNicknames(SUser user) {
-        Set<String> vcsNicknames = new HashSet<String>();
+        Set<String> vcsNicknames = new HashSet<>();
         List<VcsUsernamePropertyKey> vcsUsernameProperties = user.getVcsUsernameProperties();
         for (VcsUsernamePropertyKey vcsUsernameProperty : vcsUsernameProperties) {
             String nickname = user.getPropertyValue(vcsUsernameProperty);
