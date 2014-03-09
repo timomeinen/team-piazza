@@ -26,6 +26,12 @@ Introduction
 
 Screencast by Mike Hogan of [Software Confidence](http://www.softwareconfidence.com).
 
+
+Continuous Integration Status
+-----------------------------
+[ ![Codeship Status for timomeinen/team-piazza](https://www.codeship.io/projects/abd32ef0-89b9-0131-c0a8-6631ff40da3b/status?branch=master)](https://www.codeship.io/projects/15572)
+
+
 Licensing
 ---------
 
