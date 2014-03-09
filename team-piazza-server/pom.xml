@@ -20,13 +20,13 @@
         <dependency>
             <groupId>org.jetbrains.teamcity</groupId>
             <artifactId>server-api</artifactId>
-            <version>${teamcity-version}</version>
+            <version>${version.teamcity}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.teamcity</groupId>
             <artifactId>tests-support</artifactId>
-            <version>${teamcity-version}</version>
+            <version>${version.teamcity}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
