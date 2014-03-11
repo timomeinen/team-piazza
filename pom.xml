@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.piazza</groupId>
     <artifactId>team-piazza</artifactId>
@@ -81,18 +82,15 @@
         <connection>scm:git:git@github.com:timomeinen/team-piazza.git</connection>
         <url>scm:git:git@github.com:timomeinen/team-piazza.git</url>
         <developerConnection>scm:git:git@github.com:timomeinen/team-piazza.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
-            <id>ventus</id>
-            <url>http://ventus.catapultframework.org/nexus/content/repositories/releases</url>
+            <id>bintray-timomeinen-maven-team-piazza</id>
+            <name>timomeinen-maven-team-piazza</name>
+            <url>https://api.bintray.com/maven/timomeinen/maven/team-piazza</url>
         </repository>
-        <snapshotRepository>
-            <id>ventus</id>
-            <url>http://ventus.catapultframework.org/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
 </project>
