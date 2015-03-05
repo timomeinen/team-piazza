@@ -21,9 +21,11 @@ package com.natpryce.piazza.projectConfiguration;
 import com.natpryce.piazza.Piazza;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.ProjectManager;
+import jetbrains.buildServer.serverSide.SProject;
 import jetbrains.buildServer.serverSide.settings.ProjectSettingsManager;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import org.jetbrains.annotations.NotNull;
+import com.google.common.base.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -52,11 +54,16 @@ public class PiazzaProjectConfigurationPageExtension extends EditProjectTab {
     @Override
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
         super.fillModel(model, request);
-        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(request.getParameter("projectId"), PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
-        model.put("showFeatureBranches", projectSettings.isShowFeatureBranches());
-        model.put("maxNumberOfFeatureBranches", projectSettings.getMaxNumberOfFeatureBranchesToShow());
-        model.put("maxAgeInDaysOfFeatureBranches", projectSettings.getMaxAgeInDaysOfFeatureBranches());
-        model.put("resourceRoot", this.piazza.resourcePath(""));
-        model.put("projectId", request.getParameter("projectId"));
+        Loggers.SERVER.info("PIAZZA: EditProjectPage fillModel");
+        Optional<SProject> project = getProject(request);
+        if (project.isPresent()) {
+			PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(project.get().getProjectId(), PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
+
+			model.put("showFeatureBranches", projectSettings.isShowFeatureBranches());
+			model.put("maxNumberOfFeatureBranches", projectSettings.getMaxNumberOfFeatureBranchesToShow());
+			model.put("maxAgeInDaysOfFeatureBranches", projectSettings.getMaxAgeInDaysOfFeatureBranches());
+			model.put("resourceRoot", this.piazza.resourcePath(""));
+			model.put("projectId", request.getParameter("projectId"));
+		}
     }
 }
