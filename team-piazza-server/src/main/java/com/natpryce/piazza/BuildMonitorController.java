@@ -77,7 +77,7 @@ public class BuildMonitorController extends BaseController {
             return null;
         }
 
-        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(projectId, PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
+        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(project.getProjectId(), PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
 
         SUser associatedUser = getAssociatedUser();
         String view = showFeatureBranchBuildsOnly ? "piazza-project-monitor-feature-branches.jsp" : "piazza-project-monitor.jsp";
