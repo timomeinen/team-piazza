@@ -32,6 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.*;
+
 /**
  * @author tmeinen, fbregulla
  */
@@ -49,33 +51,34 @@ public class ProjectConfigurationController extends BaseController {
 
     @Override
     protected ModelAndView doHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
-        String projectId = getProjectId(request);
-        PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(projectId, PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
+        SProject project = getProject(request);
+        if (project != null) {
+			PiazzaProjectSettings projectSettings = (PiazzaProjectSettings) projectSettingsManager.getSettings(project.getProjectId(), PiazzaProjectSettings.PROJECT_SETTINGS_NAME);
 
-        projectSettings.setShowFeatureBranches(getShowFeatureBranchesValueFromView(request));
-        projectSettings.setMaxNumberOfFeatureBranchesToShow(getMaxNumberOfFeatureBranchesFromView(request));
-        projectSettings.setMaxAgeInDaysOfFeatureBranches(getMaxAgeInDaysOfFeatureBranchesFromView(request));
+			projectSettings.setShowFeatureBranches(getShowFeatureBranchesValueFromView(request));
+			projectSettings.setMaxNumberOfFeatureBranchesToShow(getMaxNumberOfFeatureBranchesFromView(request));
+			projectSettings.setMaxAgeInDaysOfFeatureBranches(getMaxAgeInDaysOfFeatureBranchesFromView(request));
 
-        updateConfiguration(request);
+			updateConfiguration(request, project);
+		} else {
+	        addPiazzaMessage(request, "Save failed: project not found");
+		}
         return null;
     }
 
-    private void updateConfiguration(HttpServletRequest request) {
+    private void updateConfiguration(HttpServletRequest request, SProject project) {
         try {
-            SProject project = this.projectManager.findProjectByExternalId(getProjectId(request));
-            if (project != null) {
-                project.persist();
-                addSuccessMessage(request);
-            }
+			project.persist();
+			addSuccessMessage(request);
         } catch (PiazzaConfiguration.SaveConfigFailedException e) {
             Loggers.SERVER.error(e);
             addPiazzaMessage(request, "Save failed: " + e.getLocalizedMessage());
         }
     }
 
-    private String getProjectId(HttpServletRequest request) {
-        return request.getParameter("projectId");
-    }
+	private SProject getProject(HttpServletRequest request) {
+		return projectManager.findProjectByExternalId(request.getParameter("projectId"));
+	}
 
     private boolean getShowFeatureBranchesValueFromView(HttpServletRequest request) {
         return getBooleanParameter(request, "showFeatureBranches");
