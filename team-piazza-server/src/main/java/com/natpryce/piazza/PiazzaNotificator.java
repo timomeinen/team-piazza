@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * We use the {@link Notificator} to generate input fields on the user settings => notification rules page
+ * We use the {@link Notificator} to generate input fields on the user settings notification rules page
  *
  * @author Timo Meinen
  */
