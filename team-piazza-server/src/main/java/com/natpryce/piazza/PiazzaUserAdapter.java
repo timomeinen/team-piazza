@@ -44,15 +44,23 @@ public class PiazzaUserAdapter implements UserModelListener {
         server.getUserModel().addListener(this);
     }
 
+    @Override
     public void userAccountCreated(@NotNull User user) {
         reloadUsers();
     }
 
-    public void userAccountChanged(User user) {
+    @Override
+    public void userAccountChanged(@NotNull User user) {
         reloadUsers();
     }
 
-    public void userAccountRemoved(User user) {
+    @Override
+    public void userAccountRemoved(@NotNull User user) {
+        reloadUsers();
+    }
+
+    @Override
+    public void userRolesChanged(@NotNull User user) {
         reloadUsers();
     }
 
