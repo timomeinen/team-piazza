@@ -20,6 +20,8 @@ For any build, Piazza displays:
 
 Piazza can also display an overview of all the builds in a project.
 
+The plugin support the [Feature Branch feature of TeamCity](https://confluence.jetbrains.com/display/TCD9/Working+with+Feature+Branches).
+
 Installation
 ------------
 1. [Download](https://github.com/timomeinen/team-piazza/releases) the Piazza plugin zip file
