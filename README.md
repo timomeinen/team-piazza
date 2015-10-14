@@ -20,6 +20,18 @@ For any build, Piazza displays:
 
 Piazza can also display an overview of all the builds in a project.
 
+Installation
+------------
+1. [Download](https://github.com/timomeinen/team-piazza/releases) the Piazza plugin zip file
+1. Open TeamCity Server website and go to 'Administration > Plugins List'
+1. Click 'Upload plugin zip'
+1. Choose the Piazza plugin zip file and save it to '<TeamCity Data Directory>/plugins', which is preselected
+1. Restart TeamCity Server
+1. For every build configuration you want to see in Piazza go to 'Build Configuration Settings > General Settings', click 'Show advanced options' and 'enable status widget'
+![Enable status widget](https://github.com/timomeinen/team-piazza/wiki/images/team_piazza-enable_status_widget.png)
+
+More information available from the TeamCity documentation: [Installing Additional Plugins](https://confluence.jetbrains.com/display/TCD9/Installing+Additional+Pluginszzzzz)
+
 Documentation
 -------------
 [Documentation](https://github.com/timomeinen/team-piazza/wiki)
