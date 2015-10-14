@@ -30,7 +30,12 @@ Installation
 1. For every build configuration you want to see in Piazza go to 'Build Configuration Settings > General Settings', click 'Show advanced options' and 'enable status widget'
 ![Enable status widget](https://github.com/timomeinen/team-piazza/wiki/images/team_piazza-enable_status_widget.png)
 
-More information available from the TeamCity documentation: [Installing Additional Plugins](https://confluence.jetbrains.com/display/TCD9/Installing+Additional+Pluginszzzzz)
+More information available from the TeamCity documentation: [Installing Additional Plugins](https://confluence.jetbrains.com/display/TCD9/Installing+Additional+Plugins)
+
+Use Piazza Build Monitor
+------------------------
+Go to a project page to see all build configurations in the monitor or choose a single build configuration and click on the 'Team Piazza Build Monitor' link:
+![Launch Piazza Build Monitor](https://github.com/timomeinen/team-piazza/wiki/images/team_piazza-launch_piazza.png)
 
 Documentation
 -------------
@@ -42,14 +47,7 @@ Introduction
 
 Screencast by Mike Hogan of [Software Confidence](http://www.softwareconfidence.com).
 
-
-Continuous Integration Status
------------------------------
-[ ![Codeship Status for timomeinen/team-piazza](https://www.codeship.io/projects/abd32ef0-89b9-0131-c0a8-6631ff40da3b/status?branch=master)](https://www.codeship.io/projects/15572)
-
-
 Licensing
 ---------
-
 Team Piazza is licensed under the [GPL3](http://www.gnu.org/copyleft/gpl.html).
-If that license causes difficulties, contact Nat Pryce (nat _dot_ pryce _at_ gmail _dot_ com) to discuss alternative license options.
+If that license causes difficulties, create an issue to discuss alternative license options.
