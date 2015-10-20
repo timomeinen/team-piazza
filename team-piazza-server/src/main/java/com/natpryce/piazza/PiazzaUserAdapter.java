@@ -18,6 +18,7 @@
  */
 package com.natpryce.piazza;
 
+import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
 import com.timgroup.jgravatar.Gravatar;
 import com.timgroup.jgravatar.GravatarDefaultImage;
 import jetbrains.buildServer.serverSide.SBuildServer;
@@ -36,9 +37,11 @@ public class PiazzaUserAdapter implements UserModelListener {
 
     private final UserModel userModel;
     private UserGroup userGroup = new UserGroup();
+    private final PiazzaConfiguration piazzaConfiguration;
 
-    public PiazzaUserAdapter(SBuildServer server, UserModel userModel) {
+    public PiazzaUserAdapter(SBuildServer server, UserModel userModel, PiazzaConfiguration piazzaConfiguration) {
         this.userModel = userModel;
+        this.piazzaConfiguration = piazzaConfiguration;
         reloadUsers();
 
         server.getUserModel().addListener(this);
@@ -80,7 +83,7 @@ public class PiazzaUserAdapter implements UserModelListener {
     private String determineGravatarUrl(SUser user) {
         Gravatar gravatar = new Gravatar()
                 .setDefaultImage(GravatarDefaultImage.IDENTICON)
-                .setSize(150);
+                .setSize(piazzaConfiguration.getMaxPortraitSize());
 
         return gravatar.getUrl(createGravatarUsernameOrEmail(user));
     }

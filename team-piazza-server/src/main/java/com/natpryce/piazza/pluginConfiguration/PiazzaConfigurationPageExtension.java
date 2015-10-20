@@ -57,6 +57,7 @@ public class PiazzaConfigurationPageExtension extends AdminPage {
     public void fillModel(@NotNull Map<String, Object> model, @NotNull HttpServletRequest request) {
         super.fillModel(model, request);
         model.put("showOnFailureOnly", piazzaConfiguration.isShowOnFailureOnly());
+        model.put("maxPortraitSize", piazzaConfiguration.getMaxPortraitSize());
         model.put("resourceRoot", this.piazza.resourcePath(""));
     }
 

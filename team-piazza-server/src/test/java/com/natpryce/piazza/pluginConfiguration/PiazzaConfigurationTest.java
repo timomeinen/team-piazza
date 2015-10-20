@@ -86,6 +86,22 @@ public class PiazzaConfigurationTest {
     }
 
     @Test
+    public void testAttributeMaxPortraitSize() throws Exception {
+        // given
+        piazzaConfiguration.setMaxPortraitSize(100);
+
+        // when
+        Element element = piazzaConfiguration.createConfigAsXml();
+        Attribute maxPortraitSizeAttribute = element.getAttribute("maxPortraitSize");
+
+        // then
+        assertNotNull(maxPortraitSizeAttribute);
+        assertEquals("100", maxPortraitSizeAttribute.getValue());
+    }
+
+
+
+    @Test
     public void testErrorHandling() throws Exception {
         // given an element
         Element element = new Element("piazza");
@@ -107,7 +123,7 @@ public class PiazzaConfigurationTest {
         try {
             spyPiazzaConfiguration.save();
             fail("exception expected");
-        } catch (PiazzaConfiguration.SaveConfigFailedException e) {
+        } catch (SaveConfigFailedException e) {
             assertEquals("java.io.IOException: test exception", e.getMessage());
         }
         // then a log message shall be written
@@ -156,6 +172,7 @@ public class PiazzaConfigurationTest {
     public void testReadElement() {
         piazzaConfiguration.loadConfigurationFromXmlFile();
         assertTrue(piazzaConfiguration.isShowOnFailureOnly());
+        assertEquals(150, piazzaConfiguration.getMaxPortraitSize());
     }
 
     @Test
@@ -169,5 +186,10 @@ public class PiazzaConfigurationTest {
         } finally {
             piazzaConfiguration.createConfigFile().delete();
         }
+    }
+
+    @Test
+    public void testDefaultMaxPortraitSize() throws Exception {
+        assertEquals(PiazzaConfiguration.DEFAULT_MAX_PORTRAIT_SIZE, piazzaConfiguration.getMaxPortraitSize());
     }
 }

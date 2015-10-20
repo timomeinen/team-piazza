@@ -67,7 +67,9 @@ public class BuildMonitorController extends BaseController {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "no build type with id " + buildTypeId);
             return null;
         }
-        return modelWithView("piazza-build-type-monitor.jsp").addObject("build", new BuildTypeMonitorViewState(buildType, piazza.userGroup(), piazza.isShowOnFailureOnly()));
+
+        BuildTypeMonitorViewState viewState = new BuildTypeMonitorViewState(buildType, piazza.userGroup(), piazza.isShowOnFailureOnly());
+        return modelWithView("piazza-build-type-monitor.jsp").addObject("build", viewState);
     }
 
     private ModelAndView showProject(String projectId, boolean showFeatureBranchBuildsOnly, HttpServletResponse response) throws IOException {

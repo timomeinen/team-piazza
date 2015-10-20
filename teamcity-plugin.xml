@@ -2,7 +2,7 @@
 <teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
     <info>
-        <name>piazza</name>
+        <name>team-piazza</name>
         <display-name>Piazza build monitor</display-name>
         <version>@Version@</version>
         <description>Piazza is a build monitor plugin for the Team City continuous integration server. Piazza provides a
@@ -11,7 +11,7 @@
 
         <vendor>
             <name>Team Piazza</name>
-            <url>http://code.google.com/p/team-piazza/</url>
+            <url>https://github.com/timomeinen/team-piazza</url>
         </vendor>
     </info>
 </teamcity-plugin>

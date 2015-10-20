@@ -39,20 +39,22 @@ import static com.natpryce.piazza.BuildStatus.SUCCESS;
 public class ProjectMonitorViewState {
 
     private final SProject project;
+    private final PiazzaConfiguration piazzaConfiguration;
     private PiazzaProjectSettings projectSettings;
     private final Set<PiazzaUser> committers = new HashSet<>();
     private final List<BuildTypeMonitorViewState> builds;
     private final FeatureBranchesMonitorViewState featureBranchesView;
 
-    public ProjectMonitorViewState(SProject project, UserGroup userGroup, PiazzaConfiguration configuration, PiazzaProjectSettings projectSettings, SUser user) {
+    public ProjectMonitorViewState(SProject project, UserGroup userGroup, PiazzaConfiguration piazzaConfiguration, PiazzaProjectSettings projectSettings, SUser user) {
         this.project = project;
+        this.piazzaConfiguration = piazzaConfiguration;
         this.projectSettings = projectSettings;
 
         builds = new ArrayList<>();
         for (SBuildType buildType : project.getBuildTypes()) {
             if (hasAtLeastOneBuild(buildType)) {
                 if (buildType.isAllowExternalStatus()) {
-                    builds.add(new BuildTypeMonitorViewState(buildType, userGroup, configuration.isShowOnFailureOnly()));
+                    builds.add(new BuildTypeMonitorViewState(buildType, userGroup, piazzaConfiguration.isShowOnFailureOnly()));
                 }
             }
         }
@@ -123,5 +125,9 @@ public class ProjectMonitorViewState {
 
     public FeatureBranchesMonitorViewState getFeatureBranchesView() {
         return featureBranchesView;
+    }
+
+    public String getPortraitMaxSize() {
+        return String.valueOf(piazzaConfiguration.getMaxPortraitSize()).concat("px");
     }
 }

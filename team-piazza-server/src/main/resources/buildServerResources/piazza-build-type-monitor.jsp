@@ -63,7 +63,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <div class="Portraits">
             <c:forEach var="committer" items="${build.committers}">
                 <div class="Portrait">
-                    <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
+                    <img src="${fn:escapeXml(committer.portraitURL)}"
+                         title="${fn:escapeXml(committer.name)}"
+                         style="max-width: ${project.portraitMaxSize}; max-height: ${project.portraitMaxSize}">
 
                     <p class="Name">${committer.name}</p>
                 </div>

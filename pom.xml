@@ -10,7 +10,7 @@
     <url>https://github.com/timomeinen/team-piazza</url>
 
     <properties>
-        <version.teamcity>9.0.3</version.teamcity>
+        <teamcity-version>9.1.3</teamcity-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -55,6 +55,11 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.jetbrains.teamcity</groupId>
+                <artifactId>teamcity-sdk-maven-plugin</artifactId>
+                <version>0.2</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

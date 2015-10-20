@@ -18,7 +18,7 @@
  */
 package com.natpryce.piazza.projectConfiguration;
 
-import com.natpryce.piazza.pluginConfiguration.PiazzaConfiguration;
+import com.natpryce.piazza.pluginConfiguration.SaveConfigFailedException;
 import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.ProjectManager;
@@ -31,8 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.util.*;
 
 /**
  * @author tmeinen, fbregulla
@@ -70,7 +68,7 @@ public class ProjectConfigurationController extends BaseController {
         try {
 			project.persist();
 			addSuccessMessage(request);
-        } catch (PiazzaConfiguration.SaveConfigFailedException e) {
+        } catch (SaveConfigFailedException e) {
             Loggers.SERVER.error(e);
             addPiazzaMessage(request, "Save failed: " + e.getLocalizedMessage());
         }

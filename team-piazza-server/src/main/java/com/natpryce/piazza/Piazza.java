@@ -31,7 +31,7 @@ import jetbrains.buildServer.web.openapi.WebControllerManager;
 
 public class Piazza {
 
-    public static final String PLUGIN_NAME = Piazza.class.getSimpleName().toLowerCase();
+    public static final String PLUGIN_NAME = "team-piazza";
     public static final String PATH = "/" + PLUGIN_NAME + ".html";
 
     private final PluginDescriptor pluginDescriptor;
@@ -47,7 +47,7 @@ public class Piazza {
         guestUser = userManager.getGuestUser();
 
         this.piazzaConfiguration = piazzaConfiguration;
-        this.piazzaUserAdapter = new PiazzaUserAdapter(server, userManager);
+        this.piazzaUserAdapter = new PiazzaUserAdapter(server, userManager, piazzaConfiguration);
 
         webControllerManager.registerController(PATH, new BuildMonitorController(server, projectManager, projectSettingsManager, this));
         webControllerManager.getPlaceById(PlaceId.ALL_PAGES_FOOTER).addExtension(new PiazzaLinkPageExtension(this));

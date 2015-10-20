@@ -261,5 +261,7 @@ h3 {
     margin-left: 4px
 }
 
-
+#piazzaForm th {
+    text-align: left;
+}
 

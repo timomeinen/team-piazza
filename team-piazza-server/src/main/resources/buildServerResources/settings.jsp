@@ -17,9 +17,11 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   --%>
 <%@ include file="/include.jsp" %>
-<%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
-<%--<%@ taglib prefix="forms" uri="http://www.springframework.org/tags/form" %>--%>
 <jsp:useBean id="resourceRoot" type="java.lang.String" scope="request"/>
+
+<bs:linkCSS>
+    ${resourceRoot}piazza.css
+</bs:linkCSS>
 
 <bs:linkScript>
     ${resourceRoot}js/piazza.js
@@ -31,7 +33,7 @@
 
     <bs:messages key="piazzaMessage"/>
 
-    <form action="${actionUrl}" id="piazzaForm">
+    <form action="${actionUrl}" id="piazzaForm" onkeypress="return event.keyCode != 13;">
         <table>
             <tr>
                 <th>Show Failure</th>
@@ -43,7 +45,16 @@
                 </td>
             </tr>
             <tr>
-                <th>Save Settings:</th>
+                <th>Max Portrait Size</th>
+                <td>
+                    <p>
+                        <forms:textField name="maxPortraitSize" value="${maxPortraitSize}" size="4" className="disableDefault"/>
+                        <label for="maxPortraitSize">px. Maximum size of portraits. Maximum value is 512.</label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Save Settings</th>
                 <td>
                     <div>
                         <input type="button" id="piazzaSaveButton"

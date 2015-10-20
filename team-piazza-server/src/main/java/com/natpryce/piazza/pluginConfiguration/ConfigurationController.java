@@ -22,6 +22,7 @@ import jetbrains.buildServer.controllers.BaseController;
 import jetbrains.buildServer.log.Loggers;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ConfigurationController extends BaseController {
 
+    public static final int MAX_PORTRAIT_SIZE_LIMIT = 512; // 512px is the maximum value for Gravatar
     private final PiazzaConfiguration piazzaConfiguration;
 
     public ConfigurationController(SBuildServer server, WebControllerManager manager, PiazzaConfiguration piazzaConfiguration) {
@@ -41,20 +43,36 @@ public class ConfigurationController extends BaseController {
     }
 
     @Override
-    protected ModelAndView doHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        this.piazzaConfiguration.setShowOnFailureOnly(getShowOnFailureOnlyValueFromView(request));
-
-        updateConfiguration(request);
+    protected ModelAndView doHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
+        try {
+            readConfigurationFromView(request);
+            this.piazzaConfiguration.save();
+            addSuccessMessage(request);
+        } catch (SaveConfigFailedException e) {
+            Loggers.SERVER.error(e);
+            addErrorMessage(request, e.getLocalizedMessage());
+        }
         return null;
     }
 
-    private void updateConfiguration(HttpServletRequest request) {
+    private void readConfigurationFromView(@NotNull HttpServletRequest request) {
+        boolean showOnFailureOnly = getShowOnFailureOnlyValueFromView(request);
+        this.piazzaConfiguration.setShowOnFailureOnly(showOnFailureOnly);
+
+        int maxPortraitSize = tryParseMaxPortraitSize(request);
+        this.piazzaConfiguration.setMaxPortraitSize(maxPortraitSize);
+    }
+
+    private int tryParseMaxPortraitSize(@NotNull HttpServletRequest request) {
         try {
-            this.piazzaConfiguration.save();
-            addSuccessMessage(request);
-        } catch (PiazzaConfiguration.SaveConfigFailedException e) {
-            Loggers.SERVER.error(e);
-            addPiazzaMessage(request, "Save failed: " + e.getLocalizedMessage());
+            int maxPortraitSize = Integer.parseInt(request.getParameter("maxPortraitSize"));
+
+            if (maxPortraitSize > MAX_PORTRAIT_SIZE_LIMIT)
+                throw new SaveConfigFailedException("Maximum size is 512px.");
+
+            return maxPortraitSize;
+        } catch (NumberFormatException e) {
+            throw new SaveConfigFailedException("Please enter only a number as portrait size in px.");
         }
     }
 
@@ -71,6 +89,10 @@ public class ConfigurationController extends BaseController {
 
     private void addSuccessMessage(HttpServletRequest request) {
         addPiazzaMessage(request, "Saved");
+    }
+
+    private void addErrorMessage(HttpServletRequest request, String message) {
+        addPiazzaMessage(request, "Save failed: " + message);
     }
 
     private void addPiazzaMessage(HttpServletRequest request, String message) {

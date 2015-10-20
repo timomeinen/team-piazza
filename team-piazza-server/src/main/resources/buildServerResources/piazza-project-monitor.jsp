@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!--
 Copyright (C) 2007-2009 Nat Pryce.
 
@@ -45,7 +46,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <%--@elvariable id="committer" type="com.natpryce.piazza.PiazzaUser"--%>
             <c:forEach var="committer" items="${project.committers}">
                 <div class="Portrait">
-                    <img src="${fn:escapeXml(committer.portraitURL)}" title="${fn:escapeXml(committer.name)}">
+                    <img src="${fn:escapeXml(committer.portraitURL)}"
+                         title="${fn:escapeXml(committer.name)}"
+                         style="max-width: ${project.portraitMaxSize}; max-height: ${project.portraitMaxSize}">
 
                     <p class="Name">${committer.name}</p>
                 </div>

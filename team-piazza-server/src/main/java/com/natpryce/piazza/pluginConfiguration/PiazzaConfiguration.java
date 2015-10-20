@@ -36,12 +36,15 @@ import java.io.*;
 public class PiazzaConfiguration {
 
     static final String XML_ROOT_NAME = "piazza";
+    static final int DEFAULT_MAX_PORTRAIT_SIZE = 150;
     private static final String XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY = "showOnFailureOnly";
+    private static final String XML_ATTRIBUTE_MAX_PORTRAIT_SIZE = "maxPortraitSize";
 
     static final String CONFIG_FILE_NAME = "piazza.xml";
     String configFileName = CONFIG_FILE_NAME;
     private boolean showOnFailureOnly;
     private String teamCityConfigDir;
+    private int maxPortraitSize = DEFAULT_MAX_PORTRAIT_SIZE;
 
     public PiazzaConfiguration(@NotNull ServerPaths serverPaths) {
         this.teamCityConfigDir = serverPaths.getConfigDir();
@@ -60,6 +63,7 @@ public class PiazzaConfiguration {
     Element createConfigAsXml() {
         Element piazzaConfigRoot = new Element(XML_ROOT_NAME);
         piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(showOnFailureOnly));
+        piazzaConfigRoot.setAttribute(XML_ATTRIBUTE_MAX_PORTRAIT_SIZE, String.valueOf(maxPortraitSize));
         return piazzaConfigRoot;
     }
 
@@ -68,11 +72,7 @@ public class PiazzaConfiguration {
     }
 
     File createConfigFile() {
-        return new File(teamCityConfigDir, getConfigFileName());
-    }
-
-    String getConfigFileName() {
-        return configFileName;
+        return new File(teamCityConfigDir, configFileName);
     }
 
     void writeElementTo(Element element, Writer writer) throws IOException {
@@ -104,6 +104,7 @@ public class PiazzaConfiguration {
 
     private void parseConfigFromXml(Element rootElement) {
         this.showOnFailureOnly = Boolean.parseBoolean(rootElement.getAttributeValue(XML_ATTRIBUTE_NAME_SHOW_ON_FAILURE_ONLY, String.valueOf(false)));
+        this.maxPortraitSize = Integer.parseInt(rootElement.getAttributeValue(XML_ATTRIBUTE_MAX_PORTRAIT_SIZE, String.valueOf(DEFAULT_MAX_PORTRAIT_SIZE)));
     }
 
     public boolean isShowOnFailureOnly() {
@@ -118,10 +119,11 @@ public class PiazzaConfiguration {
         this.teamCityConfigDir = teamCityConfigDir;
     }
 
-    public class SaveConfigFailedException extends RuntimeException {
+    public void setMaxPortraitSize(int maxPortraitSize) {
+        this.maxPortraitSize = maxPortraitSize;
+    }
 
-        public SaveConfigFailedException(Throwable e) {
-            super(e);
-        }
+    public int getMaxPortraitSize() {
+        return maxPortraitSize;
     }
 }
