@@ -1,2 +1,4 @@
 .idea/workspace.xml
+.idea/libraries/
+.idea/rebel_project.xml
 target/
