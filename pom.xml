@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.piazza</groupId>
     <artifactId>team-piazza</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <packaging>pom</packaging>
 
     <description>A build monitor for the Team City continuous integration server</description>
@@ -88,7 +88,7 @@
         <connection>scm:git:git@github.com:timomeinen/team-piazza.git</connection>
         <url>scm:git:git@github.com:timomeinen/team-piazza.git</url>
         <developerConnection>scm:git:git@github.com:timomeinen/team-piazza.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>team-piazza-1.5</tag>
     </scm>
 
     <distributionManagement>
