@@ -48,6 +48,7 @@ Team Piazza in Action
 If you have a picture of a running Team Piazza installation we would love to present a photo of it. 
 
 ![Team Piazza installation](https://github.com/timomeinen/team-piazza/wiki/images/team_piazza-in_action_1.jpg)
+![Team Piazza installation 2](https://github.com/timomeinen/team-piazza/wiki/images/team_piazza-in_action_2.jpg)
 
 Introduction
 ------------
